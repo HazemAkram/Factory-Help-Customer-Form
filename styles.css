@@ -1,14 +1,117 @@
-/* Minimal RTL support */
+/* Enhanced RTL support */
 .rtl {
-	direction: rtl;
-	text-align: right;
+    direction: rtl;
+    text-align: right;
 }
+
 .rtl .form-row {
-	flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
+
 .rtl .form-group label {
-	text-align: right;
+    text-align: right;
 }
+
+.rtl .form-actions {
+    flex-direction: row-reverse;
+}
+
+.rtl .header-top {
+    flex-direction: row-reverse;
+}
+
+.rtl .flag {
+    right: 0;
+    left: auto;
+}
+
+.rtl .lang-switcher {
+    left: 0;
+    right: auto;
+}
+
+.rtl .lang-switcher::after {
+    left: 12px;
+    right: auto;
+}
+
+.rtl .address-container {
+    flex-direction: row-reverse;
+}
+
+.rtl .coordinates-display {
+    flex-direction: row-reverse;
+}
+
+.rtl .map-controls {
+    flex-direction: row-reverse;
+}
+
+/* Language selector styles */
+.lang-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.lang-switcher select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 36px 10px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    font-size: 14px;
+}
+
+.lang-switcher select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.25);
+}
+
+.lang-switcher::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+}
+
+.rtl .lang-switcher::after {
+    left: 12px;
+    right: auto;
+}
+
+/* RTL specific adjustments */
+.rtl .form-section h3 {
+    text-align: right;
+}
+
+.rtl .form-section h3 i {
+    margin-left: 12px;
+    margin-right: 0;
+}
+
+.rtl .success-message {
+    text-align: right;
+}
+
+.rtl .success-icon {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;

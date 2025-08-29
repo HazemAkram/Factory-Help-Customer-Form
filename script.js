@@ -1,4 +1,4 @@
-// Factory Form Application - Refactored Version
+// Factory Form Application - Multi-Language Version
 class FactoryForm {
     constructor() {
         this.form = null;
@@ -10,21 +10,165 @@ class FactoryForm {
         this.ownerIndex = 1;
         this.productionLineIndex = 1;
         
+        // Language support
+        this.currentLanguage = 'en';
+        this.translations = {};
+        this.languageSelector = null;
+        
         this.init();
     }
 
-    init() {
+    async init() {
+        await this.loadTranslations();
         this.setupElements();
         this.setupEventListeners();
         this.setupCountryCityDropdown();
         this.setupGoogleMaps();
+        this.detectAndSetLanguage();
         this.loadFormData();
+    }
+
+    async loadTranslations() {
+        try {
+            // Load all translation files
+            const [enTranslations, arTranslations] = await Promise.all([
+                fetch('translations/en.json').then(res => res.json()),
+                fetch('translations/ar.json').then(res => res.json())
+            ]);
+            
+            this.translations = {
+                en: enTranslations,
+                ar: arTranslations
+            };
+        } catch (error) {
+            console.error('Error loading translations:', error);
+            // Fallback to basic translations
+            this.translations = {
+                en: { error: 'Translation loading failed' },
+                ar: { error: 'فشل في تحميل الترجمة' }
+            };
+        }
+    }
+
+    detectAndSetLanguage() {
+        // Get browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const primaryLang = browserLang.split('-')[0].toLowerCase();
         
+        // Check if we support this language
+        let detectedLang = 'en'; // default
+        if (this.translations[primaryLang]) {
+            detectedLang = primaryLang;
+        } else if (primaryLang === 'ar' || browserLang.includes('ar')) {
+            detectedLang = 'ar';
+        }
+        
+        // Set language
+        this.setLanguage(detectedLang);
+        
+        // Update language selector
+        if (this.languageSelector) {
+            this.languageSelector.value = detectedLang;
+        }
+    }
+
+    setLanguage(lang) {
+        if (!this.translations[lang]) {
+            console.warn(`Language ${lang} not supported, falling back to English`);
+            lang = 'en';
+        }
+        
+        this.currentLanguage = lang;
+        
+        // Update HTML lang attribute
+        document.documentElement.lang = lang;
+        
+        // Update body direction for RTL languages
+        if (lang === 'ar') {
+            document.body.classList.add('rtl');
+        } else {
+            document.body.classList.remove('rtl');
+        }
+        
+        // Apply translations
+        this.applyTranslations();
+        
+        // Save language preference
+        localStorage.setItem('preferredLanguage', lang);
+    }
+
+    applyTranslations() {
+        // Translate all elements with data-translate attribute
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            const translation = this.getTranslation(key);
+            if (translation) {
+                element.textContent = translation;
+            }
+        });
+
+        // Translate placeholders
+        const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+        placeholderElements.forEach(element => {
+            const key = element.getAttribute('data-translate-placeholder');
+            const translation = this.getTranslation(key);
+            if (translation) {
+                element.placeholder = translation;
+            }
+        });
+
+        // Update country options
+        this.updateCountryOptions();
+        
+        // Update city options if country is selected
+        const countrySelect = document.getElementById('country');
+        if (countrySelect && countrySelect.value) {
+            this.handleCountryChange({ target: countrySelect });
+        }
+    }
+
+    getTranslation(key) {
+        const keys = key.split('.');
+        let value = this.translations[this.currentLanguage];
+        
+        for (const k of keys) {
+            if (value && value[k]) {
+                value = value[k];
+            } else {
+                return null; // Translation not found
+            }
+        }
+        
+        return value;
+    }
+
+    updateCountryOptions() {
+        const countrySelect = document.getElementById('country');
+        if (!countrySelect) return;
+        
+        // Keep the current selection
+        const currentValue = countrySelect.value;
+        
+        // Update country names based on current language
+        Array.from(countrySelect.options).forEach(option => {
+            if (option.value && option.value !== '') {
+                const countryCode = option.value;
+                const translation = this.getTranslation(`countries.${countryCode}`);
+                if (translation) {
+                    option.textContent = translation;
+                }
+            }
+        });
+        
+        // Restore selection
+        countrySelect.value = currentValue;
     }
 
     setupElements() {
         this.form = document.getElementById('factoryForm');
         this.successMessage = document.getElementById('successMessage');
+        this.languageSelector = document.getElementById('languageSelector');
         
         if (!this.form) {
             console.error('Factory form not found');
@@ -34,6 +178,14 @@ class FactoryForm {
 
     setupEventListeners() {
         this.form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        
+        // Language selector event
+        if (this.languageSelector) {
+            this.languageSelector.addEventListener('change', (e) => {
+                this.setLanguage(e.target.value);
+            });
+        }
+        
         this.setupDynamicSections();
         this.setupRealTimeValidation();
         this.setupPhoneFormatting();
@@ -43,43 +195,79 @@ class FactoryForm {
     // Country-City data mapping
     initializeCountryCities() {
         return {
-            'SY': ['Damascus', 'Aleppo', 'Homs', 'Latakia', 'Hama', 'Tartus', 'Daraa', 'Idlib', 'Deir ez-Zor', 'Al-Hasakah', 'Al-Raqqah', 'Quneitra', 'Al-Suwayda'],
-            'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Antalya', 'Adana', 'Konya', 'Gaziantep', 'Mersin', 'Diyarbakir', 'Samsun', 'Denizli', 'Eskisehir'],
-            'AE': ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain'],
-            'SA': ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dammam', 'Taif', 'Tabuk', 'Abha', 'Khamis Mushait', 'Hail', 'Najran', 'Jizan'],
-            'EG': ['Cairo', 'Alexandria', 'Giza', 'Shubra El Kheima', 'Port Said', 'Suez', 'Luxor', 'Mansoura', 'El-Mahalla El-Kubra', 'Tanta', 'Asyut', 'Ismailia'],
-            'US': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose', 'Austin', 'Jacksonville'],
-            'CA': ['Toronto', 'Montreal', 'Vancouver', 'Calgary', 'Edmonton', 'Ottawa', 'Winnipeg', 'Quebec City', 'Hamilton', 'Kitchener', 'London', 'Victoria'],
-            'UK': ['London', 'Birmingham', 'Manchester', 'Glasgow', 'Liverpool', 'Leeds', 'Sheffield', 'Edinburgh', 'Bristol', 'Cardiff', 'Belfast', 'Newcastle'],
-            'DE': ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Essen', 'Leipzig', 'Bremen', 'Dresden'],
-            'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille', 'Rennes', 'Reims'],
-            'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo', 'Genoa', 'Bologna', 'Florence', 'Bari', 'Catania', 'Venice', 'Verona'],
-            'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Zaragoza', 'Málaga', 'Murcia', 'Palma', 'Las Palmas', 'Bilbao', 'Alicante', 'Córdoba'],
-            'NL': ['Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven', 'Tilburg', 'Groningen', 'Almere', 'Breda', 'Nijmegen', 'Enschede', 'Haarlem'],
-            'BE': ['Brussels', 'Antwerp', 'Ghent', 'Charleroi', 'Liège', 'Bruges', 'Namur', 'Leuven', 'Mons', 'Aalst', 'Mechelen', 'Kortrijk'],
-            'CH': ['Zurich', 'Geneva', 'Basel', 'Bern', 'Lausanne', 'Winterthur', 'Lucerne', 'St. Gallen', 'Lugano', 'Biel', 'Thun', 'Bellinzona'],
-            'AT': ['Vienna', 'Graz', 'Linz', 'Salzburg', 'Innsbruck', 'Klagenfurt', 'Villach', 'Wels', 'Sankt Pölten', 'Dornbirn', 'Wiener Neustadt', 'Steyr'],
-            'SE': ['Stockholm', 'Gothenburg', 'Malmö', 'Uppsala', 'Västerås', 'Örebro', 'Linköping', 'Helsingborg', 'Jönköping', 'Norrköping', 'Lund', 'Umeå'],
-            'NO': ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen', 'Fredrikstad', 'Kristiansand', 'Sandnes', 'Tromsø', 'Sarpsborg', 'Skien', 'Ålesund'],
-            'DK': ['Copenhagen', 'Aarhus', 'Odense', 'Aalborg', 'Esbjerg', 'Randers', 'Kolding', 'Horsens', 'Vejle', 'Roskilde', 'Herning', 'Silkeborg'],
-            'FI': ['Helsinki', 'Espoo', 'Tampere', 'Vantaa', 'Oulu', 'Turku', 'Jyväskylä', 'Lahti', 'Kuopio', 'Pori', 'Kouvola', 'Joensuu'],
-            'PL': ['Warsaw', 'Kraków', 'Łódź', 'Wrocław', 'Poznań', 'Gdańsk', 'Szczecin', 'Bydgoszcz', 'Lublin', 'Katowice', 'Białystok', 'Gdynia'],
-            'CZ': ['Prague', 'Brno', 'Ostrava', 'Plzeň', 'Liberec', 'Olomouc', 'Ústí nad Labem', 'České Budějovice', 'Hradec Králové', 'Pardubice', 'Zlín', 'Havířov'],
-            'HU': ['Budapest', 'Debrecen', 'Szeged', 'Miskolc', 'Pécs', 'Győr', 'Nyíregyháza', 'Kecskemét', 'Székesfehérvár', 'Szombathely', 'Szolnok', 'Tatabánya'],
-            'RO': ['Bucharest', 'Cluj-Napoca', 'Timișoara', 'Iași', 'Constanța', 'Craiova', 'Galați', 'Ploiești', 'Brașov', 'Brăila', 'Oradea', 'Arad'],
-            'BG': ['Sofia', 'Plovdiv', 'Varna', 'Burgas', 'Ruse', 'Stara Zagora', 'Pleven', 'Sliven', 'Dobrich', 'Shumen', 'Pernik', 'Yambol'],
-            'HR': ['Zagreb', 'Split', 'Rijeka', 'Osijek', 'Zadar', 'Pula', 'Slavonski Brod', 'Karlovac', 'Varaždin', 'Šibenik', 'Sisak', 'Vinkovci'],
-            'SI': ['Ljubljana', 'Maribor', 'Celje', 'Kranj', 'Velenje', 'Koper', 'Novo Mesto', 'Ptuj', 'Trbovlje', 'Kamnik', 'Jesenice', 'Nova Gorica'],
-            'SK': ['Bratislava', 'Košice', 'Prešov', 'Žilina', 'Banská Bystrica', 'Nitra', 'Trnava', 'Trenčín', 'Martin', 'Poprad', 'Prievidza', 'Zvolen'],
-            'LT': ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys', 'Alytus', 'Marijampolė', 'Mažeikiai', 'Jonava', 'Utena', 'Kėdainiai', 'Telšiai'],
-            'LV': ['Riga', 'Daugavpils', 'Liepāja', 'Jelgava', 'Jūrmala', 'Rēzekne', 'Valmiera', 'Ventspils', 'Ogre', 'Cēsis', 'Salaspils', 'Kuldīga'],
-            'EE': ['Tallinn', 'Tartu', 'Narva', 'Pärnu', 'Kohtla-Järve', 'Viljandi', 'Rakvere', 'Maardu', 'Kuressaare', 'Sillamäe', 'Valga', 'Võru'],
-            'IE': ['Dublin', 'Cork', 'Limerick', 'Galway', 'Waterford', 'Drogheda', 'Swords', 'Dundalk', 'Bray', 'Navan', 'Kilkenny', 'Ennis'],
-            'PT': ['Lisbon', 'Porto', 'Vila Nova de Gaia', 'Amadora', 'Braga', 'Funchal', 'Coimbra', 'Setúbal', 'Almada', 'Agualva-Cacém', 'Barreiro', 'Faro'],
-            'GR': ['Athens', 'Thessaloniki', 'Patras', 'Piraeus', 'Larissa', 'Heraklion', 'Peristeri', 'Kallithea', 'Acharnes', 'Kalamaria', 'Nikaia', 'Glyfada'],
-            'CY': ['Nicosia', 'Limassol', 'Larnaca', 'Famagusta', 'Paphos', 'Kyrenia', 'Aradippou', 'Lakatamia', 'Paralimni', 'Polis', 'Ammochostos', 'Larnaca'],
-            'MT': ['Valletta', 'Birkirkara', 'Mosta', 'Qormi', 'Żabbar', 'San Pawl il-Baħar', 'Sliema', 'Żebbuġ', 'Żejtun', 'Fgura', 'Żurrieq', 'Gżira'],
-            'LU': ['Luxembourg City', 'Esch-sur-Alzette', 'Differdange', 'Dudelange', 'Ettelbruck', 'Diekirch', 'Wiltz', 'Echternach', 'Rumelange', 'Grevenmacher', 'Remich', 'Vianden']
+            'AE': ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain', 'Al Ain', 'Khor Fakkan', 'Dibba Al-Fujairah', 'Kalba'],
+            'SA': ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dammam', 'Khobar', 'Tabuk', 'Buraydah', 'Hail', 'Najran', 'Al-Kharj', 'Taif'],
+            'EG': ['Cairo', 'Alexandria', 'Giza', 'Shubra El-Kheima', 'Port Said', 'Suez', 'Luxor', 'Aswan', 'Mansoura', 'Tanta', 'Ismailia', 'Faiyum'],
+            'IQ': ['Baghdad', 'Basra', 'Mosul', 'Erbil', 'Kirkuk', 'Najaf', 'Samarra', 'Karbala', 'Sulaymaniyah', 'Dhi Qar', 'Al Hillah'],
+            'JO': ['Amman', 'Zarqa', 'Irbid', 'Aqaba', 'Madaba', 'Mafraq', 'Al Karak', 'Jerash', 'Tafilah', 'Ajloun'],
+            'LB': ['Beirut', 'Tripoli', 'Sidon', 'Tyre', 'Byblos', 'Zahle', 'Baalbek', 'Jounieh', 'Saida', 'Nabatieh'],
+            'SY': ['Damascus', 'Aleppo', 'Homs', 'Hama', 'Latakia', 'Deir ez-Zor', 'Raqqa', 'Tartus', 'Qamishli', 'Al Hasakah'],
+            'KW': ['Kuwait City', 'Al Ahmadi', 'Hawalli', 'Salmiya', 'Jahra', 'Farwaniya', 'Mangaf', 'Sabah Al Salem'],
+            'QA': ['Doha', 'Al Rayyan', 'Al Wakrah', 'Al Khor', 'Al Shamal', 'Mesaieed', 'Umm Salal', 'Al Daayen'],
+            'BH': ['Manama', 'Riffa', 'Muharraq', 'Hamad Town', 'Isa Town', 'Sitra', 'Budaiya', 'Zallaq'],
+            'OM': ['Muscat', 'Salalah', 'Sohar', 'Nizwa', 'Sur', 'Bahla', 'Ibra', 'Rustaq', 'Shinas', 'Dhofar'],
+            'YE': ['Sana\'a', 'Aden', 'Taiz', 'Al Hudaydah', 'Ibb', 'Mokha', 'Dhamar', 'Lahij', 'Hajjah', 'Saada'],
+            'LY': ['Tripoli', 'Benghazi', 'Misrata', 'Bayda', 'Zawiya', 'Sabha', 'Ajdabiya', 'Tobruk', 'Derna', 'Sirte'],
+            'TN': ['Tunis', 'Sfax', 'Sousse', 'Kairouan', 'Bizerte', 'Gabès', 'Ariana', 'Gafsa', 'Monastir', 'Sidi Bouzid'],
+            'DZ': ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Blida', 'Batna', 'Sétif', 'Sidi Bel Abbès', 'Tlemcen', 'Tizi Ouzou'],
+            'MA': ['Rabat', 'Casablanca', 'Marrakech', 'Fes', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan'],
+            'SD': ['Khartoum', 'Omdurman', 'Port Sudan', 'Kassala', 'El-Obeid', 'Al-Fashir', 'Nyala', 'Sennar', 'Wad Madani', 'Kosti'],
+            'MR': ['Nouakchott', 'Nouadhibou', 'Atar', 'Zouérat', 'Kiffa', 'Rosso', 'Kaédi', 'Néma', 'Tékane', 'Akjoujt'],
+            'SO': ['Mogadishu', 'Hargeisa', 'Bosaso', 'Kismayo', 'Baidoa', 'Berbera', 'Galkayo', 'Marka', 'Burao', 'Erigavo'],
+            'DJ': ['Djibouti City', 'Ali Sabieh', 'Tadjoura', 'Obock', 'Dikhil', 'Arta', 'Randa'],
+            'KM': ['Moroni', 'Moutsamoudou', 'Fomboni', 'Ouani', 'Dzaoudzi', 'Domoni', 'Itsandra'],
+            'PS': ['Ramallah', 'Gaza City', 'Hebron', 'Nablus', 'Bethlehem', 'Jenin', 'Tulkarm', 'Qalqilya', 'Jericho', 'Salfit'],
+
+            'RU': ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Nizhny Novgorod', 'Kazan', 'Chelyabinsk', 'Samara', 'Omsk', 'Rostov-on-Don', 'Ufa', 'Krasnoyarsk', 'Perm', 'Voronezh', 'Volgograd'],
+            'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Adana', 'Gaziantep', 'Konya', 'Antalya', 'Kayseri', 'Mersin', 'Eskisehir', 'Diyarbakır', 'Samsun', 'Denizli', 'Sanliurfa'],
+            'CN': ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Chengdu', 'Tianjin', 'Chongqing', 'Wuhan', 'Xi’an', 'Hangzhou', 'Nanjing', 'Shenyang', 'Harbin', 'Suzhou', 'Qingdao'],
+            'IN': ['New Delhi', 'Mumbai', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Bhopal', 'Patna'],
+
+            'AL': ['Tirana', 'Durrës', 'Vlorë', 'Shkodër', 'Fier'],
+            'AD': ['Andorra la Vella', 'Escaldes-Engordany', 'Encamp', 'Sant Julià de Lòria', 'La Massana'],
+            'AT': ['Vienna', 'Graz', 'Linz', 'Salzburg', 'Innsbruck'],
+            'BY': ['Minsk', 'Gomel', 'Mogilev', 'Vitebsk', 'Hrodna'],
+            'BE': ['Brussels', 'Antwerp', 'Ghent', 'Charleroi', 'Liège'],
+            'BA': ['Sarajevo', 'Banja Luka', 'Tuzla', 'Zenica', 'Mostar'],
+            'BG': ['Sofia', 'Plovdiv', 'Varna', 'Burgas', 'Ruse'],
+            'HR': ['Zagreb', 'Split', 'Rijeka', 'Osijek', 'Zadar'],
+            'CY': ['Nicosia', 'Limassol', 'Larnaca', 'Famagusta', 'Paphos'],
+            'CZ': ['Prague', 'Brno', 'Ostrava', 'Plzeň', 'Liberec'],
+            'DK': ['Copenhagen', 'Aarhus', 'Odense', 'Aalborg', 'Esbjerg'],
+            'EE': ['Tallinn', 'Tartu', 'Narva', 'Pärnu', 'Kohtla-Järve'],
+            'FI': ['Helsinki', 'Espoo', 'Tampere', 'Vantaa', 'Oulu'],
+            'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
+            'DE': ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt'],
+            'GR': ['Athens', 'Thessaloniki', 'Patras', 'Heraklion', 'Larissa'],
+            'HU': ['Budapest', 'Debrecen', 'Szeged', 'Miskolc', 'Pécs'],
+            'IS': ['Reykjavik', 'Kópavogur', 'Hafnarfjörður', 'Akureyri', 'Reykjanesbær'],
+            'IE': ['Dublin', 'Cork', 'Limerick', 'Galway', 'Waterford'],
+            'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo'],
+            'LV': ['Riga', 'Daugavpils', 'Liepāja', 'Jelgava', 'Jūrmala'],
+            'LI': ['Vaduz', 'Schaan', 'Triesen', 'Balzers', 'Eschen'],
+            'LT': ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys'],
+            'LU': ['Luxembourg City', 'Esch-sur-Alzette', 'Differdange', 'Dudelange', 'Ettelbruck'],
+            'MT': ['Valletta', 'Birkirkara', 'Mosta', 'Qormi', 'Sliema'],
+            'MD': ['Chișinău', 'Tiraspol', 'Bălți', 'Bender', 'Rîbnița'],
+            'MC': ['Monaco'],
+            'ME': ['Podgorica', 'Nikšić', 'Herceg Novi', 'Pljevlja', 'Bijelo Polje'],
+            'NL': ['Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven'],
+            'MK': ['Skopje', 'Bitola', 'Kumanovo', 'Prilep', 'Tetovo'],
+            'NO': ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen'],
+            'PL': ['Warsaw', 'Kraków', 'Łódź', 'Wrocław', 'Poznań'],
+            'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Funchal'],
+            'RO': ['Bucharest', 'Cluj-Napoca', 'Timișoara', 'Iași', 'Constanța'],
+            'RU': ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Nizhny Novgorod'],
+            'SM': ['San Marino'],
+            'RS': ['Belgrade', 'Novi Sad', 'Niš', 'Kragujevac', 'Subotica'],
+            'SK': ['Bratislava', 'Košice', 'Prešov', 'Žilina', 'Nitra'],
+            'SI': ['Ljubljana', 'Maribor', 'Celje', 'Kranj', 'Velenje'],
+            'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Zaragoza'],
+            'SE': ['Stockholm', 'Gothenburg', 'Malmö', 'Uppsala', 'Västerås'],
+            'CH': ['Zurich', 'Geneva', 'Basel', 'Bern', 'Lausanne'],
+            'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Adana'],
+            'UA': ['Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Lviv'],
+            'GB': ['London', 'Birmingham', 'Manchester', 'Glasgow', 'Liverpool'],
         };
     }
 
@@ -98,7 +286,7 @@ class FactoryForm {
         const citySelect = document.getElementById('city');
         
         // Clear city dropdown
-        citySelect.innerHTML = `<option value="">Select City</option>`;
+        citySelect.innerHTML = `<option value="">${this.getTranslation('sections.factoryInfo.city.placeholder') || 'Select City'}</option>`;
         citySelect.disabled = true;
         
         if (selectedCountry && selectedCountry !== 'other') {
@@ -107,18 +295,22 @@ class FactoryForm {
                 cities.forEach(city => {
                     const option = document.createElement('option');
                     option.value = city;
-                    option.textContent = city;
+                    // Use translation system for city names
+                    const translatedCity = this.getTranslation(`cities.${selectedCountry}.${city}`) || city;
+                    option.textContent = translatedCity;
                     citySelect.appendChild(option);
                 });
                 citySelect.disabled = false;
             }
         } else if (selectedCountry === 'other') {
-            citySelect.innerHTML = `<option value="">Select City</option><option value="other">Other (Please specify)</option>`;
+            const otherOption = this.getTranslation('sections.factoryInfo.city.other') || 'Other (Please specify)';
+            citySelect.innerHTML = `<option value="">${this.getTranslation('sections.factoryInfo.city.placeholder') || 'Select City'}</option><option value="other">${otherOption}</option>`;
             citySelect.disabled = false;
         }
         
         citySelect.value = '';
     }
+
 
     handleCityChange(event) {
         if (event.target.value === 'other') {
@@ -173,30 +365,36 @@ class FactoryForm {
         wrapper.className = 'owner-block';
         wrapper.setAttribute('data-owner-index', String(index));
         
+        const ownerNameLabel = this.getTranslation('sections.ownerInfo.ownerName.label') || 'Owner Name';
+        const ownerPhoneLabel = this.getTranslation('sections.ownerInfo.ownerPhone.label') || 'Mobile Number';
+        const removeOwnerText = this.getTranslation('sections.ownerInfo.removeOwner') || 'Remove Owner';
+        const ownerNamePlaceholder = this.getTranslation('sections.ownerInfo.ownerName.placeholder') || 'Enter owner name';
+        const ownerPhonePlaceholder = this.getTranslation('sections.ownerInfo.ownerPhone.placeholder') || '+1 (555) 123-4567';
+        
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
-                    <label for="ownerName_${index}">Owner Name <span class="required" aria-label="required">*</span></label>
+                    <label for="ownerName_${index}">${ownerNameLabel} <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="ownerName_${index}" 
                         name="ownerName_${index}" 
                         required
                         aria-describedby="ownerName_${index}-error"
-                        placeholder="Enter owner name"
+                        placeholder="${ownerNamePlaceholder}"
                         maxlength="100"
                     >
                     <div id="ownerName_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
-                    <label for="ownerMobile_${index}">Mobile Number <span class="required" aria-label="required">*</span></label>
+                    <label for="ownerMobile_${index}">${ownerPhoneLabel} <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="tel" 
                         id="ownerMobile_${index}" 
                         name="ownerMobile_${index}" 
                         required
                         aria-describedby="ownerMobile_${index}-error"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="${ownerPhonePlaceholder}"
                         maxlength="20"
                     >
                     <div id="ownerMobile_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
@@ -204,7 +402,7 @@ class FactoryForm {
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-owner aria-label="Remove this owner">
-                    <i class="fas fa-user-minus" aria-hidden="true"></i> <span>Remove Owner</span>
+                    <i class="fas fa-user-minus" aria-hidden="true"></i> <span>${removeOwnerText}</span>
                 </button>
             </div>
         `;
@@ -283,10 +481,14 @@ class FactoryForm {
         wrapper.className = 'production-line-block';
         wrapper.setAttribute('data-line-index', String(index));
         
+        const productionLineLabel = this.getTranslation('sections.productionInfo.productionLine.label') || 'Production Line';
+        const brandNameLabel = this.getTranslation('sections.productionInfo.brandName.label') || 'Brand Name';
+        const removeProductionLineText = this.getTranslation('sections.productionInfo.removeProductionLine') || 'Remove Production Line';
+        
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
-                    <label for="productionLine_${index}">Production Line <span class="required" aria-label="required">*</span></label>
+                    <label for="productionLine_${index}">${productionLineLabel} <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="productionLine_${index}" 
@@ -299,7 +501,7 @@ class FactoryForm {
                     <div id="productionLine_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
-                    <label for="brandName_${index}">Brand Name <span class="required" aria-label="required">*</span></label>
+                    <label for="brandName_${index}">${brandNameLabel} <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="brandName_${index}" 
@@ -314,7 +516,7 @@ class FactoryForm {
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-production-line aria-label="Remove this production line">
-                    <i class="fas fa-minus" aria-hidden="true"></i> <span>Remove Production Line</span>
+                    <i class="fas fa-minus" aria-hidden="true"></i> <span>${removeProductionLineText}</span>
                 </button>
             </div>
         `;
@@ -941,13 +1143,13 @@ class FactoryForm {
             citySelect.name = 'city';
             citySelect.required = true;
             citySelect.disabled = true;
-            citySelect.innerHTML = `<option value="">Select Country First</option>`;
+            citySelect.innerHTML = `<option value="">${this.getTranslation('sections.factoryInfo.city.placeholder') || 'Select Country First'}</option>`;
             citySelect.setAttribute('aria-describedby', 'city-error');
             
             cityGroup.replaceChild(citySelect, cityField);
             this.setupFieldValidation(citySelect);
             } else {
-            cityField.innerHTML = `<option value="">Select Country First</option>`;
+            cityField.innerHTML = `<option value="">${this.getTranslation('sections.factoryInfo.city.placeholder') || 'Select Country First'}</option>`;
             cityField.disabled = true;
         }
     }
@@ -956,11 +1158,16 @@ class FactoryForm {
         // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
+        
+        // Apply RTL if needed
+        const isRTL = this.currentLanguage === 'ar';
+        const rtlStyle = isRTL ? 'right: auto; left: 20px;' : 'right: 20px; left: auto;';
+        
         notification.innerHTML = `
             <div style="
                 position: fixed;
                 top: 20px;
-                right: 20px;
+                ${rtlStyle}
                 padding: 16px 20px;
                 border-radius: 8px;
                 color: white;
@@ -972,6 +1179,7 @@ class FactoryForm {
                 ${type === 'error' ? 'background: #ef4444;' : ''}
                 ${type === 'warning' ? 'background: #f59e0b;' : ''}
                 ${type === 'info' ? 'background: #3b82f6;' : ''}
+                ${isRTL ? 'text-align: right;' : 'text-align: left;'}
             ">
                 ${message}
             </div>

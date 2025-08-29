@@ -22,10 +22,18 @@
                     <div class="logo" aria-label="Factory Registration Logo">
                         <img src="logo.png" alt="Logo" class="logo-img" />
                     </div>
+                    <!-- Language Switcher -->
+                    <div class="lang-switcher">
+                        <select id="languageSelector" aria-label="Select language">
+                            <option value="auto">🌐 Auto</option>
+                            <option value="en">🇺🇸 English</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                        </select>
+                    </div>
                 </div>
-                <span class="logo-text">Website Opening Form</span>
-                <h1>Factory Registration Form</h1>
-                <p>Please provide your factory details below for registration and integration purposes.</p>
+                <span class="logo-text" data-translate="header.logoText">Website Opening Form</span>
+                <h1 data-translate="header.title">Factory Registration Form</h1>
+                <p data-translate="header.subtitle">Please provide your factory details below for registration and integration purposes.</p>
             </div>
 
             <form id="factoryForm" class="factory-form" novalidate>
@@ -33,14 +41,14 @@
                 <div class="form-section">
                     <h3>
                         <i class="fas fa-industry" aria-hidden="true"></i>
-                        <span>
+                        <span data-translate="sections.factoryInfo.title">
                             Factory Information
                         </span>
                     </h3>
                     
                     <div class="form-group">
                         <label for="factoryName">
-                            <span>Factory Name</span> 
+                            <span data-translate="sections.factoryInfo.factoryName.label">Factory Name</span> 
                             <span class="required" aria-label="required">*</span>
                         </label>
                         <input 
@@ -49,6 +57,7 @@
                             name="factoryName" 
                             required 
                             aria-describedby="factoryName-error"
+                            data-translate-placeholder="sections.factoryInfo.factoryName.placeholder"
                             placeholder="Enter factory name"
                             maxlength="100"
                         >
@@ -58,60 +67,96 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="country">
-                                    <span>Country</span>
+                                    <span data-translate="sections.factoryInfo.country.label">Country</span>
                                  <span class="required" aria-label="required">*</span>
                             </label>
                             <select 
                                 id="country" 
                                 name="country" 
                                 required 
-                                aria-describedby="country-error"
-                            >
-                                <option value="">Select Country</option>
-                                <option value="SY">Syria</option>
-                                <option value="TR">Turkey</option>
+                                aria-describedby="country-error">
+                                <option value="" data-translate="sections.factoryInfo.country.placeholder">Select Country</option>
                                 <option value="AE">United Arab Emirates</option>
                                 <option value="SA">Saudi Arabia</option>
                                 <option value="EG">Egypt</option>
                                 <option value="IQ">Iraq</option>
-                                <option value="US">United States</option>
-                                <option value="CA">Canada</option>
-                                <option value="UK">United Kingdom</option>
-                                <option value="DE">Germany</option>
-                                <option value="FR">France</option>
-                                <option value="IT">Italy</option>
-                                <option value="ES">Spain</option>
-                                <option value="NL">Netherlands</option>
-                                <option value="BE">Belgium</option>
-                                <option value="CH">Switzerland</option>
+                                <option value="JO">Jordan</option>
+                                <option value="LB">Lebanon</option>
+                                <option value="SY">Syria</option>
+                                <option value="KW">Kuwait</option>
+                                <option value="QA">Qatar</option>
+                                <option value="BH">Bahrain</option>
+                                <option value="OM">Oman</option>
+                                <option value="YE">Yemen</option>
+                                <option value="LY">Libya</option>
+                                <option value="TN">Tunisia</option>
+                                <option value="DZ">Algeria</option>
+                                <option value="MA">Morocco</option>
+                                <option value="SD">Sudan</option>
+                                <option value="MR">Mauritania</option>
+                                <option value="SO">Somalia</option>
+                                <option value="DJ">Djibouti</option>
+                                <option value="KM">Comoros</option>
+                                <option value="PS">Palestine</option>
+
+                                <option value="AL">Albania</option>
+                                <option value="AD">Andorra</option>
                                 <option value="AT">Austria</option>
-                                <option value="SE">Sweden</option>
-                                <option value="NO">Norway</option>
-                                <option value="DK">Denmark</option>
-                                <option value="FI">Finland</option>
-                                <option value="PL">Poland</option>
-                                <option value="CZ">Czech Republic</option>
-                                <option value="HU">Hungary</option>
-                                <option value="RO">Romania</option>
+                                <option value="BY">Belarus</option>
+                                <option value="BE">Belgium</option>
+                                <option value="BA">Bosnia and Herzegovina</option>
                                 <option value="BG">Bulgaria</option>
                                 <option value="HR">Croatia</option>
-                                <option value="SI">Slovenia</option>
-                                <option value="SK">Slovakia</option>
-                                <option value="LT">Lithuania</option>
-                                <option value="LV">Latvia</option>
-                                <option value="EE">Estonia</option>
-                                <option value="IE">Ireland</option>
-                                <option value="PT">Portugal</option>
-                                <option value="GR">Greece</option>
                                 <option value="CY">Cyprus</option>
-                                <option value="MT">Malta</option>
+                                <option value="CZ">Czech Republic</option>
+                                <option value="DK">Denmark</option>
+                                <option value="EE">Estonia</option>
+                                <option value="FI">Finland</option>
+                                <option value="FR">France</option>
+                                <option value="DE">Germany</option>
+                                <option value="GR">Greece</option>
+                                <option value="HU">Hungary</option>
+                                <option value="IS">Iceland</option>
+                                <option value="IE">Ireland</option>
+                                <option value="IT">Italy</option>
+                                <option value="LV">Latvia</option>
+                                <option value="LI">Liechtenstein</option>
+                                <option value="LT">Lithuania</option>
                                 <option value="LU">Luxembourg</option>
-                                <option value="other">Other</option>
+                                <option value="MT">Malta</option>
+                                <option value="MD">Moldova</option>
+                                <option value="MC">Monaco</option>
+                                <option value="ME">Montenegro</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="MK">North Macedonia</option>
+                                <option value="NO">Norway</option>
+                                <option value="PL">Poland</option>
+                                <option value="PT">Portugal</option>
+                                <option value="RO">Romania</option>
+                                <option value="RU">Russia</option>
+                                <option value="SM">San Marino</option>
+                                <option value="RS">Serbia</option>
+                                <option value="SK">Slovakia</option>
+                                <option value="SI">Slovenia</option>
+                                <option value="ES">Spain</option>
+                                <option value="SE">Sweden</option>
+                                <option value="CH">Switzerland</option>
+                                <option value="TR">Turkey</option>
+                                <option value="UA">Ukraine</option>
+                                <option value="GB">United Kingdom</option>
+                                <option value="US">United States</option>
+                                <!-- Extra countries -->
+                                <option value="CN">China</option>
+                                <option value="IN">India</option>
+
                             </select>
                             <div id="country-error" class="error-message" role="alert" aria-live="polite"></div>
                         </div>
                         <div class="form-group">
-                            <label for="city">City <span class="required" aria-label="required">*</span></label>
+                            <label for="city">
+                                <span data-translate="sections.factoryInfo.city.label">City</span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
                             <select 
                                 id="city" 
                                 name="city" 
@@ -119,23 +164,28 @@
                                 aria-describedby="city-error"
                                 disabled
                             >
-                                <option value="">Select Country First</option>
+                                <option value="" data-translate="sections.factoryInfo.city.placeholder">Select Country First</option>
                             </select>
                             <div id="city-error" class="error-message" role="alert" aria-live="polite"></div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="detailedAddress">Detailed Address <span class="required" aria-label="required">*</span></label>
+                        <label for="detailedAddress">
+                            <span data-translate="sections.factoryInfo.address.label">Detailed Address</span>
+                            <span class="required" aria-label="required">*</span>
+                        </label>
                         <div class="address-container">
                             <div class="map-section">
                                 <div id="map" class="google-map" aria-label="Location map for address selection"></div>
                                 <div class="map-controls">
                                     <button type="button" class="btn btn-secondary" id="getCurrentLocation">
-                                        <i class="fas fa-location-arrow" aria-hidden="true"></i> <span>Current Location</span>
+                                        <i class="fas fa-location-arrow" aria-hidden="true"></i> 
+                                        <span data-translate="sections.factoryInfo.address.currentLocation">Current Location</span>
                                     </button>
                                     <button type="button" class="btn btn-secondary" id="searchLocation">
-                                        <i class="fas fa-search" aria-hidden="true"></i> <span>Search Address</span>
+                                        <i class="fas fa-search" aria-hidden="true"></i> 
+                                        <span data-translate="sections.factoryInfo.address.searchLocation">Search Address</span>
                                     </button>
                                 </div>
                             </div>
@@ -144,6 +194,7 @@
                                     id="detailedAddress" 
                                     name="detailedAddress" 
                                     rows="3" 
+                                    data-translate-placeholder="sections.factoryInfo.address.placeholder"
                                     placeholder="Street address, building number, floor, etc." 
                                     required
                                     aria-describedby="detailedAddress-error"
@@ -152,11 +203,11 @@
                                 <div id="detailedAddress-error" class="error-message" role="alert" aria-live="polite"></div>
                                 <div class="coordinates-display">
                                     <div class="coordinate-field">
-                                        <label for="latitude">Latitude</label>
+                                        <label for="latitude" data-translate="sections.factoryInfo.address.latitude">Latitude</label>
                                         <input type="text" id="latitude" name="latitude" readonly aria-label="Selected latitude coordinate">
                                     </div>
                                     <div class="coordinate-field">
-                                        <label for="longitude">Longitude</label>
+                                        <label for="longitude" data-translate="sections.factoryInfo.address.longitude">Longitude</label>
                                         <input type="text" id="longitude" name="longitude" readonly aria-label="Selected longitude coordinate">
                                     </div>
                                 </div>
@@ -166,11 +217,14 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="landlinePhone">Landline Phone</label>
+                            <label for="landlinePhone">
+                                <span data-translate="sections.factoryInfo.phone.label">Landline Phone</span>
+                            </label>
                             <input 
                                 type="tel" 
                                 id="landlinePhone" 
                                 name="landlinePhone" 
+                                data-translate-placeholder="sections.factoryInfo.phone.placeholder"
                                 placeholder="+1 (555) 123-4567"
                                 aria-describedby="landlinePhone-error"
                                 maxlength="20"
@@ -178,13 +232,17 @@
                             <div id="landlinePhone-error" class="error-message" role="alert" aria-live="polite"></div>
                         </div>
                         <div class="form-group">
-                            <label for="factoryEmail">Email (for website integration) <span class="required" aria-label="required">*</span></label>
+                            <label for="factoryEmail">
+                                <span data-translate="sections.factoryInfo.email.label">Email (for website integration)</span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
                             <input 
                                 type="email" 
                                 id="factoryEmail" 
                                 name="factoryEmail" 
                                 required
                                 aria-describedby="factoryEmail-error"
+                                data-translate-placeholder="sections.factoryInfo.email.placeholder"
                                 placeholder="factory@example.com"
                                 maxlength="100"
                             >
@@ -197,7 +255,7 @@
                 <div class="form-section">
                     <h3 >
                         <i class="fas fa-user-tie" aria-hidden="true"></i>
-                        <span>    
+                        <span data-translate="sections.ownerInfo.title">    
                             Factory Owner Information
                         </span>
                     </h3>
@@ -205,13 +263,17 @@
                     <div id="ownersContainer">
                         <div class="owner-block" data-owner-index="1">
                             <div class="form-group">
-                                <label for="ownerName_1">Owner Name <span class="required" aria-label="required">*</span></label>
+                                <label for="ownerName_1">
+                                    <span data-translate="sections.ownerInfo.ownerName.label">Owner Name</span>
+                                    <span class="required" aria-label="required">*</span>
+                                </label>
                                 <input 
                                     type="text" 
                                     id="ownerName_1" 
                                     name="ownerName_1" 
                                     required
                                     aria-describedby="ownerName_1-error"
+                                    data-translate-placeholder="sections.ownerInfo.ownerName.placeholder"
                                     placeholder="Enter owner name"
                                     maxlength="100"
                                 >
@@ -220,7 +282,7 @@
 
                             <div class="form-group">
                                 <label for="ownerMobile_1">
-                                    <span>
+                                    <span data-translate="sections.ownerInfo.ownerPhone.label">
                                         Mobile Number
                                     </span>
                                     <span class="required" aria-label="required">*</span>
@@ -231,6 +293,7 @@
                                     name="ownerMobile_1" 
                                     required
                                     aria-describedby="ownerMobile_1-error"
+                                    data-translate-placeholder="sections.ownerInfo.ownerPhone.placeholder"
                                     placeholder="+1 (555) 123-4567"
                                     maxlength="20"
                                 >
@@ -242,7 +305,7 @@
                     <div class="form-actions">
                         <button type="button" class="btn btn-secondary" id="addOwnerBtn" aria-label="Add another factory owner">
                             <i class="fas fa-user-plus" aria-hidden="true"></i> 
-                            <span>
+                            <span data-translate="sections.ownerInfo.addOwner">
                                 Add Owner
                             </span>
                         </button>
@@ -253,14 +316,14 @@
                 <div class="form-section">
                     <h3>
                         <i class="fas fa-tools" aria-hidden="true"></i> 
-                        <span>
+                        <span data-translate="sections.spareParts.title">
                             Spare Parts Manager
                         </span>
                     </h3>
                     
                     <div class="form-group">
                         <label for="sparePartsManagerName">
-                                    <span>
+                                    <span data-translate="sections.spareParts.managerName.label">
                                 Name
                             </span>
                             <span class="required" aria-label="required">*</span>
@@ -271,6 +334,7 @@
                             name="sparePartsManagerName" 
                             required
                             aria-describedby="sparePartsManagerName-error"
+                            data-translate-placeholder="sections.spareParts.managerName.placeholder"
                             placeholder="Enter manager name"
                             maxlength="100"
                         >
@@ -280,7 +344,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="sparePartsManagerMobile">
-                                <span>
+                                <span data-translate="sections.spareParts.managerPhone.label">
                                     Mobile Number
                                 </span>
                                 <span class="required" aria-label="required">*</span>
@@ -291,6 +355,7 @@
                                 name="sparePartsManagerMobile" 
                                 required
                                 aria-describedby="sparePartsManagerMobile-error"
+                                data-translate-placeholder="sections.spareParts.managerPhone.placeholder"
                                 placeholder="+1 (555) 123-4567"
                                 maxlength="20"
                             >
@@ -298,7 +363,7 @@
                         </div>
                         <div class="form-group">
                             <label for="sparePartsManagerEmail">
-                                <span>
+                                <span data-translate="sections.spareParts.managerEmail.label">
                                     Email
                                 </span>
                                 <span class="required" aria-label="required">*</span>
@@ -309,6 +374,7 @@
                                 name="sparePartsManagerEmail" 
                                 required
                                 aria-describedby="sparePartsManagerEmail-error"
+                                data-translate-placeholder="sections.spareParts.managerEmail.placeholder"
                                 placeholder="manager@example.com"
                                 maxlength="100"
                             >
@@ -321,14 +387,14 @@
                 <div class="form-section">
                     <h3>
                         <i class="fas fa-cogs" aria-hidden="true"></i>
-                        <span>
+                        <span data-translate="sections.productionInfo.title">
                             Industrial Activity
                         </span>
                         </h3>
                     
                     <div class="form-group">
                         <label for="industryField">
-                            <span>
+                            <span data-translate="sections.productionInfo.productType.label">
                                 Industry Field
                             </span>
                             <span class="required" aria-label="required">*</span>
@@ -339,7 +405,7 @@
                             required
                             aria-describedby="industryField-error"
                         >
-                            <option value="">Select Industry Field</option>
+                            <option value="" data-translate="sections.productionInfo.productType.placeholder">Select Industry Field</option>
                             <option value="automotive">Automotive</option>
                             <option value="electronics">Electronics</option>
                             <option value="textiles">Textiles</option>
@@ -361,7 +427,7 @@
 
                     <div class="form-group">
                         <label>
-                            <span>
+                            <span data-translate="sections.productionInfo.productionCapacity.label">
                                 Available Production Lines & Brands
                             </span>
                             <span class="required" aria-label="required">*</span>
@@ -371,7 +437,7 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="productionLine_1">
-                                            <span>
+                                            <span data-translate="sections.productionInfo.productionLine.label">
                                                 Production Line
                                             </span>
                                             <span class="required" aria-label="required">*</span>
@@ -389,7 +455,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="brandName_1">
-                                            <span>
+                                            <span data-translate="sections.productionInfo.brandName.label">
                                                 Brand Name
                                             </span>
                                             <span class="required" aria-label="required">*</span>
@@ -412,7 +478,7 @@
                         <div class="form-actions">
                             <button type="button" class="btn btn-secondary" id="addProductionLineBtn" aria-label="Add another production line">
                                 <i class="fas fa-plus" aria-hidden="true"></i> 
-                                <span>
+                                <span data-translate="sections.productionInfo.addProductionLine">
                                     Add Production Line
                                 </span>
                             </button>
@@ -421,7 +487,7 @@
 
                     <div class="form-group">
                         <label for="manufacturingDate">
-                            <span>
+                            <span data-translate="sections.productionInfo.manufacturingDate.label">
                                 Production Lines Manufacturing Date
                             </span>
                         </label>
@@ -439,14 +505,14 @@
                 <div class="form-section">
                     <h3>
                         <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                        <span>
+                        <span data-translate="sections.terms.title">
                             Terms & Conditions
                         </span>
                     </h3>
                     
                     <div class="form-group">
                         <div class="terms-content">
-                            <p>
+                            <p data-translate="sections.terms.content">
                                 The customer is deemed to have accepted the terms of the privacy policy and the terms of use of the company's website and undertakes to maintain the confidentiality of data and not to leak any of it to third parties under any circumstances during the period granted to him to browse the website's data, which is specified as one month from the date of his entry to the website. The company is committed to maintaining the confidentiality of customer data in accordance with the rules of electronic commerce, the European Data Protection Regulation, and the UNCITRAL rules.
                             </p>
                         </div>
@@ -455,10 +521,12 @@
 
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="resetForm()" aria-label="Reset all form fields">
-                        <i class="fas fa-undo" aria-hidden="true"></i> <span>Reset Form</span>
+                        <i class="fas fa-undo" aria-hidden="true"></i> 
+                        <span data-translate="form.reset">Reset Form</span>
                     </button>
                     <button type="submit" class="btn btn-primary" aria-label="Submit factory information">
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i> <span >Submit Factory Information</span>
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> 
+                        <span data-translate="form.submit">Submit Factory Information</span>
                     </button>
                 </div>
             </form>
@@ -467,10 +535,10 @@
                 <div class="success-icon">
                     <i class="fas fa-check-circle" aria-hidden="true"></i>
                 </div>
-                <h3>Thank You!</h3>
-                <p>Your factory information has been submitted successfully. We'll review and get back to you soon!</p>
+                <h3 data-translate="messages.success.title">Thank You!</h3>
+                <p data-translate="messages.success.description">Your factory information has been submitted successfully. We'll review and get back to you soon!</p>
                 <button class="btn btn-primary" onclick="showForm()" aria-label="Submit another factory registration">
-                    <span>Submit Another</span>
+                    <span data-translate="messages.success.submitAnother">Submit Another</span>
                 </button>
             </div>
         </div>
