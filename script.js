@@ -868,9 +868,14 @@ class FactoryForm {
 
     isDevelopmentMode() {
         // Check if we're in development mode
-        return window.location.hostname === 'localhost' || 
-               window.location.hostname === '127.0.0.1' ||
-               window.location.protocol === 'file:';
+        const isLocal = window.location.hostname === 'localhost' || 
+               window.location.hostname === '127.0.0.1';
+        const isFile = window.location.protocol === 'file:';
+        // When served via Flask on localhost (http), use real backend, not simulation
+        if (isLocal && window.location.protocol.startsWith('http')) {
+            return false;
+        }
+        return isLocal || isFile;
     }
 
     showSuccessMessage() {
