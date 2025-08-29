@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Information Form</title>
+    <meta name="description" content="Register your factory information for website integration and registration purposes">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Maps API - Replace YOUR_API_KEY with actual key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSO5F4NJH0XgB8L7ug9hL1iTWQbqxZDTU&libraries=places" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="header-top">
+                    <div class="flag" aria-label="Country Flag">
+                        <img src="flag.png" alt="Flag" class="flag-img" />
+                    </div>
+                    <div class="logo" aria-label="Factory Registration Logo">
+                        <img src="logo.png" alt="Logo" class="logo-img" />
+                    </div>
+                    <div class="lang-switcher">
+                        <label for="langSelect" class="visually-hidden" data-i18n="app.language">Language</label>
+                        <select id="langSelect" aria-label="Language">
+                            <option class="lang-option" value="en">English</option>
+                            <option class="lang-option" value="tr">Türkçe</option>
+                            <option class="lang-option" value="ar">العربية</option>
+                            <option class="lang-option" value="de">Deutsch</option>
+                            <option class="lang-option" value="fr">Français</option>
+                            <option class="lang-option" value="es">Español</option>
+                            <option class="lang-option" value="zh">中文</option>
+                            <option class="lang-option" value="ru">Русский</option>
+                            <option class="lang-option" value="hi">हिन्दी</option>
+                        </select>
+                    </div>
+                </div>
+                <span data-i18n="app.logo" class="logo-text">Website Opening Form</span>
+                <h1 data-i18n="app.title">Factory Registration Form</h1>
+                <p data-i18n="app.subtitle">Please provide your factory details below for registration and integration purposes.</p>
+            </div>
+
+            <form id="factoryForm" class="factory-form" novalidate>
+                <!-- First Section: Factory Information -->
+                <div class="form-section">
+                    <h3>
+                        <i class="fas fa-industry" aria-hidden="true"></i>
+                        <span data-i18n="section.factoryInfo">
+                            Factory Information
+                        </span>
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="factoryName">
+                            <span data-i18n="field.factoryName">Factory Name</span> 
+                            <span class="required" aria-label="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="factoryName" 
+                            name="factoryName" 
+                            required 
+                            aria-describedby="factoryName-error"
+                            placeholder="Enter factory name"
+                            data-i18n-placeholder="placeholder.factoryName"
+                            maxlength="100"
+                        >
+                        <div id="factoryName-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="country">
+                                <span data-i18n="field.country">Country</span>
+                                 <span class="required" aria-label="required">*</span>
+                            </label>
+                            <select 
+                                id="country" 
+                                name="country" 
+                                required 
+                                aria-describedby="country-error"
+                            >
+                                <option value="" data-i18n="select.countryPlaceholder">Select Country</option>
+                                <option value="SY">Syria</option>
+                                <option value="TR">Turkey</option>
+                                <option value="AE">United Arab Emirates</option>
+                                <option value="SA">Saudi Arabia</option>
+                                <option value="EG">Egypt</option>
+                                <option value="IQ">Iraq</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="IT">Italy</option>
+                                <option value="ES">Spain</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="BE">Belgium</option>
+                                <option value="CH">Switzerland</option>
+                                <option value="AT">Austria</option>
+                                <option value="SE">Sweden</option>
+                                <option value="NO">Norway</option>
+                                <option value="DK">Denmark</option>
+                                <option value="FI">Finland</option>
+                                <option value="PL">Poland</option>
+                                <option value="CZ">Czech Republic</option>
+                                <option value="HU">Hungary</option>
+                                <option value="RO">Romania</option>
+                                <option value="BG">Bulgaria</option>
+                                <option value="HR">Croatia</option>
+                                <option value="SI">Slovenia</option>
+                                <option value="SK">Slovakia</option>
+                                <option value="LT">Lithuania</option>
+                                <option value="LV">Latvia</option>
+                                <option value="EE">Estonia</option>
+                                <option value="IE">Ireland</option>
+                                <option value="PT">Portugal</option>
+                                <option value="GR">Greece</option>
+                                <option value="CY">Cyprus</option>
+                                <option value="MT">Malta</option>
+                                <option value="LU">Luxembourg</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div id="country-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city" data-i18n="field.city">City <span class="required" aria-label="required">*</span></label>
+                            <select 
+                                id="city" 
+                                name="city" 
+                                required 
+                                aria-describedby="city-error"
+                                disabled
+                            >
+                                <option value="" data-i18n="select.cityPlaceholder">Select Country First</option>
+                            </select>
+                            <div id="city-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailedAddress" data-i18n="field.detailedAddress">Detailed Address <span class="required" aria-label="required">*</span></label>
+                        <div class="address-container">
+                            <div class="map-section">
+                                <div id="map" class="google-map" aria-label="Location map for address selection"></div>
+                                <div class="map-controls">
+                                    <button type="button" class="btn btn-secondary" id="getCurrentLocation">
+                                        <i class="fas fa-location-arrow" aria-hidden="true"></i> <span data-i18n="map.currentLocation">Current Location</span>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="searchLocation">
+                                        <i class="fas fa-search" aria-hidden="true"></i> <span data-i18n="map.searchAddress">Search Address</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="address-fields">
+                                <textarea 
+                                    id="detailedAddress" 
+                                    name="detailedAddress" 
+                                    rows="3" 
+                                    placeholder="Street address, building number, floor, etc." 
+                                    data-i18n-placeholder="placeholder.detailedAddress"
+                                    required
+                                    aria-describedby="detailedAddress-error"
+                                    maxlength="500"
+                                ></textarea>
+                                <div id="detailedAddress-error" class="error-message" role="alert" aria-live="polite"></div>
+                                <div class="coordinates-display">
+                                    <div class="coordinate-field">
+                                        <label for="latitude" data-i19n="field.latitude">Latitude</label>
+                                        <input type="text" id="latitude" name="latitude" readonly aria-label="Selected latitude coordinate">
+                                    </div>
+                                    <div class="coordinate-field">
+                                        <label for="longitude" data-i19n="field.longitude">Longitude</label>
+                                        <input type="text" id="longitude" name="longitude" readonly aria-label="Selected longitude coordinate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="landlinePhone" data-i18n="field.landLinePhone">Landline Phone</label>
+                            <input 
+                                type="tel" 
+                                id="landlinePhone" 
+                                name="landlinePhone" 
+                                placeholder="+1 (555) 123-4567"
+                                aria-describedby="landlinePhone-error"
+                                maxlength="20"
+                            >
+                            <div id="landlinePhone-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="factoryEmail" data-i18n="field.factoryEmail">Email (for website integration) <span class="required" aria-label="required">*</span></label>
+                            <input 
+                                type="email" 
+                                id="factoryEmail" 
+                                name="factoryEmail" 
+                                required
+                                aria-describedby="factoryEmail-error"
+                                placeholder="factory@example.com"
+                                maxlength="100"
+                            >
+                            <div id="factoryEmail-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Section: Factory Owner Information -->
+                <div class="form-section">
+                    <h3 >
+                        <i class="fas fa-user-tie" aria-hidden="true"></i>
+                        <span data-i18n="section.factoryOwnerInfo">    
+                            Factory Owner Information
+                        </span>
+                    </h3>
+                    
+                    <div id="ownersContainer">
+                        <div class="owner-block" data-owner-index="1">
+                            <div class="form-group">
+                                <label for="ownerName_1" data-i18n="field.ownerName">Owner Name <span class="required" aria-label="required">*</span></label>
+                                <input 
+                                    type="text" 
+                                    id="ownerName_1" 
+                                    name="ownerName_1" 
+                                    required
+                                    aria-describedby="ownerName_1-error"
+                                    placeholder="Enter owner name"
+                                    data-i18n-placeholder="placeholder.ownerName"
+                                    maxlength="100"
+                                >
+                                <div id="ownerName_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ownerMobile_1">
+                                    <span data-i18n="field.mobileNumber">
+                                        Mobile Number
+                                    </span>
+                                    <span class="required" aria-label="required">*</span>
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="ownerMobile_1" 
+                                    name="ownerMobile_1" 
+                                    required
+                                    aria-describedby="ownerMobile_1-error"
+                                    placeholder="+1 (555) 123-4567"
+                                    maxlength="20"
+                                >
+                                <div id="ownerMobile_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="addOwnerBtn" aria-label="Add another factory owner">
+                            <i class="fas fa-user-plus" aria-hidden="true"></i> 
+                            <span data-i18n="actions.addOwner">
+                                Add Owner
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Third Section: Spare Parts Manager -->
+                <div class="form-section">
+                    <h3>
+                        <i class="fas fa-tools" aria-hidden="true"></i> 
+                        <span data-i18n="section.sparePartsManger">
+                            Spare Parts Manager
+                        </span>
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="sparePartsManagerName">
+                            <span data-i18n="field.mangerName">
+                                Name
+                            </span>
+                            <span class="required" aria-label="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="sparePartsManagerName" 
+                            name="sparePartsManagerName" 
+                            required
+                            aria-describedby="sparePartsManagerName-error"
+                            placeholder="Enter manager name"
+                            data-i18n-placeholder="placeholder.mangerName"
+                            maxlength="100"
+                        >
+                        <div id="sparePartsManagerName-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sparePartsManagerMobile">
+                                <span data-i18n="field.mobileNumber">
+                                    Mobile Number
+                                </span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="sparePartsManagerMobile" 
+                                name="sparePartsManagerMobile" 
+                                required
+                                aria-describedby="sparePartsManagerMobile-error"
+                                placeholder="+1 (555) 123-4567"
+                                maxlength="20"
+                            >
+                            <div id="sparePartsManagerMobile-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sparePartsManagerEmail">
+                                <span data-i18n="field.email">
+                                    Email
+                                </span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="sparePartsManagerEmail" 
+                                name="sparePartsManagerEmail" 
+                                required
+                                aria-describedby="sparePartsManagerEmail-error"
+                                placeholder="manager@example.com"
+                                maxlength="100"
+                            >
+                            <div id="sparePartsManagerEmail-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth Section: Industrial Activity -->
+                <div class="form-section">
+                    <h3>
+                        <i class="fas fa-cogs" aria-hidden="true"></i>
+                        <span data-i18n="section.industrilaActivity">
+                            Industrial Activity
+                        </span>
+                        </h3>
+                    
+                    <div class="form-group">
+                        <label for="industryField">
+                            <span data-i18n="field.industryField">
+                                Industry Field
+                            </span>
+                            <span class="required" aria-label="required">*</span>
+                        </label>
+                        <select 
+                            id="industryField" 
+                            name="industryField" 
+                            required
+                            aria-describedby="industryField-error"
+                        >
+                            <option value="" data-i18n="select.industryPlaceholder">Select Industry Field</option>
+                            <option value="automotive">Automotive</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="textiles">Textiles</option>
+                            <option value="chemicals">Chemicals</option>
+                            <option value="pharmaceuticals">Pharmaceuticals</option>
+                            <option value="food_beverage">Food & Beverage</option>
+                            <option value="machinery">Machinery & Equipment</option>
+                            <option value="metals">Metals & Mining</option>
+                            <option value="construction">Construction Materials</option>
+                            <option value="aerospace">Aerospace & Defense</option>
+                            <option value="energy">Energy & Utilities</option>
+                            <option value="medical">Medical Devices</option>
+                            <option value="plastics">Plastics & Rubber</option>
+                            <option value="paper">Paper & Packaging</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div id="industryField-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span data-i18n="field.avProdLinesAndBrands">
+                                Available Production Lines & Brands
+                            </span>
+                            <span class="required" aria-label="required">*</span>
+                        </label>
+                        <div id="productionLinesContainer">
+                            <div class="production-line-block" data-line-index="1">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="productionLine_1">
+                                            <span data-i18n="field.productionLine">
+                                                Production Line
+                                            </span>
+                                            <span class="required" aria-label="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="productionLine_1" 
+                                            name="productionLine_1" 
+                                            placeholder="e.g., Assembly Line A, Manufacturing Unit 1" 
+                                            data-i18n-placeholder="placeholder.productionLine"
+                                            required
+                                            aria-describedby="productionLine_1-error"
+                                            maxlength="100"
+                                        >
+                                        <div id="productionLine_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="brandName_1">
+                                            <span data-i18n="field.brandName">
+                                                Brand Name
+                                            </span>
+                                            <span class="required" aria-label="required">*</span>
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            id="brandName_1" 
+                                            name="brandName_1" 
+                                            placeholder="e.g., Brand X, Company Y" 
+                                            data-i18n-placeholder="placeholder.brandName"
+                                            required
+                                            aria-describedby="brandName_1-error"
+                                            maxlength="100"
+                                        >
+                                        <div id="brandName_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="addProductionLineBtn" aria-label="Add another production line">
+                                <i class="fas fa-plus" aria-hidden="true"></i> 
+                                <span data-i18n="actions.addLine">
+                                    Add Production Line
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="manufacturingDate">
+                            <span data-i18n="field.prodLineDate">
+                                Production Lines Manufacturing Date
+                            </span>
+                        </label>
+                        <input 
+                            type="date" 
+                            id="manufacturingDate" 
+                            name="manufacturingDate"
+                            aria-describedby="manufacturingDate-error"
+                        >
+                        <div id="manufacturingDate-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-section">
+                    <h3>
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                        <span data-i18n="section.termsAndConditions">
+                            Terms & Conditions
+                        </span>
+                    </h3>
+                    
+                    <div class="form-group">
+                        <div class="terms-content">
+                            <p data-i18n="termsAndConditions.desc">
+                                The customer is deemed to have accepted the terms of the privacy policy and the terms of use of the company's website and undertakes to maintain the confidentiality of data and not to leak any of it to third parties under any circumstances during the period granted to him to browse the website's data, which is specified as one month from the date of his entry to the website. The company is committed to maintaining the confidentiality of customer data in accordance with the rules of electronic commerce, the European Data Protection Regulation, and the UNCITRAL rules.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()" aria-label="Reset all form fields">
+                        <i class="fas fa-undo" aria-hidden="true"></i> <span data-i18n="actions.reset">Reset Form</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary" aria-label="Submit factory information">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> <span data-i18n="actions.submit">Submit Factory Information</span>
+                    </button>
+                </div>
+            </form>
+
+            <div id="successMessage" class="success-message" role="alert" aria-live="polite">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                </div>
+                <h3 data-i18n="success.title">Thank You!</h3>
+                <p data-i18n="success.desc">Your factory information has been submitted successfully. We'll review and get back to you soon!</p>
+                <button class="btn btn-primary" onclick="showForm()" aria-label="Submit another factory registration">
+                    <span data-i18n="success.submitAnother">Submit Another</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
