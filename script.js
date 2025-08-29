@@ -9,7 +9,6 @@ class FactoryForm {
         this.countryCities = this.initializeCountryCities();
         this.ownerIndex = 1;
         this.productionLineIndex = 1;
-        this.i18n = new I18n();
         
         this.init();
     }
@@ -20,15 +19,7 @@ class FactoryForm {
         this.setupCountryCityDropdown();
         this.setupGoogleMaps();
         this.loadFormData();
-        this.i18n.applyTranslations();
-
-        const langSelect = document.getElementById('langSelect');
-        if (langSelect) {
-            langSelect.value = this.i18n.lang;
-            langSelect.addEventListener('change', (e) => {
-                this.i18n.setLanguage(e.target.value);
-            });
-        }
+        
     }
 
     setupElements() {
@@ -107,7 +98,7 @@ class FactoryForm {
         const citySelect = document.getElementById('city');
         
         // Clear city dropdown
-        citySelect.innerHTML = `<option value="">${this.i18n.t('select.city') || 'Select City'}</option>`;
+        citySelect.innerHTML = `<option value="">Select City</option>`;
         citySelect.disabled = true;
         
         if (selectedCountry && selectedCountry !== 'other') {
@@ -122,7 +113,7 @@ class FactoryForm {
                 citySelect.disabled = false;
             }
         } else if (selectedCountry === 'other') {
-            citySelect.innerHTML = `<option value="">${this.i18n.t('select.city') || 'Select City'}</option><option value="other">${this.i18n.t('select.otherSpecify') || 'Other (Please specify)'}</option>`;
+            citySelect.innerHTML = `<option value="">Select City</option><option value="other">Other (Please specify)</option>`;
             citySelect.disabled = false;
         }
         
@@ -144,8 +135,7 @@ class FactoryForm {
         textInput.id = 'city';
         textInput.name = 'city';
         textInput.required = true;
-        textInput.placeholder = this.i18n.t('placeholder.cityName') || 'Enter city name';
-        textInput.setAttribute('data-i18n-placeholder', 'placeholder.cityName');
+        textInput.placeholder = 'Enter city name';
         textInput.maxLength = 100;
         textInput.setAttribute('aria-describedby', 'city-error');
         
@@ -154,7 +144,6 @@ class FactoryForm {
         
         // Re-setup event listeners for the new input
         this.setupFieldValidation(textInput);
-        this.i18n.applyTranslations(cityGroup);
     }
 
     setupDynamicSections() {
@@ -187,7 +176,7 @@ class FactoryForm {
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
-                    <label for="ownerName_${index}"><span data-i18n="field.ownerName">Owner Name</span> <span class="required" aria-label="required">*</span></label>
+                    <label for="ownerName_${index}">Owner Name <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="ownerName_${index}" 
@@ -195,13 +184,12 @@ class FactoryForm {
                         required
                         aria-describedby="ownerName_${index}-error"
                         placeholder="Enter owner name"
-                        data-i18n-placeholder="placeholder.ownerName"
                         maxlength="100"
                     >
                     <div id="ownerName_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
-                    <label for="ownerMobile_${index}"><span data-i18n="field.mobileNumber">Mobile Number</span> <span class="required" aria-label="required">*</span></label>
+                    <label for="ownerMobile_${index}">Mobile Number <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="tel" 
                         id="ownerMobile_${index}" 
@@ -216,7 +204,7 @@ class FactoryForm {
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-owner aria-label="Remove this owner">
-                    <i class="fas fa-user-minus" aria-hidden="true"></i> <span data-i18n="actions.removeOwner">Remove Owner</span>
+                    <i class="fas fa-user-minus" aria-hidden="true"></i> <span>Remove Owner</span>
                 </button>
             </div>
         `;
@@ -227,7 +215,6 @@ class FactoryForm {
         // Setup validation for new fields
         const inputs = wrapper.querySelectorAll('input');
         inputs.forEach(input => this.setupFieldValidation(input));
-        this.i18n.applyTranslations(wrapper);
         
         return wrapper;
     }
@@ -237,7 +224,7 @@ class FactoryForm {
         const blocks = ownersContainer.querySelectorAll('.owner-block');
         
         if (blocks.length <= 1) {
-            this.showNotification(this.i18n.t('actions.removingOwnerBlocked'), 'warning');
+            this.showNotification('Removing owner blocked', 'warning');
             return;
         }
         
@@ -299,13 +286,12 @@ class FactoryForm {
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
-                    <label for="productionLine_${index}"><span data-i18n="field.productionLine">Production Line</span> <span class="required" aria-label="required">*</span></label>
+                    <label for="productionLine_${index}">Production Line <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="productionLine_${index}" 
                         name="productionLine_${index}" 
                         placeholder="e.g., Assembly Line A, Manufacturing Unit 1" 
-                        data-i18n-placeholder="placeholder.productionLine"
                         required
                         aria-describedby="productionLine_${index}-error"
                         maxlength="100"
@@ -313,13 +299,12 @@ class FactoryForm {
                     <div id="productionLine_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
-                    <label for="brandName_${index}"><span data-i18n="field.brandName">Brand Name</span> <span class="required" aria-label="required">*</span></label>
+                    <label for="brandName_${index}">Brand Name <span class="required" aria-label="required">*</span></label>
                     <input 
                         type="text" 
                         id="brandName_${index}" 
                         name="brandName_${index}" 
                         placeholder="e.g., Brand X, Company Y" 
-                        data-i18n-placeholder="placeholder.brandName"
                         required
                         aria-describedby="brandName_${index}-error"
                         maxlength="100"
@@ -329,7 +314,7 @@ class FactoryForm {
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-production-line aria-label="Remove this production line">
-                    <i class="fas fa-minus" aria-hidden="true"></i> <span data-i18n="actions.removeLine">Remove Production Line</span>
+                    <i class="fas fa-minus" aria-hidden="true"></i> <span>Remove Production Line</span>
                 </button>
             </div>
         `;
@@ -340,7 +325,6 @@ class FactoryForm {
         // Setup validation for new fields
         const inputs = wrapper.querySelectorAll('input');
         inputs.forEach(input => this.setupFieldValidation(input));
-        this.i18n.applyTranslations(wrapper);
         
         return wrapper;
     }
@@ -350,7 +334,7 @@ class FactoryForm {
         const blocks = container.querySelectorAll('.production-line-block');
         
         if (blocks.length <= 1) {
-            this.showNotification(this.i18n.t('actions.removingLineBlocked'), 'warning');
+            this.showNotification('Removing production line blocked', 'warning');
             return;
         }
         
@@ -410,8 +394,8 @@ class FactoryForm {
             mapElement.innerHTML = `
                 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; text-align: center;">
                     <i class="fas fa-map-marker-alt" style="font-size: 48px; color: #64748b; margin-bottom: 16px;"></i>
-                    <p style="color: #64748b; margin: 0;">${this.i18n.t('map.apiNeeded')}</p>
-                    <small style="color: #94a3b8; margin-top: 8px;">${this.i18n.t('map.updateKey')}</small>
+                    <p style="color: #64748b; margin: 0;">Google Maps API needed</p>
+                    <small style="color: #94a3b8; margin-top: 8px;">Update API key</small>
                 </div>
             `;
         }
@@ -454,7 +438,7 @@ class FactoryForm {
 
     getCurrentLocation() {
         if (!navigator.geolocation) {
-            this.showNotification(this.i18n.t('geo.notSupported'), 'error');
+            this.showNotification('Geolocation not supported', 'error');
             return;
         }
 
@@ -469,13 +453,13 @@ class FactoryForm {
                 this.getAddressFromCoordinates(pos);
             },
             (error) => {
-                this.showNotification(`${this.i18n.t('submit.fail').replace('{msg}', error.message)}`, 'error');
+                this.showNotification(`Submit failed: ${error.message}`, 'error');
             }
         );
     }
 
     searchLocation() {
-        const address = prompt(this.i18n.t('geo.prompt'));
+        const address = prompt('Enter address to search');
         if (address) {
             this.geocodeAddress(address);
         }
@@ -490,7 +474,7 @@ class FactoryForm {
             position: latLng,
             map: this.map,
             draggable: true,
-            title: this.i18n.t('geo.markerTitle')
+            title: 'Marker'
         });
 
         // Update coordinates display
@@ -535,7 +519,7 @@ class FactoryForm {
                     addressInput.value = results[0].formatted_address;
                 }
             } else {
-                this.showNotification(this.i18n.t('geo.geocodeFail').replace('{status}', status), 'error');
+                    this.showNotification(`Geocoding failed: ${status}`, 'error');
             }
         });
     }
@@ -554,17 +538,17 @@ class FactoryForm {
         this.clearFieldError(field);
         
         if (field.hasAttribute('required') && !field.value.trim()) {
-            this.showFieldError(field, this.i18n.t('validate.required'));
+            this.showFieldError(field, 'This field is required');
             return false;
         }
         
         if (field.type === 'email' && field.value && !this.isValidEmail(field.value)) {
-            this.showFieldError(field, this.i18n.t('validate.email'));
+            this.showFieldError(field, 'Invalid email address');
             return false;
         }
         
         if (field.type === 'tel' && field.value && !this.isValidPhone(field.value)) {
-            this.showFieldError(field, this.i18n.t('validate.phone'));
+            this.showFieldError(field, 'Invalid phone number');
             return false;
         }
         
@@ -777,7 +761,7 @@ class FactoryForm {
         try {
             // Show loading state
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class=\"fas fa-spinner fa-spin\" aria-hidden=\"true\"></i> ${this.i18n.t('actions.submitting')}`;
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Submitting...`;
             
             // Collect form data
             const formData = new FormData(this.form);
@@ -809,14 +793,14 @@ class FactoryForm {
                 console.log('Form submitted successfully:', response);
                 
                 // Show submission ID to user
-                this.showNotification(this.i18n.t('submit.successToast').replace('{id}', data.submissionId), 'success');
+                this.showNotification(`Submission successful: ${data.submissionId}`, 'success');
             } else {
                 throw new Error(response.message || 'Server submission failed');
             }
             
         } catch (error) {
             console.error('Form submission error:', error);
-            this.showNotification(this.i18n.t('submit.fail').replace('{msg}', error.message), 'error');
+                this.showNotification(`Submit failed: ${error.message}`, 'error');
         } finally {
             // Reset button
             submitBtn.disabled = false;
@@ -904,7 +888,7 @@ class FactoryForm {
     }
 
     resetForm() {
-        if (confirm(this.i18n.t('reset.confirm'))) {
+        if (confirm('Are you sure you want to reset the form?')) {
             this.form.reset();
             this.clearAllErrors();
             localStorage.removeItem('factoryFormData');
@@ -915,7 +899,7 @@ class FactoryForm {
             // Reset city field
             this.resetCityField();
             
-            this.showNotification(this.i18n.t('reset.done'), 'success');
+            this.showNotification('Form reset successfully', 'success');
         }
     }
 
@@ -952,16 +936,14 @@ class FactoryForm {
             citySelect.name = 'city';
             citySelect.required = true;
             citySelect.disabled = true;
-            citySelect.innerHTML = `<option value="" data-i18n="select.cityPlaceholder">Select Country First</option>`;
+            citySelect.innerHTML = `<option value="">Select Country First</option>`;
             citySelect.setAttribute('aria-describedby', 'city-error');
             
             cityGroup.replaceChild(citySelect, cityField);
             this.setupFieldValidation(citySelect);
-            this.i18n.applyTranslations(cityGroup);
-        } else {
-            cityField.innerHTML = `<option value="" data-i18n="select.cityPlaceholder">Select Country First</option>`;
+            } else {
+            cityField.innerHTML = `<option value="">Select Country First</option>`;
             cityField.disabled = true;
-            this.i18n.applyTranslations(cityField.parentNode);
         }
     }
 
