@@ -1,4 +1,3 @@
-// Factory Form Application - Multi-Language Version
 class FactoryForm {
     constructor() {
         this.form = null;
@@ -10,7 +9,6 @@ class FactoryForm {
         this.ownerIndex = 1;
         this.productionLineIndex = 1;
         
-        // Language support
         this.currentLanguage = 'en';
         this.translations = {};
         this.languageSelector = null;
@@ -31,14 +29,28 @@ class FactoryForm {
     async loadTranslations() {
         try {
             // Load all translation files
-            const [enTranslations, arTranslations] = await Promise.all([
+            const [enTranslations, arTranslations, deTranslations, esTranslations, frTranslations, zhTranslations, ruTranslations, inTranslations, trTranslations] = await Promise.all([
                 fetch('translations/en.json').then(res => res.json()),
-                fetch('translations/ar.json').then(res => res.json())
+                fetch('translations/ar.json').then(res => res.json()),
+                fetch('translations/de.json').then(res => res.json()),
+                fetch('translations/es.json').then(res => res.json()),
+                fetch('translations/fr.json').then(res => res.json()),
+                fetch('translations/zh.json').then(res => res.json()),
+                fetch('translations/ru.json').then(res => res.json()),
+                fetch('translations/in.json').then(res => res.json()),
+                fetch('translations/tr.json').then(res => res.json()),
             ]);
             
             this.translations = {
                 en: enTranslations,
-                ar: arTranslations
+                ar: arTranslations,
+                de: deTranslations,
+                es: esTranslations,
+                fr: frTranslations,
+                zh: zhTranslations,
+                ru: ruTranslations,
+                in: inTranslations,
+                tr: trTranslations
             };
         } catch (error) {
             console.error('Error loading translations:', error);
@@ -61,6 +73,20 @@ class FactoryForm {
             detectedLang = primaryLang;
         } else if (primaryLang === 'ar' || browserLang.includes('ar')) {
             detectedLang = 'ar';
+        } else if (primaryLang === 'de' || browserLang.includes('de')) {
+            detectedLang = 'de';
+        } else if (primaryLang === 'es' || browserLang.includes('es')) {
+            detectedLang = 'es';
+        } else if (primaryLang === 'fr' || browserLang.includes('fr')) {
+            detectedLang = 'fr';
+        } else if (primaryLang === 'zh' || browserLang.includes('zh')) {
+            detectedLang = 'zh';
+        } else if (primaryLang === 'ru' || browserLang.includes('ru')) {
+            detectedLang = 'ru';
+        } else if (primaryLang === 'in' || browserLang.includes('in')) {
+            detectedLang = 'in';
+        } else if (primaryLang === 'tr' || browserLang.includes('tr')) {
+            detectedLang = 'tr';
         }
         
         // Set language
@@ -1013,7 +1039,7 @@ class FactoryForm {
     async submitToServer(data) {
         // Configuration for server endpoint
         const serverConfig = {
-            endpoint: '/api/factory-registration', // Update this to your actual endpoint
+            endpoint: '/api/factory-registration',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1037,7 +1063,14 @@ class FactoryForm {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                return await response.json();
+                const result = await response.json();
+                
+                // Handle email notification results
+                if (result.emails) {
+                    this.handleEmailResults(result.emails);
+                }
+                
+                return result;
             }
         } catch (error) {
             console.error('Server submission error:', error);
@@ -1045,6 +1078,21 @@ class FactoryForm {
         }
     }
 
+    handleEmailResults(emailResults) {
+        // Show email notification results to user
+        if (emailResults.company_email_sent && emailResults.customer_email_sent) {
+            this.showNotification('Confirmation emails sent successfully!', 'success');
+        } else if (emailResults.company_email_sent || emailResults.customer_email_sent) {
+            this.showNotification('Some confirmation emails sent. Please check your email.', 'warning');
+        } else {
+            this.showNotification('Registration saved but email notifications failed. We will contact you soon.', 'warning');
+        }
+        
+        // Log any email errors
+        if (emailResults.errors && emailResults.errors.length > 0) {
+            console.warn('Email notification errors:', emailResults.errors);
+        }
+    } 
     simulateServerSubmission(data) {
         return new Promise((resolve) => {
             setTimeout(() => {

@@ -1,0 +1,831 @@
+{
+    "meta": {
+        "title": "Formulario de Información de Fábrica",
+        "description": "Registre la información de su fábrica para fines de integración del sitio web y registro"
+    },
+    "header": {
+        "logoText": "Formulario de Apertura del Sitio Web",
+        "title": "Formulario de Registro de Fábrica",
+        "subtitle": "Por favor proporcione los detalles de su fábrica a continuación para fines de registro e integración."
+    },
+    "sections": {
+        "factoryInfo": {
+            "title": "Información de la Fábrica",
+            "factoryName": {
+                "label": "Nombre de la Fábrica",
+                "placeholder": "Ingrese el nombre de la fábrica",
+                "error": "El nombre de la fábrica es obligatorio"
+            },
+            "country": {
+                "label": "País",
+                "placeholder": "Seleccione País",
+                "error": "Por favor seleccione un país"
+            },
+            "city": {
+                "label": "Ciudad",
+                "placeholder": "Seleccione País Primero",
+                "other": "Otro (Por favor especifique)",
+                "error": "Por favor seleccione una ciudad"
+            },
+            "address": {
+                "label": "Dirección Detallada",
+                "placeholder": "Dirección de la calle, número de edificio, piso, etc.",
+                "error": "La dirección detallada es obligatoria",
+                "currentLocation": "Ubicación Actual",
+                "searchLocation": "Buscar Dirección",
+                "latitude": "Latitud",
+                "longitude": "Longitud"
+            },
+            "phone": {
+                "label": "Teléfono Fijo",
+                "placeholder": "+34 (91) 123-4567"
+            },
+            "email": {
+                "label": "Correo Electrónico (para integración del sitio web)",
+                "placeholder": "fabrica@ejemplo.com",
+                "error": "Se requiere un correo electrónico válido"
+            }
+        },
+        "ownerInfo": {
+            "title": "Información del Propietario de la Fábrica",
+            "ownerName": {
+                "label": "Nombre del Propietario",
+                "placeholder": "Ingrese el nombre del propietario"
+            },
+            "ownerPhone": {
+                "label": "Número Móvil",
+                "placeholder": "+34 (91) 123-4567"
+            },
+            "addOwner": "Agregar Propietario",
+            "removeOwner": "Eliminar Propietario"
+        },
+        "spareParts": {
+            "title": "Gerente de Repuestos",
+            "managerName": {
+                "label": "Nombre",
+                "placeholder": "Ingrese el nombre del gerente"
+            },
+            "managerPhone": {
+                "label": "Número Móvil",
+                "placeholder": "+34 (91) 123-4567"
+            },
+            "managerEmail": {
+                "label": "Correo Electrónico",
+                "placeholder": "gerente@ejemplo.com"
+            }
+        },
+        "productionInfo": {
+            "title": "Actividad Industrial",
+            "productType": {
+                "label": "Campo Industrial",
+                "placeholder": "Seleccione Campo Industrial"
+            },
+            "productionLine": {
+                "label": "Línea de Producción"
+            },
+            "brandName": {
+                "label": "Nombre de la Marca"
+            },
+            "addProductionLine": "Agregar Línea de Producción",
+            "removeProductionLine": "Eliminar Línea de Producción",
+            "manufacturingDate": {
+                "label": "Fecha de Fabricación de las Líneas de Producción"
+            }
+        },
+        "terms": {
+            "title": "Términos y Condiciones",
+            "content": "El cliente se considera que ha aceptado los términos de la política de privacidad y los términos de uso del sitio web de la empresa y se compromete a mantener la confidencialidad de los datos y no filtrar ninguno de ellos a terceros bajo ninguna circunstancia durante el período que se le otorga para navegar por los datos del sitio web, que se especifica como un mes a partir de la fecha de su entrada al sitio web. La empresa se compromete a mantener la confidencialidad de los datos del cliente de acuerdo con las reglas del comercio electrónico, el Reglamento Europeo de Protección de Datos y las reglas de UNCITRAL."
+        }
+    },
+    "form": {
+        "submit": "Enviar Información de la Fábrica",
+        "submitting": "Enviando...",
+        "reset": "Restablecer Formulario",
+        "resetConfirm": "¿Está seguro de que desea restablecer el formulario?",
+        "resetSuccess": "Formulario restablecido exitosamente"
+    },
+    "validation": {
+        "required": "Este campo es obligatorio",
+        "invalidEmail": "Por favor ingrese una dirección de correo electrónico válida",
+        "invalidPhone": "Por favor ingrese un número de teléfono válido"
+    },
+    "messages": {
+        "success": {
+            "title": "¡Gracias!",
+            "description": "Su información de fábrica ha sido enviada exitosamente. ¡La revisaremos y nos pondremos en contacto con usted pronto!",
+            "submitAnother": "Enviar Otro"
+        },
+        "error": "Ocurrió un error. Por favor inténtelo de nuevo.",
+        "submissionId": "ID de Envío"
+    },
+    "countries": {
+        "AE": "Emiratos Árabes Unidos",
+        "SA": "Arabia Saudita",
+        "EG": "Egipto",
+        "IQ": "Irak",
+        "JO": "Jordania",
+        "LB": "Líbano",
+        "SY": "Siria",
+        "KW": "Kuwait",
+        "QA": "Catar",
+        "BH": "Bahrein",
+        "OM": "Omán",
+        "YE": "Yemen",
+        "LY": "Libia",
+        "TN": "Túnez",
+        "DZ": "Argelia",
+        "MA": "Marruecos",
+        "SD": "Sudán",
+        "MR": "Mauritania",
+        "SO": "Somalia",
+        "DJ": "Yibuti",
+        "KM": "Comoras",
+        "PS": "Palestina",
+        "AL": "Albania",
+        "AD": "Andorra",
+        "AT": "Austria",
+        "BY": "Bielorrusia",
+        "BE": "Bélgica",
+        "BA": "Bosnia y Herzegovina",
+        "BG": "Bulgaria",
+        "HR": "Croacia",
+        "CY": "Chipre",
+        "CZ": "República Checa",
+        "DK": "Dinamarca",
+        "EE": "Estonia",
+        "FI": "Finlandia",
+        "FR": "Francia",
+        "DE": "Alemania",
+        "GR": "Grecia",
+        "HU": "Hungría",
+        "IS": "Islandia",
+        "IE": "Irlanda",
+        "IT": "Italia",
+        "LV": "Letonia",
+        "LI": "Liechtenstein",
+        "LT": "Lituania",
+        "LU": "Luxemburgo",
+        "MT": "Malta",
+        "MD": "Moldavia",
+        "MC": "Mónaco",
+        "ME": "Montenegro",
+        "NL": "Países Bajos",
+        "MK": "Macedonia del Norte",
+        "NO": "Noruega",
+        "PL": "Polonia",
+        "PT": "Portugal",
+        "RO": "Rumania",
+        "RU": "Rusia",
+        "SM": "San Marino",
+        "RS": "Serbia",
+        "SK": "Eslovaquia",
+        "SI": "Eslovenia",
+        "ES": "España",
+        "SE": "Suecia",
+        "CH": "Suiza",
+        "TR": "Turquía",
+        "UA": "Ucrania",
+        "GB": "Reino Unido",
+        "US": "Estados Unidos",
+        "CN": "China",
+        "IN": "India"
+    },
+    "cities": {
+        "AE": {
+            "Dubai": "Dubái",
+            "Abu Dhabi": "Abu Dabi",
+            "Sharjah": "Sharjah",
+            "Ajman": "Ajman",
+            "Ras Al Khaimah": "Ras al-Khaimah",
+            "Fujairah": "Fujairah",
+            "Umm Al Quwain": "Umm al-Qaiwain",
+            "Al Ain": "Al Ain",
+            "Khor Fakkan": "Khor Fakkan",
+            "Dibba Al-Fujairah": "Dibba al-Fujairah",
+            "Kalba": "Kalba"
+        },
+        "SA": {
+            "Riyadh": "Riad",
+            "Jeddah": "Yeda",
+            "Mecca": "La Meca",
+            "Medina": "Medina",
+            "Dammam": "Dammam",
+            "Khobar": "Al-Khobar",
+            "Tabuk": "Tabuk",
+            "Buraydah": "Buraydah",
+            "Hail": "Ha'il",
+            "Najran": "Najran",
+            "Al-Kharj": "Al-Kharj",
+            "Taif": "Taif"
+        },
+        "EG": {
+            "Cairo": "El Cairo",
+            "Alexandria": "Alejandría",
+            "Giza": "Giza",
+            "Shubra El-Kheima": "Shubra el-Kheima",
+            "Port Said": "Puerto Said",
+            "Suez": "Suez",
+            "Luxor": "Luxor",
+            "Aswan": "Asuán",
+            "Mansoura": "Mansoura",
+            "Tanta": "Tanta",
+            "Ismailia": "Ismailia",
+            "Faiyum": "Fayum"
+        },
+        "IQ": {
+            "Baghdad": "Bagdad",
+            "Basra": "Basora",
+            "Mosul": "Mosul",
+            "Erbil": "Erbil",
+            "Kirkuk": "Kirkuk",
+            "Najaf": "Najaf",
+            "Samarra": "Samarra",
+            "Karbala": "Kerbala",
+            "Sulaymaniyah": "Sulaymaniyah",
+            "Dhi Qar": "Dhi Qar",
+            "Al Hillah": "Al Hillah"
+        },
+        "JO": {
+            "Amman": "Amán",
+            "Zarqa": "Zarqa",
+            "Irbid": "Irbid",
+            "Aqaba": "Aqaba",
+            "Madaba": "Madaba",
+            "Mafraq": "Mafraq",
+            "Al Karak": "Al Karak",
+            "Jerash": "Jerash",
+            "Tafilah": "Tafilah",
+            "Ajloun": "Ajloun"
+        },
+        "LB": {
+            "Beirut": "Beirut",
+            "Tripoli": "Trípoli",
+            "Sidon": "Sidón",
+            "Tyre": "Tiro",
+            "Byblos": "Byblos",
+            "Zahle": "Zahle",
+            "Baalbek": "Baalbek",
+            "Jounieh": "Jounieh",
+            "Saida": "Saida",
+            "Nabatieh": "Nabatieh"
+        },
+        "SY": {
+            "Damascus": "Damasco",
+            "Aleppo": "Alepo",
+            "Homs": "Homs",
+            "Hama": "Hama",
+            "Latakia": "Latakia",
+            "Deir ez-Zor": "Deir ez-Zor",
+            "Raqqa": "Raqqa",
+            "Tartus": "Tartus",
+            "Qamishli": "Qamishli",
+            "Al Hasakah": "Al Hasakah"
+        },
+        "KW": {
+            "Kuwait City": "Ciudad de Kuwait",
+            "Al Ahmadi": "Al Ahmadi",
+            "Hawalli": "Hawalli",
+            "Salmiya": "Salmiya",
+            "Jahra": "Al Jahra",
+            "Farwaniya": "Farwaniya",
+            "Mangaf": "Mangaf",
+            "Sabah Al Salem": "Sabah Al Salem"
+        },
+        "QA": {
+            "Doha": "Doha",
+            "Al Rayyan": "Al Rayyan",
+            "Al Wakrah": "Al Wakrah",
+            "Al Khor": "Al Khor",
+            "Al Shamal": "Al Shamal",
+            "Mesaieed": "Mesaieed",
+            "Umm Salal": "Umm Salal",
+            "Al Daayen": "Al Daayen"
+        },
+        "BH": {
+            "Manama": "Manama",
+            "Riffa": "Riffa",
+            "Muharraq": "Muharraq",
+            "Hamad Town": "Ciudad Hamad",
+            "Isa Town": "Ciudad Isa",
+            "Sitra": "Sitra",
+            "Budaiya": "Budaiya",
+            "Zallaq": "Zallaq"
+        },
+        "OM": {
+            "Muscat": "Mascate",
+            "Salalah": "Salalah",
+            "Sohar": "Sohar",
+            "Nizwa": "Nizwa",
+            "Sur": "Sur",
+            "Bahla": "Bahla",
+            "Ibra": "Ibra",
+            "Rustaq": "Rustaq",
+            "Shinas": "Shinas",
+            "Dhofar": "Dhofar"
+        },
+        "YE": {
+            "Sana'a": "Saná",
+            "Aden": "Adén",
+            "Taiz": "Taiz",
+            "Al Hudaydah": "Al Hudaydah",
+            "Ibb": "Ibb",
+            "Mokha": "Mokha",
+            "Dhamar": "Dhamar",
+            "Lahij": "Lahij",
+            "Hajjah": "Hajjah",
+            "Saada": "Saada"
+        },
+        "LY": {
+            "Tripoli": "Trípoli",
+            "Benghazi": "Bengasi",
+            "Misrata": "Misrata",
+            "Bayda": "Al Bayda",
+            "Zawiya": "Al Zawiya",
+            "Sabha": "Sabha",
+            "Ajdabiya": "Ajdabiya",
+            "Tobruk": "Tobruk",
+            "Derna": "Derna",
+            "Sirte": "Sirte"
+        },
+        "TN": {
+            "Tunis": "Túnez",
+            "Sfax": "Sfax",
+            "Sousse": "Sousse",
+            "Kairouan": "Kairouan",
+            "Bizerte": "Bizerte",
+            "Gabès": "Gabès",
+            "Ariana": "Ariana",
+            "Gafsa": "Gafsa",
+            "Monastir": "Monastir",
+            "Sidi Bouzid": "Sidi Bouzid"
+        },
+        "DZ": {
+            "Algiers": "Argel",
+            "Oran": "Orán",
+            "Constantine": "Constantina",
+            "Annaba": "Annaba",
+            "Blida": "Blida",
+            "Batna": "Batna",
+            "Sétif": "Sétif",
+            "Sidi Bel Abbès": "Sidi Bel Abbès",
+            "Tlemcen": "Tlemcen",
+            "Tizi Ouzou": "Tizi Ouzou"
+        },
+        "MA": {
+            "Rabat": "Rabat",
+            "Casablanca": "Casablanca",
+            "Marrakech": "Marrakech",
+            "Fes": "Fez",
+            "Tangier": "Tánger",
+            "Agadir": "Agadir",
+            "Meknes": "Meknes",
+            "Oujda": "Oujda",
+            "Kenitra": "Kenitra",
+            "Tetouan": "Tetuán"
+        },
+        "SD": {
+            "Khartoum": "Jartum",
+            "Omdurman": "Omdurman",
+            "Port Sudan": "Puerto Sudán",
+            "Kassala": "Kassala",
+            "El-Obeid": "Al-Ubayyid",
+            "Al-Fashir": "Al-Fashir",
+            "Nyala": "Nyala",
+            "Sennar": "Sennar",
+            "Wad Madani": "Wad Madani",
+            "Kosti": "Kosti"
+        },
+        "MR": {
+            "Nouakchott": "Nuakchot",
+            "Nouadhibou": "Nouadhibou",
+            "Atar": "Atar",
+            "Zouérat": "Zouérat",
+            "Kiffa": "Kiffa",
+            "Rosso": "Rosso",
+            "Kaédi": "Kaédi",
+            "Néma": "Néma",
+            "Tékane": "Tékane",
+            "Akjoujt": "Akjoujt"
+        },
+        "SO": {
+            "Mogadishu": "Mogadiscio",
+            "Hargeisa": "Hargeisa",
+            "Bosaso": "Bosaso",
+            "Kismayo": "Kismayo",
+            "Baidoa": "Baidoa",
+            "Berbera": "Berbera",
+            "Galkayo": "Galkayo",
+            "Marka": "Marka",
+            "Burao": "Burao",
+            "Erigavo": "Erigavo"
+        },
+        "DJ": {
+            "Djibouti City": "Ciudad de Yibuti",
+            "Ali Sabieh": "Ali Sabieh",
+            "Tadjoura": "Tadjoura",
+            "Obock": "Obock",
+            "Dikhil": "Dikhil",
+            "Arta": "Arta",
+            "Randa": "Randa"
+        },
+        "KM": {
+            "Moroni": "Moroni",
+            "Moutsamoudou": "Moutsamoudou",
+            "Fomboni": "Fomboni",
+            "Ouani": "Ouani",
+            "Dzaoudzi": "Dzaoudzi",
+            "Domoni": "Domoni",
+            "Itsandra": "Itsandra"
+        },
+        "PS": {
+            "Ramallah": "Ramala",
+            "Gaza City": "Ciudad de Gaza",
+            "Hebron": "Hebrón",
+            "Nablus": "Nablus",
+            "Bethlehem": "Belén",
+            "Jenin": "Jenin",
+            "Tulkarm": "Tulkarm",
+            "Qalqilya": "Qalqilya",
+            "Jericho": "Jericó",
+            "Salfit": "Salfit"
+        },
+        "RU": {
+            "Moscow": "Moscú",
+            "Saint Petersburg": "San Petersburgo",
+            "Novosibirsk": "Novosibirsk",
+            "Yekaterinburg": "Ekaterinburgo",
+            "Nizhny Novgorod": "Nizhni Nóvgorod",
+            "Kazan": "Kazán",
+            "Chelyabinsk": "Cheliábinsk",
+            "Samara": "Samara",
+            "Omsk": "Omsk",
+            "Rostov-on-Don": "Rostov del Don",
+            "Ufa": "Ufá",
+            "Krasnoyarsk": "Krasnoyarsk",
+            "Perm": "Perm",
+            "Voronezh": "Vorónezh",
+            "Volgograd": "Volgogrado"
+        },
+        "TR": {
+            "Istanbul": "Estambul",
+            "Ankara": "Ankara",
+            "Izmir": "Esmirna",
+            "Bursa": "Bursa",
+            "Adana": "Adana",
+            "Gaziantep": "Gaziantep",
+            "Konya": "Konya",
+            "Antalya": "Antalya",
+            "Kayseri": "Kayseri",
+            "Mersin": "Mersin",
+            "Eskisehir": "Eskişehir",
+            "Diyarbakır": "Diyarbakır",
+            "Samsun": "Samsun",
+            "Denizli": "Denizli",
+            "Sanliurfa": "Şanlıurfa"
+        },
+        "CN": {
+            "Beijing": "Pekín",
+            "Shanghai": "Shanghái",
+            "Guangzhou": "Cantón",
+            "Shenzhen": "Shenzhen",
+            "Chengdu": "Chengdu",
+            "Tianjin": "Tianjin",
+            "Chongqing": "Chongqing",
+            "Wuhan": "Wuhan",
+            "Xi'an": "Xi'an",
+            "Hangzhou": "Hangzhou",
+            "Nanjing": "Nanjing",
+            "Shenyang": "Shenyang",
+            "Harbin": "Harbin",
+            "Suzhou": "Suzhou",
+            "Qingdao": "Qingdao"
+        },
+        "IN": {
+            "New Delhi": "Nueva Delhi",
+            "Mumbai": "Mumbai",
+            "Bangalore": "Bangalore",
+            "Hyderabad": "Hyderabad",
+            "Chennai": "Chennai",
+            "Kolkata": "Calcuta",
+            "Pune": "Pune",
+            "Ahmedabad": "Ahmedabad",
+            "Jaipur": "Jaipur",
+            "Lucknow": "Lucknow",
+            "Kanpur": "Kanpur",
+            "Nagpur": "Nagpur",
+            "Indore": "Indore",
+            "Bhopal": "Bhopal",
+            "Patna": "Patna"
+        },
+        "AL": {
+            "Tirana": "Tirana",
+            "Durrës": "Durrës",
+            "Vlorë": "Vlorë",
+            "Shkodër": "Shkodër",
+            "Fier": "Fier"
+        },
+        "AD": {
+            "Andorra la Vella": "Andorra la Vieja",
+            "Escaldes-Engordany": "Escaldes-Engordany",
+            "Encamp": "Encamp",
+            "Sant Julià de Lòria": "Sant Julià de Lòria",
+            "La Massana": "La Massana"
+        },
+        "AT": {
+            "Vienna": "Viena",
+            "Graz": "Graz",
+            "Linz": "Linz",
+            "Salzburg": "Salzburgo",
+            "Innsbruck": "Innsbruck"
+        },
+        "BY": {
+            "Minsk": "Minsk",
+            "Gomel": "Gomel",
+            "Mogilev": "Mogilev",
+            "Vitebsk": "Vitebsk",
+            "Hrodna": "Hrodna"
+        },
+        "BE": {
+            "Brussels": "Bruselas",
+            "Antwerp": "Amberes",
+            "Ghent": "Gante",
+            "Charleroi": "Charleroi",
+            "Liège": "Lieja"
+        },
+        "BA": {
+            "Sarajevo": "Sarajevo",
+            "Banja Luka": "Banja Luka",
+            "Tuzla": "Tuzla",
+            "Zenica": "Zenica",
+            "Mostar": "Mostar"
+        },
+        "BG": {
+            "Sofia": "Sofía",
+            "Plovdiv": "Plovdiv",
+            "Varna": "Varna",
+            "Burgas": "Burgas",
+            "Ruse": "Ruse"
+        },
+        "HR": {
+            "Zagreb": "Zagreb",
+            "Split": "Split",
+            "Rijeka": "Rijeka",
+            "Osijek": "Osijek",
+            "Zadar": "Zadar"
+        },
+        "CY": {
+            "Nicosia": "Nicosia",
+            "Limassol": "Limassol",
+            "Larnaca": "Larnaca",
+            "Famagusta": "Famagusta",
+            "Paphos": "Paphos"
+        },
+        "CZ": {
+            "Prague": "Praga",
+            "Brno": "Brno",
+            "Ostrava": "Ostrava",
+            "Plzeň": "Plzeň",
+            "Liberec": "Liberec"
+        },
+        "DK": {
+            "Copenhagen": "Copenhague",
+            "Aarhus": "Aarhus",
+            "Odense": "Odense",
+            "Aalborg": "Aalborg",
+            "Esbjerg": "Esbjerg"
+        },
+        "EE": {
+            "Tallinn": "Tallin",
+            "Tartu": "Tartu",
+            "Narva": "Narva",
+            "Pärnu": "Pärnu",
+            "Kohtla-Järve": "Kohtla-Järve"
+        },
+        "FI": {
+            "Helsinki": "Helsinki",
+            "Espoo": "Espoo",
+            "Tampere": "Tampere",
+            "Vantaa": "Vantaa",
+            "Oulu": "Oulu"
+        },
+        "FR": {
+            "Paris": "París",
+            "Marseille": "Marsella",
+            "Lyon": "Lyon",
+            "Toulouse": "Toulouse",
+            "Nice": "Niza"
+        },
+        "DE": {
+            "Berlin": "Berlín",
+            "Hamburg": "Hamburgo",
+            "Munich": "Múnich",
+            "Cologne": "Colonia",
+            "Frankfurt": "Fráncfort"
+        },
+        "GR": {
+            "Athens": "Atenas",
+            "Thessaloniki": "Salónica",
+            "Patras": "Patras",
+            "Heraklion": "Heraclión",
+            "Larissa": "Larisa"
+        },
+        "HU": {
+            "Budapest": "Budapest",
+            "Debrecen": "Debrecen",
+            "Szeged": "Szeged",
+            "Miskolc": "Miskolc",
+            "Pécs": "Pécs"
+        },
+        "IS": {
+            "Reykjavik": "Reikiavik",
+            "Kópavogur": "Kópavogur",
+            "Hafnarfjörður": "Hafnarfjörður",
+            "Akureyri": "Akureyri",
+            "Reykjanesbær": "Reykjanesbær"
+        },
+        "IE": {
+            "Dublin": "Dublín",
+            "Cork": "Cork",
+            "Limerick": "Limerick",
+            "Galway": "Galway",
+            "Waterford": "Waterford"
+        },
+        "IT": {
+            "Rome": "Roma",
+            "Milan": "Milán",
+            "Naples": "Nápoles",
+            "Turin": "Turín",
+            "Palermo": "Palermo"
+        },
+        "LV": {
+            "Riga": "Riga",
+            "Daugavpils": "Daugavpils",
+            "Liepāja": "Liepāja",
+            "Jelgava": "Jelgava",
+            "Jūrmala": "Jūrmala"
+        },
+        "LI": {
+            "Vaduz": "Vaduz",
+            "Schaan": "Schaan",
+            "Triesen": "Triesen",
+            "Balzers": "Balzers",
+            "Eschen": "Eschen"
+        },
+        "LT": {
+            "Vilnius": "Vilna",
+            "Kaunas": "Kaunas",
+            "Klaipėda": "Klaipėda",
+            "Šiauliai": "Šiauliai",
+            "Panevėžys": "Panevėžys"
+        },
+        "LU": {
+            "Luxembourg City": "Ciudad de Luxemburgo",
+            "Esch-sur-Alzette": "Esch-sur-Alzette",
+            "Differdange": "Differdange",
+            "Dudelange": "Dudelange",
+            "Ettelbruck": "Ettelbruck"
+        },
+        "MT": {
+            "Valletta": "La Valeta",
+            "Birkirkara": "Birkirkara",
+            "Mosta": "Mosta",
+            "Qormi": "Qormi",
+            "Sliema": "Sliema"
+        },
+        "MD": {
+            "Chișinău": "Chișinău",
+            "Tiraspol": "Tiraspol",
+            "Bălți": "Bălți",
+            "Bender": "Bender",
+            "Rîbnița": "Rîbnița"
+        },
+        "MC": {
+            "Monaco": "Mónaco"
+        },
+        "ME": {
+            "Podgorica": "Podgorica",
+            "Nikšić": "Nikšić",
+            "Herceg Novi": "Herceg Novi",
+            "Pljevlja": "Pljevlja",
+            "Bijelo Polje": "Bijelo Polje"
+        },
+        "NL": {
+            "Amsterdam": "Ámsterdam",
+            "Rotterdam": "Róterdam",
+            "The Hague": "La Haya",
+            "Utrecht": "Utrecht",
+            "Eindhoven": "Eindhoven"
+        },
+        "MK": {
+            "Skopje": "Skopje",
+            "Bitola": "Bitola",
+            "Kumanovo": "Kumanovo",
+            "Prilep": "Prilep",
+            "Tetovo": "Tetovo"
+        },
+        "NO": {
+            "Oslo": "Oslo",
+            "Bergen": "Bergen",
+            "Trondheim": "Trondheim",
+            "Stavanger": "Stavanger",
+            "Drammen": "Drammen"
+        },
+        "PL": {
+            "Warsaw": "Varsovia",
+            "Kraków": "Cracovia",
+            "Łódź": "Łódź",
+            "Wrocław": "Breslavia",
+            "Poznań": "Poznań"
+        },
+        "PT": {
+            "Lisbon": "Lisboa",
+            "Porto": "Oporto",
+            "Braga": "Braga",
+            "Coimbra": "Coimbra",
+            "Funchal": "Funchal"
+        },
+        "RO": {
+            "Bucharest": "Bucarest",
+            "Cluj-Napoca": "Cluj-Napoca",
+            "Timișoara": "Timișoara",
+            "Iași": "Iași",
+            "Constanța": "Constanța"
+        },
+        "SM": {
+            "San Marino": "San Marino"
+        },
+        "RS": {
+            "Belgrade": "Belgrado",
+            "Novi Sad": "Novi Sad",
+            "Niš": "Niš",
+            "Kragujevac": "Kragujevac",
+            "Subotica": "Subotica"
+        },
+        "SK": {
+            "Bratislava": "Bratislava",
+            "Košice": "Košice",
+            "Prešov": "Prešov",
+            "Žilina": "Žilina",
+            "Nitra": "Nitra"
+        },
+        "SI": {
+            "Ljubljana": "Liubliana",
+            "Maribor": "Maribor",
+            "Celje": "Celje",
+            "Kranj": "Kranj",
+            "Velenje": "Velenje"
+        },
+        "ES": {
+            "Madrid": "Madrid",
+            "Barcelona": "Barcelona",
+            "Valencia": "Valencia",
+            "Seville": "Sevilla",
+            "Zaragoza": "Zaragoza"
+        },
+        "SE": {
+            "Stockholm": "Estocolmo",
+            "Gothenburg": "Gotemburgo",
+            "Malmö": "Malmö",
+            "Uppsala": "Upsala",
+            "Västerås": "Västerås"
+        },
+        "CH": {
+            "Zurich": "Zúrich",
+            "Geneva": "Ginebra",
+            "Basel": "Basilea",
+            "Bern": "Berna",
+            "Lausanne": "Lausana"
+        },
+        "UA": {
+            "Kyiv": "Kiev",
+            "Kharkiv": "Járkov",
+            "Odesa": "Odesa",
+            "Dnipro": "Dnipro",
+            "Lviv": "Leópolis"
+        },
+        "GB": {
+            "London": "Londres",
+            "Birmingham": "Birmingham",
+            "Manchester": "Mánchester",
+            "Glasgow": "Glasgow",
+            "Liverpool": "Liverpool"
+        }
+    },
+    "productTypes": {
+        "textiles": "Textiles",
+        "electronics": "Electrónica",
+        "automotive": "Automotriz",
+        "food_beverage": "Alimentos y Bebidas",
+        "chemicals": "Química",
+        "pharmaceuticals": "Farmacéutica",
+        "machinery": "Maquinaria y Equipos",
+        "metals": "Metales y Minería",
+        "construction": "Materiales de Construcción",
+        "aerospace": "Aeroespacial y Defensa",
+        "energy": "Energía y Servicios Públicos",
+        "medical": "Dispositivos Médicos",
+        "plastics": "Plásticos y Caucho",
+        "paper": "Papel y Empaque",
+        "other": "Otros"
+    }
+}

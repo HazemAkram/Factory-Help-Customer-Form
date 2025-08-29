@@ -1,0 +1,831 @@
+{
+    "meta": {
+        "title": "工厂信息登记表",
+        "description": "为网站集成和注册目的登记您的工厂信息"
+    },
+    "header": {
+        "logoText": "网站开通申请表",
+        "title": "工厂注册登记表",
+        "subtitle": "请在下表提供您的工厂详细信息，用于注册和集成目的。"
+    },
+    "sections": {
+        "factoryInfo": {
+            "title": "工厂信息",
+            "factoryName": {
+                "label": "工厂名称",
+                "placeholder": "请输入工厂名称",
+                "error": "工厂名称为必填项"
+            },
+            "country": {
+                "label": "国家",
+                "placeholder": "选择国家",
+                "error": "请选择一个国家"
+            },
+            "city": {
+                "label": "城市",
+                "placeholder": "请先选择国家",
+                "other": "其他（请注明）",
+                "error": "请选择一个城市"
+            },
+            "address": {
+                "label": "详细地址",
+                "placeholder": "街道地址、楼号、楼层等",
+                "error": "详细地址为必填项",
+                "currentLocation": "当前位置",
+                "searchLocation": "搜索地址",
+                "latitude": "纬度",
+                "longitude": "经度"
+            },
+            "phone": {
+                "label": "固定电话",
+                "placeholder": "+1 (555) 123-4567"
+            },
+            "email": {
+                "label": "邮箱（用于网站集成）",
+                "placeholder": "factory@example.com",
+                "error": "需要有效的邮箱地址"
+            }
+        },
+        "ownerInfo": {
+            "title": "工厂所有者信息",
+            "ownerName": {
+                "label": "所有者姓名",
+                "placeholder": "请输入所有者姓名"
+            },
+            "ownerPhone": {
+                "label": "手机号码",
+                "placeholder": "+1 (555) 123-4567"
+            },
+            "addOwner": "添加所有者",
+            "removeOwner": "移除所有者"
+        },
+        "spareParts": {
+            "title": "备件经理",
+            "managerName": {
+                "label": "姓名",
+                "placeholder": "请输入经理姓名"
+            },
+            "managerPhone": {
+                "label": "手机号码",
+                "placeholder": "+1 (555) 123-4567"
+            },
+            "managerEmail": {
+                "label": "邮箱",
+                "placeholder": "manager@example.com"
+            }
+        },
+        "productionInfo": {
+            "title": "工业活动",
+            "productType": {
+                "label": "行业领域",
+                "placeholder": "选择行业领域"
+            },
+            "productionLine": {
+                "label": "生产线"
+            },
+            "brandName": {
+                "label": "品牌名称"
+            },
+            "addProductionLine": "添加生产线",
+            "removeProductionLine": "移除生产线",
+            "manufacturingDate": {
+                "label": "生产线生产日期"
+            }
+        },
+        "terms": {
+            "title": "条款与条件",
+            "content": "客户被视为已接受隐私政策条款和公司网站使用条款，并承诺在授予其浏览网站数据的一个月期限内，对数据保密，且在任何情况下不得向第三方泄露任何数据。公司承诺根据电子商务规则、欧洲数据保护条例和《贸易法委员会规则》对客户数据保密。"
+        }
+    },
+    "form": {
+        "submit": "提交工厂信息",
+        "submitting": "提交中...",
+        "reset": "重置表单",
+        "resetConfirm": "确定要重置表单吗？",
+        "resetSuccess": "表单重置成功"
+    },
+    "validation": {
+        "required": "此字段为必填项",
+        "invalidEmail": "请输入有效的邮箱地址",
+        "invalidPhone": "请输入有效的电话号码"
+    },
+    "messages": {
+        "success": {
+            "title": "感谢您！",
+            "description": "您的工厂信息已成功提交。我们将进行审核并尽快回复您！",
+            "submitAnother": "提交另一份"
+        },
+        "error": "发生错误，请重试。",
+        "submissionId": "提交ID"
+    },
+    "countries": {
+        "AE": "阿拉伯联合酋长国",
+        "SA": "沙特阿拉伯",
+        "EG": "埃及",
+        "IQ": "伊拉克",
+        "JO": "约旦",
+        "LB": "黎巴嫩",
+        "SY": "叙利亚",
+        "KW": "科威特",
+        "QA": "卡塔尔",
+        "BH": "巴林",
+        "OM": "阿曼",
+        "YE": "也门",
+        "LY": "利比亚",
+        "TN": "突尼斯",
+        "DZ": "阿尔及利亚",
+        "MA": "摩洛哥",
+        "SD": "苏丹",
+        "MR": "毛里塔尼亚",
+        "SO": "索马里",
+        "DJ": "吉布提",
+        "KM": "科摩罗",
+        "PS": "巴勒斯坦",
+        "AL": "阿尔巴尼亚",
+        "AD": "安道尔",
+        "AT": "奥地利",
+        "BY": "白俄罗斯",
+        "BE": "比利时",
+        "BA": "波斯尼亚和黑塞哥维那",
+        "BG": "保加利亚",
+        "HR": "克罗地亚",
+        "CY": "塞浦路斯",
+        "CZ": "捷克共和国",
+        "DK": "丹麦",
+        "EE": "爱沙尼亚",
+        "FI": "芬兰",
+        "FR": "法国",
+        "DE": "德国",
+        "GR": "希腊",
+        "HU": "匈牙利",
+        "IS": "冰岛",
+        "IE": "爱尔兰",
+        "IT": "意大利",
+        "LV": "拉脱维亚",
+        "LI": "列支敦士登",
+        "LT": "立陶宛",
+        "LU": "卢森堡",
+        "MT": "马耳他",
+        "MD": "摩尔多瓦",
+        "MC": "摩纳哥",
+        "ME": "黑山",
+        "NL": "荷兰",
+        "MK": "北马其顿",
+        "NO": "挪威",
+        "PL": "波兰",
+        "PT": "葡萄牙",
+        "RO": "罗马尼亚",
+        "RU": "俄罗斯",
+        "SM": "圣马力诺",
+        "RS": "塞尔维亚",
+        "SK": "斯洛伐克",
+        "SI": "斯洛文尼亚",
+        "ES": "西班牙",
+        "SE": "瑞典",
+        "CH": "瑞士",
+        "TR": "土耳其",
+        "UA": "乌克兰",
+        "GB": "英国",
+        "US": "美国",
+        "CN": "中国",
+        "IN": "印度"
+    },
+    "cities": {
+        "AE": {
+            "Dubai": "迪拜",
+            "Abu Dhabi": "阿布扎比",
+            "Sharjah": "沙迦",
+            "Ajman": "阿治曼",
+            "Ras Al Khaimah": "哈伊马角",
+            "Fujairah": "富查伊拉",
+            "Umm Al Quwain": "乌姆盖万",
+            "Al Ain": "艾因",
+            "Khor Fakkan": "豪尔费坎",
+            "Dibba Al-Fujairah": "富查伊拉迪巴",
+            "Kalba": "卡尔巴"
+        },
+        "SA": {
+            "Riyadh": "利雅得",
+            "Jeddah": "吉达",
+            "Mecca": "麦加",
+            "Medina": "麦地那",
+            "Dammam": "达曼",
+            "Khobar": "霍巴尔",
+            "Tabuk": "塔布克",
+            "Buraydah": "布赖代",
+            "Hail": "哈伊勒",
+            "Najran": "奈季兰",
+            "Al-Kharj": "海爾季",
+            "Taif": "塔伊夫"
+        },
+        "EG": {
+            "Cairo": "开罗",
+            "Alexandria": "亚历山大",
+            "Giza": "吉萨",
+            "Shubra El-Kheima": "舒卜拉海迈",
+            "Port Said": "塞得港",
+            "Suez": "苏伊士",
+            "Luxor": "卢克索",
+            "Aswan": "阿斯旺",
+            "Mansoura": "曼苏拉",
+            "Tanta": "坦塔",
+            "Ismailia": "伊斯梅利亚",
+            "Faiyum": "法尤姆"
+        },
+        "IQ": {
+            "Baghdad": "巴格达",
+            "Basra": "巴士拉",
+            "Mosul": "摩苏尔",
+            "Erbil": "埃尔比勒",
+            "Kirkuk": "基尔库克",
+            "Najaf": "纳杰夫",
+            "Samarra": "萨迈拉",
+            "Karbala": "卡尔巴拉",
+            "Sulaymaniyah": "苏莱曼尼亚",
+            "Dhi Qar": "济加尔",
+            "Al Hillah": "希拉"
+        },
+        "JO": {
+            "Amman": "安曼",
+            "Zarqa": "扎尔卡",
+            "Irbid": "伊尔比德",
+            "Aqaba": "亚喀巴",
+            "Madaba": "马代巴",
+            "Mafraq": "马弗拉克",
+            "Al Karak": "卡拉克",
+            "Jerash": "杰拉什",
+            "Tafilah": "塔菲拉",
+            "Ajloun": "阿杰隆"
+        },
+        "LB": {
+            "Beirut": "贝鲁特",
+            "Tripoli": "的黎波里",
+            "Sidon": "西顿",
+            "Tyre": "提尔",
+            "Byblos": "朱拜勒",
+            "Zahle": "扎赫勒",
+            "Baalbek": "巴勒贝克",
+            "Jounieh": "朱尼耶",
+            "Saida": "赛达",
+            "Nabatieh": "纳巴提亚"
+        },
+        "SY": {
+            "Damascus": "大马士革",
+            "Aleppo": "阿勒颇",
+            "Homs": "霍姆斯",
+            "Hama": "哈马",
+            "Latakia": "拉塔基亚",
+            "Deir ez-Zor": "代尔祖尔",
+            "Raqqa": "拉卡",
+            "Tartus": "塔尔图斯",
+            "Qamishli": "卡米什利",
+            "Al Hasakah": "哈塞克"
+        },
+        "KW": {
+            "Kuwait City": "科威特城",
+            "Al Ahmadi": "艾哈迈迪",
+            "Hawalli": "哈瓦利",
+            "Salmiya": "萨尔米亚",
+            "Jahra": "杰赫拉",
+            "Farwaniya": "法尔瓦尼亚",
+            "Mangaf": "曼加夫",
+            "Sabah Al Salem": "萨巴赫萨利姆"
+        },
+        "QA": {
+            "Doha": "多哈",
+            "Al Rayyan": "赖扬",
+            "Al Wakrah": "沃克拉",
+            "Al Khor": "豪尔",
+            "Al Shamal": "北部区",
+            "Mesaieed": "迈赛义德",
+            "Umm Salal": "乌姆锡拉勒",
+            "Al Daayen": "戴延"
+        },
+        "BH": {
+            "Manama": "麦纳麦",
+            "Riffa": "里法",
+            "Muharraq": "穆哈拉格",
+            "Hamad Town": "哈马德镇",
+            "Isa Town": "伊萨镇",
+            "Sitra": "锡特拉",
+            "Budaiya": "布代亚",
+            "Zallaq": "扎拉格"
+        },
+        "OM": {
+            "Muscat": "马斯喀特",
+            "Salalah": "塞拉莱",
+            "Sohar": "苏哈尔",
+            "Nizwa": "尼兹瓦",
+            "Sur": "苏尔",
+            "Bahla": "巴赫拉",
+            "Ibra": "伊卜里",
+            "Rustaq": "鲁斯塔克",
+            "Shinas": "希纳斯",
+            "Dhofar": "佐法尔"
+        },
+        "YE": {
+            "Sana'a": "萨那",
+            "Aden": "亚丁",
+            "Taiz": "塔伊兹",
+            "Al Hudaydah": "荷台达",
+            "Ibb": "伊卜",
+            "Mokha": "穆哈",
+            "Dhamar": "扎马尔",
+            "Lahij": "拉赫季",
+            "Hajjah": "哈杰",
+            "Saada": "萨达"
+        },
+        "LY": {
+            "Tripoli": "的黎波里",
+            "Benghazi": "班加西",
+            "Misrata": "米苏拉塔",
+            "Bayda": "贝达",
+            "Zawiya": "扎维耶",
+            "Sabha": "塞卜哈",
+            "Ajdabiya": "艾季达比耶",
+            "Tobruk": "托布鲁克",
+            "Derna": "德尔纳",
+            "Sirte": "苏尔特"
+        },
+        "TN": {
+            "Tunis": "突尼斯市",
+            "Sfax": "斯法克斯",
+            "Sousse": "苏塞",
+            "Kairouan": "凯鲁万",
+            "Bizerte": "比塞大",
+            "Gabès": "加贝斯",
+            "Ariana": "阿里亚纳",
+            "Gafsa": "加夫萨",
+            "Monastir": "莫纳斯提尔",
+            "Sidi Bouzid": "西迪布济德"
+        },
+        "DZ": {
+            "Algiers": "阿尔及尔",
+            "Oran": "奥兰",
+            "Constantine": "君士坦丁",
+            "Annaba": "安纳巴",
+            "Blida": "卜利达",
+            "Batna": "巴特纳",
+            "Sétif": "塞提夫",
+            "Sidi Bel Abbès": "西迪贝勒阿巴斯",
+            "Tlemcen": "特莱姆森",
+            "Tizi Ouzou": "提济乌祖"
+        },
+        "MA": {
+            "Rabat": "拉巴特",
+            "Casablanca": "卡萨布兰卡",
+            "Marrakech": "马拉喀什",
+            "Fes": "非斯",
+            "Tangier": "丹吉尔",
+            "Agadir": "阿加迪尔",
+            "Meknes": "梅克内斯",
+            "Oujda": "乌季达",
+            "Kenitra": "盖尼特拉",
+            "Tetouan": "得土安"
+        },
+        "SD": {
+            "Khartoum": "喀土穆",
+            "Omdurman": "恩图曼",
+            "Port Sudan": "苏丹港",
+            "Kassala": "卡萨拉",
+            "El-Obeid": "欧拜伊德",
+            "Al-Fashir": "法希尔",
+            "Nyala": "尼亚拉",
+            "Sennar": "森纳尔",
+            "Wad Madani": "瓦德迈达尼",
+            "Kosti": "库斯提"
+        },
+        "MR": {
+            "Nouakchott": "努瓦克肖特",
+            "Nouadhibou": "努瓦迪布",
+            "Atar": "阿塔尔",
+            "Zouérat": "祖埃拉特",
+            "Kiffa": "基法",
+            "Rosso": "罗索",
+            "Kaédi": "卡埃迪",
+            "Néma": "内马",
+            "Tékane": "泰卡内",
+            "Akjoujt": "阿克儒特"
+        },
+        "SO": {
+            "Mogadishu": "摩加迪沙",
+            "Hargeisa": "哈尔格萨",
+            "Bosaso": "博萨索",
+            "Kismayo": "基斯马尤",
+            "Baidoa": "拜多阿",
+            "Berbera": "柏培拉",
+            "Galkayo": "加尔卡尤",
+            "Marka": "马尔卡",
+            "Burao": "布劳",
+            "Erigavo": "埃里加博"
+        },
+        "DJ": {
+            "Djibouti City": "吉布提市",
+            "Ali Sabieh": "阿里萨比耶",
+            "Tadjoura": "塔朱拉",
+            "Obock": "奥博克",
+            "Dikhil": "迪基勒",
+            "Arta": "阿尔塔",
+            "Randa": "兰达"
+        },
+        "KM": {
+            "Moroni": "莫罗尼",
+            "Moutsamoudou": "穆察穆杜",
+            "Fomboni": "丰博尼",
+            "Ouani": "瓦尼",
+            "Dzaoudzi": "藻德济",
+            "Domoni": "多莫尼",
+            "Itsandra": "伊桑德拉"
+        },
+        "PS": {
+            "Ramallah": "拉姆安拉",
+            "Gaza City": "加沙城",
+            "Hebron": "希伯伦",
+            "Nablus": "纳布卢斯",
+            "Bethlehem": "伯利恒",
+            "Jenin": "杰宁",
+            "Tulkarm": "图勒凯尔姆",
+            "Qalqilya": "盖勒吉利耶",
+            "Jericho": "杰里科",
+            "Salfit": "萨尔菲特"
+        },
+        "RU": {
+            "Moscow": "莫斯科",
+            "Saint Petersburg": "圣彼得堡",
+            "Novosibirsk": "新西伯利亚",
+            "Yekaterinburg": "叶卡捷琳堡",
+            "Nizhny Novgorod": "下诺夫哥罗德",
+            "Kazan": "喀山",
+            "Chelyabinsk": "车里雅宾斯克",
+            "Samara": "萨马拉",
+            "Omsk": "鄂木斯克",
+            "Rostov-on-Don": "顿河畔罗斯托夫",
+            "Ufa": "乌法",
+            "Krasnoyarsk": "克拉斯诺亚尔斯克",
+            "Perm": "彼尔姆",
+            "Voronezh": "沃罗涅日",
+            "Volgograd": "伏尔加格勒"
+        },
+        "TR": {
+            "Istanbul": "伊斯坦布尔",
+            "Ankara": "安卡拉",
+            "Izmir": "伊兹密尔",
+            "Bursa": "布尔萨",
+            "Adana": "阿达纳",
+            "Gaziantep": "加济安泰普",
+            "Konya": "科尼亚",
+            "Antalya": "安塔利亚",
+            "Kayseri": "开塞利",
+            "Mersin": "梅尔辛",
+            "Eskisehir": "埃斯基谢希尔",
+            "Diyarbakır": "迪亚巴克尔",
+            "Samsun": "萨姆松",
+            "Denizli": "代尼兹利",
+            "Sanliurfa": "尚勒乌尔法"
+        },
+        "CN": {
+            "Beijing": "北京",
+            "Shanghai": "上海",
+            "Guangzhou": "广州",
+            "Shenzhen": "深圳",
+            "Chengdu": "成都",
+            "Tianjin": "天津",
+            "Chongqing": "重庆",
+            "Wuhan": "武汉",
+            "Xi'an": "西安",
+            "Hangzhou": "杭州",
+            "Nanjing": "南京",
+            "Shenyang": "沈阳",
+            "Harbin": "哈尔滨",
+            "Suzhou": "苏州",
+            "Qingdao": "青岛"
+        },
+        "IN": {
+            "New Delhi": "新德里",
+            "Mumbai": "孟买",
+            "Bangalore": "班加罗尔",
+            "Hyderabad": "海得拉巴",
+            "Chennai": "金奈",
+            "Kolkata": "加尔各答",
+            "Pune": "浦那",
+            "Ahmedabad": "艾哈迈达巴德",
+            "Jaipur": "斋浦尔",
+            "Lucknow": "勒克瑙",
+            "Kanpur": "坎普尔",
+            "Nagpur": "那格浦尔",
+            "Indore": "印多尔",
+            "Bhopal": "博帕尔",
+            "Patna": "巴特那"
+        },
+        "AL": {
+            "Tirana": "地拉那",
+            "Durrës": "都拉斯",
+            "Vlorë": "发罗拉",
+            "Shkodër": "斯库台",
+            "Fier": "费里"
+        },
+        "AD": {
+            "Andorra la Vella": "安道尔城",
+            "Escaldes-Engordany": "埃斯卡尔德斯-恩戈尔达尼",
+            "Encamp": "恩坎普",
+            "Sant Julià de Lòria": "圣胡利娅-德洛里亚",
+            "La Massana": "拉马萨纳"
+        },
+        "AT": {
+            "Vienna": "维也纳",
+            "Graz": "格拉茨",
+            "Linz": "林茨",
+            "Salzburg": "萨尔茨堡",
+            "Innsbruck": "因斯布鲁克"
+        },
+        "BY": {
+            "Minsk": "明斯克",
+            "Gomel": "戈梅利",
+            "Mogilev": "莫吉廖夫",
+            "Vitebsk": "维捷布斯克",
+            "Hrodna": "格罗德诺"
+        },
+        "BE": {
+            "Brussels": "布鲁塞尔",
+            "Antwerp": "安特卫普",
+            "Ghent": "根特",
+            "Charleroi": "沙勒罗瓦",
+            "Liège": "列日"
+        },
+        "BA": {
+            "Sarajevo": "萨拉热窝",
+            "Banja Luka": "巴尼亚卢卡",
+            "Tuzla": "图兹拉",
+            "Zenica": "泽尼察",
+            "Mostar": "莫斯塔尔"
+        },
+        "BG": {
+            "Sofia": "索非亚",
+            "Plovdiv": "普罗夫迪夫",
+            "Varna": "瓦尔纳",
+            "Burgas": "布尔加斯",
+            "Ruse": "鲁塞"
+        },
+        "HR": {
+            "Zagreb": "萨格勒布",
+            "Split": "斯普利特",
+            "Rijeka": "里耶卡",
+            "Osijek": "奥西耶克",
+            "Zadar": "扎达尔"
+        },
+        "CY": {
+            "Nicosia": "尼科西亚",
+            "Limassol": "利马索尔",
+            "Larnaca": "拉纳卡",
+            "Famagusta": "法马古斯塔",
+            "Paphos": "帕福斯"
+        },
+        "CZ": {
+            "Prague": "布拉格",
+            "Brno": "布尔诺",
+            "Ostrava": "俄斯特拉发",
+            "Plzeň": "比尔森",
+            "Liberec": "利贝雷茨"
+        },
+        "DK": {
+            "Copenhagen": "哥本哈根",
+            "Aarhus": "奥胡斯",
+            "Odense": "欧登塞",
+            "Aalborg": "奥尔堡",
+            "Esbjerg": "埃斯比约"
+        },
+        "EE": {
+            "Tallinn": "塔林",
+            "Tartu": "塔尔图",
+            "Narva": "纳尔瓦",
+            "Pärnu": "派尔努",
+            "Kohtla-Järve": "科赫特拉-耶尔韦"
+        },
+        "FI": {
+            "Helsinki": "赫尔辛基",
+            "Espoo": "埃斯波",
+            "Tampere": "坦佩雷",
+            "Vantaa": "万塔",
+            "Oulu": "奥卢"
+        },
+        "FR": {
+            "Paris": "巴黎",
+            "Marseille": "马赛",
+            "Lyon": "里昂",
+            "Toulouse": "图卢兹",
+            "Nice": "尼斯"
+        },
+        "DE": {
+            "Berlin": "柏林",
+            "Hamburg": "汉堡",
+            "Munich": "慕尼黑",
+            "Cologne": "科隆",
+            "Frankfurt": "法兰克福"
+        },
+        "GR": {
+            "Athens": "雅典",
+            "Thessaloniki": "塞萨洛尼基",
+            "Patras": "帕特雷",
+            "Heraklion": "伊拉克利翁",
+            "Larissa": "拉里萨"
+        },
+        "HU": {
+            "Budapest": "布达佩斯",
+            "Debrecen": "德布勒森",
+            "Szeged": "塞格德",
+            "Miskolc": "米什科尔茨",
+            "Pécs": "佩奇"
+        },
+        "IS": {
+            "Reykjavik": "雷克雅未克",
+            "Kópavogur": "科帕沃于尔",
+            "Hafnarfjörður": "哈夫纳菲厄泽",
+            "Akureyri": "阿克雷里",
+            "Reykjanesbær": "雷克雅内斯拜尔"
+        },
+        "IE": {
+            "Dublin": "都柏林",
+            "Cork": "科克",
+            "Limerick": "利默里克",
+            "Galway": "高威",
+            "Waterford": "沃特福德"
+        },
+        "IT": {
+            "Rome": "罗马",
+            "Milan": "米兰",
+            "Naples": "那不勒斯",
+            "Turin": "都灵",
+            "Palermo": "巴勒莫"
+        },
+        "LV": {
+            "Riga": "里加",
+            "Daugavpils": "陶格夫匹尔斯",
+            "Liepāja": "利耶帕亚",
+            "Jelgava": "叶尔加瓦",
+            "Jūrmala": "尤尔马拉"
+        },
+        "LI": {
+            "Vaduz": "瓦杜兹",
+            "Schaan": "沙恩",
+            "Triesen": "特里森",
+            "Balzers": "巴尔策斯",
+            "Eschen": "埃申"
+        },
+        "LT": {
+            "Vilnius": "维尔纽斯",
+            "Kaunas": "考纳斯",
+            "Klaipėda": "克莱佩达",
+            "Šiauliai": "希奥利艾",
+            "Panevėžys": "帕涅韦日斯"
+        },
+        "LU": {
+            "Luxembourg City": "卢森堡市",
+            "Esch-sur-Alzette": "阿尔泽特河畔埃施",
+            "Differdange": "迪弗当日",
+            "Dudelange": "迪德朗日",
+            "Ettelbruck": "埃特尔布吕克"
+        },
+        "MT": {
+            "Valletta": "瓦莱塔",
+            "Birkirkara": "比尔基卡拉",
+            "Mosta": "莫斯塔",
+            "Qormi": "考米",
+            "Sliema": "斯利马"
+        },
+        "MD": {
+            "Chișinău": "基希讷乌",
+            "Tiraspol": "蒂拉斯波尔",
+            "Bălți": "伯尔兹",
+            "Bender": "本德尔",
+            "Rîbnița": "勒布尼察"
+        },
+        "MC": {
+            "Monaco": "摩纳哥"
+        },
+        "ME": {
+            "Podgorica": "波德戈里察",
+            "Nikšić": "尼克希奇",
+            "Herceg Novi": "新海尔采格",
+            "Pljevlja": "普列夫利亚",
+            "Bijelo Polje": "比耶洛波列"
+        },
+        "NL": {
+            "Amsterdam": "阿姆斯特丹",
+            "Rotterdam": "鹿特丹",
+            "The Hague": "海牙",
+            "Utrecht": "乌得勒支",
+            "Eindhoven": "埃因霍温"
+        },
+        "MK": {
+            "Skopje": "斯科普里",
+            "Bitola": "比托拉",
+            "Kumanovo": "库马诺沃",
+            "Prilep": "普里莱普",
+            "Tetovo": "泰托沃"
+        },
+        "NO": {
+            "Oslo": "奥斯陆",
+            "Bergen": "卑尔根",
+            "Trondheim": "特隆赫姆",
+            "Stavanger": "斯塔万格",
+            "Drammen": "德拉门"
+        },
+        "PL": {
+            "Warsaw": "华沙",
+            "Kraków": "克拉科夫",
+            "Łódź": "罗兹",
+            "Wrocław": "弗罗茨瓦夫",
+            "Poznań": "波兹南"
+        },
+        "PT": {
+            "Lisbon": "里斯本",
+            "Porto": "波尔图",
+            "Braga": "布拉加",
+            "Coimbra": "科英布拉",
+            "Funchal": "丰沙尔"
+        },
+        "RO": {
+            "Bucharest": "布加勒斯特",
+            "Cluj-Napoca": "克卢日-纳波卡",
+            "Timișoara": "蒂米什瓦拉",
+            "Iași": "雅西",
+            "Constanța": "康斯坦察"
+        },
+        "SM": {
+            "San Marino": "圣马力诺"
+        },
+        "RS": {
+            "Belgrade": "贝尔格莱德",
+            "Novi Sad": "诺维萨德",
+            "Niš": "尼什",
+            "Kragujevac": "克拉古耶瓦茨",
+            "Subotica": "苏博蒂察"
+        },
+        "SK": {
+            "Bratislava": "布拉迪斯拉发",
+            "Košice": "科希策",
+            "Prešov": "普雷绍夫",
+            "Žilina": "日利纳",
+            "Nitra": "尼特拉"
+        },
+        "SI": {
+            "Ljubljana": "卢布尔雅那",
+            "Maribor": "马里博尔",
+            "Celje": "采列",
+            "Kranj": "克拉尼",
+            "Velenje": "韦莱涅"
+        },
+        "ES": {
+            "Madrid": "马德里",
+            "Barcelona": "巴塞罗那",
+            "Valencia": "瓦伦西亚",
+            "Seville": "塞维利亚",
+            "Zaragoza": "萨拉戈萨"
+        },
+        "SE": {
+            "Stockholm": "斯德哥尔摩",
+            "Gothenburg": "哥德堡",
+            "Malmö": "马尔默",
+            "Uppsala": "乌普萨拉",
+            "Västerås": "韦斯特罗斯"
+        },
+        "CH": {
+            "Zurich": "苏黎世",
+            "Geneva": "日内瓦",
+            "Basel": "巴塞尔",
+            "Bern": "伯尔尼",
+            "Lausanne": "洛桑"
+        },
+        "UA": {
+            "Kyiv": "基辅",
+            "Kharkiv": "哈尔科夫",
+            "Odesa": "敖德萨",
+            "Dnipro": "第聂伯罗",
+            "Lviv": "利沃夫"
+        },
+        "GB": {
+            "London": "伦敦",
+            "Birmingham": "伯明翰",
+            "Manchester": "曼彻斯特",
+            "Glasgow": "格拉斯哥",
+            "Liverpool": "利物浦"
+        }
+    },
+    "productTypes": {
+        "textiles": "纺织品",
+        "electronics": "电子产品",
+        "automotive": "汽车",
+        "food_beverage": "食品与饮料",
+        "chemicals": "化学品",
+        "pharmaceuticals": "药品",
+        "machinery": "机械设备",
+        "metals": "金属与采矿",
+        "construction": "建筑材料",
+        "aerospace": "航空航天与国防",
+        "energy": "能源与公用事业",
+        "medical": "医疗器械",
+        "plastics": "塑料与橡胶",
+        "paper": "纸制品与包装",
+        "other": "其他"
+    }
+}

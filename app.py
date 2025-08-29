@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Dict, List
 from flask import Flask, request, jsonify, send_from_directory, send_file, Response
 from flask_cors import CORS
+from flask_mail import Mail, Message
 import csv
 import json
 from dotenv import load_dotenv
@@ -20,6 +21,21 @@ SUBMISSIONS_DIR.mkdir(exist_ok=True)
 
 app = Flask(__name__, static_folder=str(STATIC_ROOT), static_url_path="")
 CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+# Email configuration
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL', 'false').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', '')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', '')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', 'noreply@yourcompany.com')
+
+# Company email for notifications
+COMPANY_EMAIL = os.getenv('COMPANY_EMAIL', 'admin@yourcompany.com')
+COMPANY_NAME = os.getenv('COMPANY_NAME', 'Your Company Name')
+
+mail = Mail(app)
 
 
 @app.route("/")
@@ -89,15 +105,279 @@ def write_csv(record: Dict) -> None:
 				writer.writeheader()
 				for row in rows:
 					writer.writerow({k: row.get(k, "") for k in fieldnames})
+		else:
+			# Header didn't change, just append the new record
+			with CSV_PATH.open("a", encoding="utf-8", newline="") as f:
+				writer = csv.DictWriter(f, fieldnames=fieldnames)
+				writer.writerow({k: record.get(k, "") for k in fieldnames})
 	else:
+		# File doesn't exist, create it with headers
 		fieldnames = list(record.keys())
-
-	# Append the new record
-	with CSV_PATH.open("a", encoding="utf-8", newline="") as f:
-		writer = csv.DictWriter(f, fieldnames=fieldnames)
-		if not exists:
+		with CSV_PATH.open("w", encoding="utf-8", newline="") as f:
+			writer = csv.DictWriter(f, fieldnames=fieldnames)
 			writer.writeheader()
-		writer.writerow({k: record.get(k, "") for k in fieldnames})
+			writer.writerow({k: record.get(k, "") for k in fieldnames})
+
+
+def create_company_notification_email(registration_data: Dict) -> str:
+	"""Create HTML email content for company notification"""
+	html_content = f"""
+	<html>
+	<head>
+		<style>
+			body {{ font-family: Arial, sans-serif; margin: 20px; }}
+			.header {{ background-color: #FF5100; color: white; padding: 20px; text-align: center; }}
+			.content {{ padding: 20px; }}
+			.section {{ margin: 20px 0; padding: 15px; border-left: 4px solid #FF5100; background-color: #f8f9fa; }}
+			.field {{ margin: 10px 0; }}
+			.label {{ font-weight: bold; color: #333; }}
+			.value {{ color: #666; }}
+			.footer {{ text-align: center; padding: 20px; color: #666; font-size: 12px; }}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<h1>New Factory Registration</h1>
+			<p>Submission ID: {registration_data.get('submissionId', 'N/A')}</p>
+		</div>
+		
+		<div class="content">
+			<div class="section">
+				<h2>Factory Information</h2>
+				<div class="field">
+					<span class="label">Factory Name:</span>
+					<span class="value">{registration_data.get('factoryName', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Country:</span>
+					<span class="value">{registration_data.get('country', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">City:</span>
+					<span class="value">{registration_data.get('city', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Address:</span>
+					<span class="value">{registration_data.get('detailedAddress', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Email:</span>
+					<span class="value">{registration_data.get('factoryEmail', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Phone:</span>
+					<span class="value">{registration_data.get('landlinePhone', 'N/A')}</span>
+				</div>
+			</div>
+			
+			<div class="section">
+				<h2>Factory Owner Information</h2>
+	"""
+	
+	# Add owner information
+	owner_index = 1
+	while f'ownerName_{owner_index}' in registration_data:
+		owner_name = registration_data.get(f'ownerName_{owner_index}', 'N/A')
+		owner_mobile = registration_data.get(f'ownerMobile_{owner_index}', 'N/A')
+		html_content += f"""
+				<div class="field">
+					<span class="label">Owner {owner_index}:</span>
+					<span class="value">{owner_name} - {owner_mobile}</span>
+				</div>
+		"""
+		owner_index += 1
+	
+	html_content += f"""
+			</div>
+			
+			<div class="section">
+				<h2>Spare Parts Manager</h2>
+				<div class="field">
+					<span class="label">Name:</span>
+					<span class="value">{registration_data.get('sparePartsManagerName', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Mobile:</span>
+					<span class="value">{registration_data.get('sparePartsManagerMobile', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Email:</span>
+					<span class="value">{registration_data.get('sparePartsManagerEmail', 'N/A')}</span>
+				</div>
+			</div>
+			
+			<div class="section">
+				<h2>Industrial Activity</h2>
+				<div class="field">
+					<span class="label">Industry Field:</span>
+					<span class="value">{registration_data.get('industryField', 'N/A')}</span>
+				</div>
+	"""
+	
+	# Add production lines
+	production_index = 1
+	while f'productionLine_{production_index}' in registration_data:
+		production_line = registration_data.get(f'productionLine_{production_index}', 'N/A')
+		brand_name = registration_data.get(f'brandName_{production_index}', 'N/A')
+		html_content += f"""
+				<div class="field">
+					<span class="label">Production Line {production_index}:</span>
+					<span class="value">{production_line} - {brand_name}</span>
+				</div>
+		"""
+		production_index += 1
+	
+	html_content += f"""
+			</div>
+			
+			<div class="section">
+				<h2>Submission Details</h2>
+				<div class="field">
+					<span class="label">Submission Date:</span>
+					<span class="value">{registration_data.get('receivedAt', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">IP Address:</span>
+					<span class="value">{registration_data.get('ip', 'N/A')}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+			<p>This is an automated notification from your factory registration system.</p>
+			<p>© {datetime.now().year} {COMPANY_NAME}. All rights reserved.</p>
+		</div>
+	</body>
+	</html>
+	"""
+	return html_content
+
+
+def create_customer_confirmation_email(registration_data: Dict) -> str:
+	"""Create HTML email content for customer confirmation"""
+	html_content = f"""
+	<html>
+	<head>
+		<style>
+			body {{ font-family: Arial, sans-serif; margin: 20px; }}
+			.header {{ background-color: #FF5100; color: white; padding: 20px; text-align: center; }}
+			.content {{ padding: 20px; }}
+			.section {{ margin: 20px 0; padding: 15px; border-left: 4px solid #FF5100; background-color: #f8f9fa; }}
+			.field {{ margin: 10px 0; }}
+			.label {{ font-weight: bold; color: #333; }}
+			.value {{ color: #666; }}
+			.footer {{ text-align: center; padding: 20px; color: #666; font-size: 12px; }}
+			.thank-you {{ text-align: center; font-size: 18px; color: #22c55e; margin: 20px 0; }}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<h1>Factory Registration Confirmation</h1>
+			<p>Submission ID: {registration_data.get('submissionId', 'N/A')}</p>
+		</div>
+		
+		<div class="content">
+			<div class="thank-you">
+				<h2>Thank You for Your Registration!</h2>
+				<p>Dear {registration_data.get('factoryName', 'Valued Customer')},</p>
+				<p>We have successfully received your factory registration information. Our team will review your submission and contact you within 2-3 business days.</p>
+			</div>
+			
+			<div class="section">
+				<h2>Registration Summary</h2>
+				<div class="field">
+					<span class="label">Factory Name:</span>
+					<span class="value">{registration_data.get('factoryName', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Location:</span>
+					<span class="value">{registration_data.get('city', 'N/A')}, {registration_data.get('country', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Industry:</span>
+					<span class="value">{registration_data.get('industryField', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Contact Email:</span>
+					<span class="value">{registration_data.get('factoryEmail', 'N/A')}</span>
+				</div>
+			</div>
+			
+			<div class="section">
+				<h2>Next Steps</h2>
+				<ol>
+					<li>Our team will review your registration within 2-3 business days</li>
+					<li>We will contact you via email or phone to discuss next steps</li>
+					<li>You may be asked to provide additional documentation if needed</li>
+					<li>Upon approval, you will receive access to our platform</li>
+				</ol>
+			</div>
+			
+			<div class="section">
+				<h2>Contact Information</h2>
+				<p>If you have any questions about your registration, please contact us:</p>
+				<p><strong>Email:</strong> {COMPANY_EMAIL}</p>
+				<p><strong>Company:</strong> {COMPANY_NAME}</p>
+			</div>
+		</div>
+		
+		<div class="footer">
+			<p>Thank you for choosing {COMPANY_NAME}!</p>
+			<p>© {datetime.now().year} {COMPANY_NAME}. All rights reserved.</p>
+		</div>
+	</body>
+	</html>
+	"""
+	return html_content
+
+
+def send_emails(registration_data: Dict) -> Dict:
+	"""Send notification emails to company and customer"""
+	email_results = {
+		'company_email_sent': False,
+		'customer_email_sent': False,
+		'errors': []
+	}
+	
+	try:
+		# Send email to company
+		company_subject = f"New Factory Registration: {registration_data.get('factoryName', 'Unknown Factory')}"
+		company_html = create_company_notification_email(registration_data)
+		
+		company_msg = Message(
+			subject=company_subject,
+			recipients=[COMPANY_EMAIL],
+			html=company_html
+		)
+		
+		mail.send(company_msg)
+		email_results['company_email_sent'] = True
+		
+	except Exception as e:
+		email_results['errors'].append(f"Company email error: {str(e)}")
+	
+	try:
+		# Send confirmation email to customer
+		customer_email = registration_data.get('factoryEmail')
+		if customer_email:
+			customer_subject = f"Factory Registration Confirmation - {registration_data.get('submissionId', 'N/A')}"
+			customer_html = create_customer_confirmation_email(registration_data)
+			
+			customer_msg = Message(
+				subject=customer_subject,
+				recipients=[customer_email],
+				html=customer_html
+			)
+			
+			mail.send(customer_msg)
+			email_results['customer_email_sent'] = True
+		else:
+			email_results['errors'].append("No customer email provided")
+			
+	except Exception as e:
+		email_results['errors'].append(f"Customer email error: {str(e)}")
+	
+	return email_results
 
 
 @app.route("/api/factory-registration", methods=["POST"])
@@ -125,8 +405,19 @@ def factory_registration():
 	# Persist JSONL and CSV
 	write_jsonl(normalized)
 	write_csv(normalized)
-
-	return jsonify({"success": True, "message": "Registration saved", "submissionId": payload.get("submissionId")}), 201
+	
+	# Send notification emails
+	email_results = send_emails(normalized)
+	
+	# Prepare response
+	response_data = {
+		"success": True, 
+		"message": "Registration saved", 
+		"submissionId": payload.get("submissionId"),
+		"emails": email_results
+	}
+	
+	return jsonify(response_data), 201
 
 
 if __name__ == "__main__":

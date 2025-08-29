@@ -1,0 +1,831 @@
+{
+    "meta": {
+        "title": "Fabrika Bilgi Formu",
+        "description": "Web sitesi entegrasyonu ve kayıt amaçları için fabrika bilgilerinizi kaydedin"
+    },
+    "header": {
+        "logoText": "Web Sitesi Açılış Formu",
+        "title": "Fabrika Kayıt Formu",
+        "subtitle": "Lütfen kayıt ve entegrasyon amaçları için fabrika detaylarınızı aşağıda belirtin."
+    },
+    "sections": {
+        "factoryInfo": {
+            "title": "Fabrika Bilgileri",
+            "factoryName": {
+                "label": "Fabrika Adı",
+                "placeholder": "Fabrika adını girin",
+                "error": "Fabrika adı gereklidir"
+            },
+            "country": {
+                "label": "Ülke",
+                "placeholder": "Ülke Seçin",
+                "error": "Lütfen bir ülke seçin"
+            },
+            "city": {
+                "label": "Şehir",
+                "placeholder": "Önce Ülke Seçin",
+                "other": "Diğer (Lütfen belirtin)",
+                "error": "Lütfen bir şehir seçin"
+            },
+            "address": {
+                "label": "Detaylı Adres",
+                "placeholder": "Sokak adresi, bina numarası, kat, vb.",
+                "error": "Detaylı adres gereklidir",
+                "currentLocation": "Mevcut Konum",
+                "searchLocation": "Adres Ara",
+                "latitude": "Enlem",
+                "longitude": "Boylam"
+            },
+            "phone": {
+                "label": "Sabit Telefon",
+                "placeholder": "+90 (212) 123-4567"
+            },
+            "email": {
+                "label": "E-posta (web sitesi entegrasyonu için)",
+                "placeholder": "fabrika@ornek.com",
+                "error": "Geçerli bir e-posta adresi gereklidir"
+            }
+        },
+        "ownerInfo": {
+            "title": "Fabrika Sahibi Bilgileri",
+            "ownerName": {
+                "label": "Sahip Adı",
+                "placeholder": "Sahip adını girin"
+            },
+            "ownerPhone": {
+                "label": "Cep Telefonu",
+                "placeholder": "+90 (212) 123-4567"
+            },
+            "addOwner": "Sahip Ekle",
+            "removeOwner": "Sahibi Kaldır"
+        },
+        "spareParts": {
+            "title": "Yedek Parça Müdürü",
+            "managerName": {
+                "label": "Ad",
+                "placeholder": "Müdür adını girin"
+            },
+            "managerPhone": {
+                "label": "Cep Telefonu",
+                "placeholder": "+90 (212) 123-4567"
+            },
+            "managerEmail": {
+                "label": "E-posta",
+                "placeholder": "mudur@ornek.com"
+            }
+        },
+        "productionInfo": {
+            "title": "Endüstriyel Faaliyet",
+            "productType": {
+                "label": "Endüstri Alanı",
+                "placeholder": "Endüstri Alanı Seçin"
+            },
+            "productionLine": {
+                "label": "Üretim Hattı"
+            },
+            "brandName": {
+                "label": "Marka Adı"
+            },
+            "addProductionLine": "Üretim Hattı Ekle",
+            "removeProductionLine": "Üretim Hattını Kaldır",
+            "manufacturingDate": {
+                "label": "Üretim Hatlarının Üretim Tarihi"
+            }
+        },
+        "terms": {
+            "title": "Şartlar ve Koşullar",
+            "content": "Müşteri, şirketin web sitesi gizlilik politikası şartlarını ve kullanım koşullarını kabul etmiş sayılır ve verilerin gizliliğini korumayı ve web sitesi verilerinde gezinmesi için kendisine verilen süre boyunca, hiçbir koşulda bunları üçüncü taraflara sızdırmamayı taahhüt eder. Bu süre, web sitesine giriş tarihinden itibaren bir ay olarak belirtilmiştir. Şirket, elektronik ticaret kuralları, Avrupa Veri Koruma Yönetmeliği ve UNCITRAL kurallarına uygun olarak müşteri verilerinin gizliliğini korumayı taahhüt eder."
+        }
+    },
+    "form": {
+        "submit": "Fabrika Bilgilerini Gönder",
+        "submitting": "Gönderiliyor...",
+        "reset": "Formu Sıfırla",
+        "resetConfirm": "Formu sıfırlamak istediğinizden emin misiniz?",
+        "resetSuccess": "Form başarıyla sıfırlandı"
+    },
+    "validation": {
+        "required": "Bu alan gereklidir",
+        "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
+        "invalidPhone": "Lütfen geçerli bir telefon numarası girin"
+    },
+    "messages": {
+        "success": {
+            "title": "Teşekkürler!",
+            "description": "Fabrika bilgileriniz başarıyla gönderildi. İnceleyeceğiz ve yakında sizinle iletişime geçeceğiz!",
+            "submitAnother": "Başka Gönder"
+        },
+        "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+        "submissionId": "Gönderim ID'si"
+    },
+    "countries": {
+        "AE": "Birleşik Arap Emirlikleri",
+        "SA": "Suudi Arabistan",
+        "EG": "Mısır",
+        "IQ": "Irak",
+        "JO": "Ürdün",
+        "LB": "Lübnan",
+        "SY": "Suriye",
+        "KW": "Kuveyt",
+        "QA": "Katar",
+        "BH": "Bahreyn",
+        "OM": "Umman",
+        "YE": "Yemen",
+        "LY": "Libya",
+        "TN": "Tunus",
+        "DZ": "Cezayir",
+        "MA": "Fas",
+        "SD": "Sudan",
+        "MR": "Moritanya",
+        "SO": "Somali",
+        "DJ": "Cibuti",
+        "KM": "Komorlar",
+        "PS": "Filistin",
+        "AL": "Arnavutluk",
+        "AD": "Andorra",
+        "AT": "Avusturya",
+        "BY": "Belarus",
+        "BE": "Belçika",
+        "BA": "Bosna Hersek",
+        "BG": "Bulgaristan",
+        "HR": "Hırvatistan",
+        "CY": "Kıbrıs",
+        "CZ": "Çek Cumhuriyeti",
+        "DK": "Danimarka",
+        "EE": "Estonya",
+        "FI": "Finlandiya",
+        "FR": "Fransa",
+        "DE": "Almanya",
+        "GR": "Yunanistan",
+        "HU": "Macaristan",
+        "IS": "İzlanda",
+        "IE": "İrlanda",
+        "IT": "İtalya",
+        "LV": "Letonya",
+        "LI": "Lihtenştayn",
+        "LT": "Litvanya",
+        "LU": "Lüksemburg",
+        "MT": "Malta",
+        "MD": "Moldova",
+        "MC": "Monako",
+        "ME": "Karadağ",
+        "NL": "Hollanda",
+        "MK": "Kuzey Makedonya",
+        "NO": "Norveç",
+        "PL": "Polonya",
+        "PT": "Portekiz",
+        "RO": "Romanya",
+        "RU": "Rusya",
+        "SM": "San Marino",
+        "RS": "Sırbistan",
+        "SK": "Slovakya",
+        "SI": "Slovenya",
+        "ES": "İspanya",
+        "SE": "İsveç",
+        "CH": "İsviçre",
+        "TR": "Türkiye",
+        "UA": "Ukrayna",
+        "GB": "Birleşik Krallık",
+        "US": "Amerika Birleşik Devletleri",
+        "CN": "Çin",
+        "IN": "Hindistan"
+    },
+    "cities": {
+        "AE": {
+            "Dubai": "Dubai",
+            "Abu Dhabi": "Abu Dabi",
+            "Sharjah": "Şarika",
+            "Ajman": "Ajman",
+            "Ras Al Khaimah": "Ras el-Hayme",
+            "Fujairah": "Füceyre",
+            "Umm Al Quwain": "Umm el-Kayveyn",
+            "Al Ain": "El Ayn",
+            "Khor Fakkan": "Horfakkan",
+            "Dibba Al-Fujairah": "Dibba el-Füceyre",
+            "Kalba": "Kalba"
+        },
+        "SA": {
+            "Riyadh": "Riyad",
+            "Jeddah": "Cidde",
+            "Mecca": "Mekke",
+            "Medina": "Medine",
+            "Dammam": "Dammam",
+            "Khobar": "El-Hubar",
+            "Tabuk": "Tabuk",
+            "Buraydah": "Büreyda",
+            "Hail": "Hayil",
+            "Najran": "Necran",
+            "Al-Kharj": "El-Harc",
+            "Taif": "Taif"
+        },
+        "EG": {
+            "Cairo": "Kahire",
+            "Alexandria": "İskenderiye",
+            "Giza": "Gize",
+            "Shubra El-Kheima": "Şubra el-Hayme",
+            "Port Said": "Port Said",
+            "Suez": "Süveyş",
+            "Luxor": "Luksor",
+            "Aswan": "Asvan",
+            "Mansoura": "Mansura",
+            "Tanta": "Tanta",
+            "Ismailia": "İsmailiye",
+            "Faiyum": "Fayyum"
+        },
+        "IQ": {
+            "Baghdad": "Bağdat",
+            "Basra": "Basra",
+            "Mosul": "Musul",
+            "Erbil": "Erbil",
+            "Kirkuk": "Kerkük",
+            "Najaf": "Necef",
+            "Samarra": "Samarra",
+            "Karbala": "Kerbelâ",
+            "Sulaymaniyah": "Süleymaniye",
+            "Dhi Qar": "Zi Kar",
+            "Al Hillah": "El Hille"
+        },
+        "JO": {
+            "Amman": "Amman",
+            "Zarqa": "Zerka",
+            "Irbid": "İrbid",
+            "Aqaba": "Akabe",
+            "Madaba": "Medeba",
+            "Mafraq": "Mefrak",
+            "Al Karak": "El Kerak",
+            "Jerash": "Ceraş",
+            "Tafilah": "Tafile",
+            "Ajloun": "Aclun"
+        },
+        "LB": {
+            "Beirut": "Beyrut",
+            "Tripoli": "Trablus",
+            "Sidon": "Sayda",
+            "Tyre": "Sur",
+            "Byblos": "Cübeyl",
+            "Zahle": "Zahle",
+            "Baalbek": "Baalbek",
+            "Jounieh": "Cüniye",
+            "Saida": "Sayda",
+            "Nabatieh": "Nabatye"
+        },
+        "SY": {
+            "Damascus": "Şam",
+            "Aleppo": "Halep",
+            "Homs": "Humus",
+            "Hama": "Hama",
+            "Latakia": "Lazkiye",
+            "Deir ez-Zor": "Deyr ez-Zor",
+            "Raqqa": "Rakka",
+            "Tartus": "Tartus",
+            "Qamishli": "Kamışlı",
+            "Al Hasakah": "El Hasake"
+        },
+        "KW": {
+            "Kuwait City": "Kuveyt Şehri",
+            "Al Ahmadi": "El Ahmedi",
+            "Hawalli": "Havalli",
+            "Salmiya": "Selmiye",
+            "Jahra": "El Cahra",
+            "Farwaniya": "Fervaniye",
+            "Mangaf": "Mangaf",
+            "Sabah Al Salem": "Sabah el-Selim"
+        },
+        "QA": {
+            "Doha": "Doha",
+            "Al Rayyan": "El Reyyan",
+            "Al Wakrah": "El Vakra",
+            "Al Khor": "El Hor",
+            "Al Shamal": "El Şimal",
+            "Mesaieed": "Mesaieed",
+            "Umm Salal": "Umm Selal",
+            "Al Daayen": "El Dayen"
+        },
+        "BH": {
+            "Manama": "Manama",
+            "Riffa": "Riffa",
+            "Muharraq": "Muharrak",
+            "Hamad Town": "Hamad Şehri",
+            "Isa Town": "İsa Şehri",
+            "Sitra": "Sitra",
+            "Budaiya": "Büdeyye",
+            "Zallaq": "Zellak"
+        },
+        "OM": {
+            "Muscat": "Maskat",
+            "Salalah": "Salalah",
+            "Sohar": "Sohar",
+            "Nizwa": "Nizva",
+            "Sur": "Sur",
+            "Bahla": "Bahla",
+            "Ibra": "İbra",
+            "Rustaq": "Rustak",
+            "Shinas": "Şinas",
+            "Dhofar": "Zofar"
+        },
+        "YE": {
+            "Sana'a": "San'a",
+            "Aden": "Aden",
+            "Taiz": "Taiz",
+            "Al Hudaydah": "El Hudeyde",
+            "Ibb": "İbb",
+            "Mokha": "Moka",
+            "Dhamar": "Dhamar",
+            "Lahij": "Lahic",
+            "Hajjah": "Hacce",
+            "Saada": "Saada"
+        },
+        "LY": {
+            "Tripoli": "Trablus",
+            "Benghazi": "Bingazi",
+            "Misrata": "Misrata",
+            "Bayda": "El Beyda",
+            "Zawiya": "El Zaviye",
+            "Sabha": "Sebha",
+            "Ajdabiya": "Ecdebiye",
+            "Tobruk": "Tobruk",
+            "Derna": "Derna",
+            "Sirte": "Sirt"
+        },
+        "TN": {
+            "Tunis": "Tunus",
+            "Sfax": "Sfaks",
+            "Sousse": "Susa",
+            "Kairouan": "Kayrevan",
+            "Bizerte": "Bizerte",
+            "Gabès": "Gabes",
+            "Ariana": "Ariana",
+            "Gafsa": "Gafsa",
+            "Monastir": "Monastır",
+            "Sidi Bouzid": "Sidi Buzid"
+        },
+        "DZ": {
+            "Algiers": "Cezayir",
+            "Oran": "Vehran",
+            "Constantine": "Kostantine",
+            "Annaba": "Annaba",
+            "Blida": "Blida",
+            "Batna": "Batna",
+            "Sétif": "Setif",
+            "Sidi Bel Abbès": "Sidi Bel Abbès",
+            "Tlemcen": "Tlemsen",
+            "Tizi Ouzou": "Tizi Uzu"
+        },
+        "MA": {
+            "Rabat": "Rabat",
+            "Casablanca": "Kazablanka",
+            "Marrakech": "Marakeş",
+            "Fes": "Fas",
+            "Tangier": "Tanca",
+            "Agadir": "Agadir",
+            "Meknes": "Meknes",
+            "Oujda": "Vücda",
+            "Kenitra": "Kenitra",
+            "Tetouan": "Tetuán"
+        },
+        "SD": {
+            "Khartoum": "Hartum",
+            "Omdurman": "Ummdurman",
+            "Port Sudan": "Port Sudan",
+            "Kassala": "Kassala",
+            "El-Obeid": "El Ubeyyid",
+            "Al-Fashir": "El Fashir",
+            "Nyala": "Nyala",
+            "Sennar": "Sennar",
+            "Wad Madani": "Vad Medeni",
+            "Kosti": "Kosti"
+        },
+        "MR": {
+            "Nouakchott": "Nuakşot",
+            "Nouadhibou": "Nouadhibou",
+            "Atar": "Atar",
+            "Zouérat": "Zouérat",
+            "Kiffa": "Kiffa",
+            "Rosso": "Rosso",
+            "Kaédi": "Kaédi",
+            "Néma": "Néma",
+            "Tékane": "Tékane",
+            "Akjoujt": "Akjoujt"
+        },
+        "SO": {
+            "Mogadishu": "Mogadişu",
+            "Hargeisa": "Hargeisa",
+            "Bosaso": "Bosaso",
+            "Kismayo": "Kismayo",
+            "Baidoa": "Baydava",
+            "Berbera": "Berbera",
+            "Galkayo": "Galkayo",
+            "Marka": "Marka",
+            "Burao": "Burao",
+            "Erigavo": "Erigavo"
+        },
+        "DJ": {
+            "Djibouti City": "Cibuti Şehri",
+            "Ali Sabieh": "Ali Sabieh",
+            "Tadjoura": "Tadjoura",
+            "Obock": "Obock",
+            "Dikhil": "Dikhil",
+            "Arta": "Arta",
+            "Randa": "Randa"
+        },
+        "KM": {
+            "Moroni": "Moroni",
+            "Moutsamoudou": "Moutsamoudou",
+            "Fomboni": "Fomboni",
+            "Ouani": "Ouani",
+            "Dzaoudzi": "Dzaoudzi",
+            "Domoni": "Domoni",
+            "Itsandra": "Itsandra"
+        },
+        "PS": {
+            "Ramallah": "Ramallah",
+            "Gaza City": "Gazze Şehri",
+            "Hebron": "El Halil",
+            "Nablus": "Nablus",
+            "Bethlehem": "Beytüllahim",
+            "Jenin": "Cenin",
+            "Tulkarm": "Tulkarm",
+            "Qalqilya": "Kalkilya",
+            "Jericho": "Eriha",
+            "Salfit": "Salfit"
+        },
+        "RU": {
+            "Moscow": "Moskova",
+            "Saint Petersburg": "Sankt Petersburg",
+            "Novosibirsk": "Novosibirsk",
+            "Yekaterinburg": "Yekaterinburg",
+            "Nizhny Novgorod": "Nijni Novgorod",
+            "Kazan": "Kazan",
+            "Chelyabinsk": "Çelyabinsk",
+            "Samara": "Samara",
+            "Omsk": "Omsk",
+            "Rostov-on-Don": "Rostov-na-Donu",
+            "Ufa": "Ufa",
+            "Krasnoyarsk": "Krasnoyarsk",
+            "Perm": "Perm",
+            "Voronezh": "Voronej",
+            "Volgograd": "Volgograd"
+        },
+        "TR": {
+            "Istanbul": "İstanbul",
+            "Ankara": "Ankara",
+            "Izmir": "İzmir",
+            "Bursa": "Bursa",
+            "Adana": "Adana",
+            "Gaziantep": "Gaziantep",
+            "Konya": "Konya",
+            "Antalya": "Antalya",
+            "Kayseri": "Kayseri",
+            "Mersin": "Mersin",
+            "Eskisehir": "Eskişehir",
+            "Diyarbakır": "Diyarbakır",
+            "Samsun": "Samsun",
+            "Denizli": "Denizli",
+            "Sanliurfa": "Şanlıurfa"
+        },
+        "CN": {
+            "Beijing": "Pekin",
+            "Shanghai": "Şanghay",
+            "Guangzhou": "Guangzhou",
+            "Shenzhen": "Shenzhen",
+            "Chengdu": "Chengdu",
+            "Tianjin": "Tianjin",
+            "Chongqing": "Chongqing",
+            "Wuhan": "Wuhan",
+            "Xi'an": "Xi'an",
+            "Hangzhou": "Hangzhou",
+            "Nanjing": "Nanjing",
+            "Shenyang": "Shenyang",
+            "Harbin": "Harbin",
+            "Suzhou": "Suzhou",
+            "Qingdao": "Qingdao"
+        },
+        "IN": {
+            "New Delhi": "Yeni Delhi",
+            "Mumbai": "Mumbai",
+            "Bangalore": "Bangalore",
+            "Hyderabad": "Hyderabad",
+            "Chennai": "Chennai",
+            "Kolkata": "Kolkata",
+            "Pune": "Pune",
+            "Ahmedabad": "Ahmedabad",
+            "Jaipur": "Jaipur",
+            "Lucknow": "Lucknow",
+            "Kanpur": "Kanpur",
+            "Nagpur": "Nagpur",
+            "Indore": "Indore",
+            "Bhopal": "Bhopal",
+            "Patna": "Patna"
+        },
+        "AL": {
+            "Tirana": "Tiran",
+            "Durrës": "Dıraç",
+            "Vlorë": "Vlora",
+            "Shkodër": "İşkodra",
+            "Fier": "Fier"
+        },
+        "AD": {
+            "Andorra la Vella": "Andorra la Vella",
+            "Escaldes-Engordany": "Escaldes-Engordany",
+            "Encamp": "Encamp",
+            "Sant Julià de Lòria": "Sant Julià de Lòria",
+            "La Massana": "La Massana"
+        },
+        "AT": {
+            "Vienna": "Viyana",
+            "Graz": "Graz",
+            "Linz": "Linz",
+            "Salzburg": "Salzburg",
+            "Innsbruck": "Innsbruck"
+        },
+        "BY": {
+            "Minsk": "Minsk",
+            "Gomel": "Gomel",
+            "Mogilev": "Mogilev",
+            "Vitebsk": "Vitebsk",
+            "Hrodna": "Hrodna"
+        },
+        "BE": {
+            "Brussels": "Brüksel",
+            "Antwerp": "Anvers",
+            "Ghent": "Gent",
+            "Charleroi": "Charleroi",
+            "Liège": "Liège"
+        },
+        "BA": {
+            "Sarajevo": "Saraybosna",
+            "Banja Luka": "Banja Luka",
+            "Tuzla": "Tuzla",
+            "Zenica": "Zenica",
+            "Mostar": "Mostar"
+        },
+        "BG": {
+            "Sofia": "Sofya",
+            "Plovdiv": "Plovdiv",
+            "Varna": "Varna",
+            "Burgas": "Burgas",
+            "Ruse": "Ruse"
+        },
+        "HR": {
+            "Zagreb": "Zagreb",
+            "Split": "Split",
+            "Rijeka": "Rijeka",
+            "Osijek": "Osijek",
+            "Zadar": "Zadar"
+        },
+        "CY": {
+            "Nicosia": "Lefkoşa",
+            "Limassol": "Limasol",
+            "Larnaca": "Larnaka",
+            "Famagusta": "Gazimağusa",
+            "Paphos": "Baf"
+        },
+        "CZ": {
+            "Prague": "Prag",
+            "Brno": "Brno",
+            "Ostrava": "Ostrava",
+            "Plzeň": "Plzeň",
+            "Liberec": "Liberec"
+        },
+        "DK": {
+            "Copenhagen": "Kopenhag",
+            "Aarhus": "Aarhus",
+            "Odense": "Odense",
+            "Aalborg": "Aalborg",
+            "Esbjerg": "Esbjerg"
+        },
+        "EE": {
+            "Tallinn": "Tallinn",
+            "Tartu": "Tartu",
+            "Narva": "Narva",
+            "Pärnu": "Pärnu",
+            "Kohtla-Järve": "Kohtla-Järve"
+        },
+        "FI": {
+            "Helsinki": "Helsinki",
+            "Espoo": "Espoo",
+            "Tampere": "Tampere",
+            "Vantaa": "Vantaa",
+            "Oulu": "Oulu"
+        },
+        "FR": {
+            "Paris": "Paris",
+            "Marseille": "Marsilya",
+            "Lyon": "Lyon",
+            "Toulouse": "Toulouse",
+            "Nice": "Nice"
+        },
+        "DE": {
+            "Berlin": "Berlin",
+            "Hamburg": "Hamburg",
+            "Munich": "Münih",
+            "Cologne": "Köln",
+            "Frankfurt": "Frankfurt"
+        },
+        "GR": {
+            "Athens": "Atina",
+            "Thessaloniki": "Selanik",
+            "Patras": "Patras",
+            "Heraklion": "Heraklion",
+            "Larissa": "Larisa"
+        },
+        "HU": {
+            "Budapest": "Budapeşte",
+            "Debrecen": "Debrecen",
+            "Szeged": "Szeged",
+            "Miskolc": "Miskolc",
+            "Pécs": "Pécs"
+        },
+        "IS": {
+            "Reykjavik": "Reykjavik",
+            "Kópavogur": "Kópavogur",
+            "Hafnarfjörður": "Hafnarfjörður",
+            "Akureyri": "Akureyri",
+            "Reykjanesbær": "Reykjanesbær"
+        },
+        "IE": {
+            "Dublin": "Dublin",
+            "Cork": "Cork",
+            "Limerick": "Limerick",
+            "Galway": "Galway",
+            "Waterford": "Waterford"
+        },
+        "IT": {
+            "Rome": "Roma",
+            "Milan": "Milano",
+            "Naples": "Napoli",
+            "Turin": "Torino",
+            "Palermo": "Palermo"
+        },
+        "LV": {
+            "Riga": "Riga",
+            "Daugavpils": "Daugavpils",
+            "Liepāja": "Liepāja",
+            "Jelgava": "Jelgava",
+            "Jūrmala": "Jūrmala"
+        },
+        "LI": {
+            "Vaduz": "Vaduz",
+            "Schaan": "Schaan",
+            "Triesen": "Triesen",
+            "Balzers": "Balzers",
+            "Eschen": "Eschen"
+        },
+        "LT": {
+            "Vilnius": "Vilnius",
+            "Kaunas": "Kaunas",
+            "Klaipėda": "Klaipėda",
+            "Šiauliai": "Šiauliai",
+            "Panevėžys": "Panevėžys"
+        },
+        "LU": {
+            "Luxembourg City": "Lüksemburg Şehri",
+            "Esch-sur-Alzette": "Esch-sur-Alzette",
+            "Differdange": "Differdange",
+            "Dudelange": "Dudelange",
+            "Ettelbruck": "Ettelbruck"
+        },
+        "MT": {
+            "Valletta": "Valletta",
+            "Birkirkara": "Birkirkara",
+            "Mosta": "Mosta",
+            "Qormi": "Qormi",
+            "Sliema": "Sliema"
+        },
+        "MD": {
+            "Chișinău": "Kişinev",
+            "Tiraspol": "Tiraspol",
+            "Bălți": "Bălți",
+            "Bender": "Bender",
+            "Rîbnița": "Rîbnița"
+        },
+        "MC": {
+            "Monaco": "Monako"
+        },
+        "ME": {
+            "Podgorica": "Podgorica",
+            "Nikšić": "Nikšić",
+            "Herceg Novi": "Herceg Novi",
+            "Pljevlja": "Pljevlja",
+            "Bijelo Polje": "Bijelo Polje"
+        },
+        "NL": {
+            "Amsterdam": "Amsterdam",
+            "Rotterdam": "Rotterdam",
+            "The Hague": "Lahey",
+            "Utrecht": "Utrecht",
+            "Eindhoven": "Eindhoven"
+        },
+        "MK": {
+            "Skopje": "Üsküp",
+            "Bitola": "Bitola",
+            "Kumanovo": "Kumanovo",
+            "Prilep": "Prilep",
+            "Tetovo": "Tetovo"
+        },
+        "NO": {
+            "Oslo": "Oslo",
+            "Bergen": "Bergen",
+            "Trondheim": "Trondheim",
+            "Stavanger": "Stavanger",
+            "Drammen": "Drammen"
+        },
+        "PL": {
+            "Warsaw": "Varşova",
+            "Kraków": "Kraków",
+            "Łódź": "Łódź",
+            "Wrocław": "Wrocław",
+            "Poznań": "Poznań"
+        },
+        "PT": {
+            "Lisbon": "Lizbon",
+            "Porto": "Porto",
+            "Braga": "Braga",
+            "Coimbra": "Coimbra",
+            "Funchal": "Funchal"
+        },
+        "RO": {
+            "Bucharest": "Bükreş",
+            "Cluj-Napoca": "Cluj-Napoca",
+            "Timișoara": "Timișoara",
+            "Iași": "Iași",
+            "Constanța": "Constanța"
+        },
+        "SM": {
+            "San Marino": "San Marino"
+        },
+        "RS": {
+            "Belgrade": "Belgrad",
+            "Novi Sad": "Novi Sad",
+            "Niš": "Niş",
+            "Kragujevac": "Kragujevac",
+            "Subotica": "Subotica"
+        },
+        "SK": {
+            "Bratislava": "Bratislava",
+            "Košice": "Košice",
+            "Prešov": "Prešov",
+            "Žilina": "Žilina",
+            "Nitra": "Nitra"
+        },
+        "SI": {
+            "Ljubljana": "Ljubljana",
+            "Maribor": "Maribor",
+            "Celje": "Celje",
+            "Kranj": "Kranj",
+            "Velenje": "Velenje"
+        },
+        "ES": {
+            "Madrid": "Madrid",
+            "Barcelona": "Barselona",
+            "Valencia": "Valencia",
+            "Seville": "Sevilla",
+            "Zaragoza": "Zaragoza"
+        },
+        "SE": {
+            "Stockholm": "Stockholm",
+            "Gothenburg": "Göteborg",
+            "Malmö": "Malmö",
+            "Uppsala": "Uppsala",
+            "Västerås": "Västerås"
+        },
+        "CH": {
+            "Zurich": "Zürih",
+            "Geneva": "Cenevre",
+            "Basel": "Basel",
+            "Bern": "Bern",
+            "Lausanne": "Lozan"
+        },
+        "UA": {
+            "Kyiv": "Kiev",
+            "Kharkiv": "Harkov",
+            "Odesa": "Odessa",
+            "Dnipro": "Dnipro",
+            "Lviv": "Lviv"
+        },
+        "GB": {
+            "London": "Londra",
+            "Birmingham": "Birmingham",
+            "Manchester": "Manchester",
+            "Glasgow": "Glasgow",
+            "Liverpool": "Liverpool"
+        }
+    },
+    "productTypes": {
+        "textiles": "Tekstil",
+        "electronics": "Elektronik",
+        "automotive": "Otomotiv",
+        "food_beverage": "Gıda ve İçecek",
+        "chemicals": "Kimya",
+        "pharmaceuticals": "İlaç",
+        "machinery": "Makine ve Ekipman",
+        "metals": "Metal ve Madencilik",
+        "construction": "İnşaat Malzemeleri",
+        "aerospace": "Havacılık ve Savunma",
+        "energy": "Enerji ve Kamu Hizmetleri",
+        "medical": "Tıbbi Cihazlar",
+        "plastics": "Plastik ve Kauçuk",
+        "paper": "Kağıt ve Ambalaj",
+        "other": "Diğer"
+    }
+}
