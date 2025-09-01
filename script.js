@@ -6,6 +6,7 @@ class FactoryForm {
         this.marker = null;
         this.geocoder = null;
         this.countryCities = this.initializeCountryCities();
+        this.countryCodes = this.initializeCountryCodes();
         this.ownerIndex = 1;
         this.productionLineIndex = 1;
         
@@ -23,6 +24,7 @@ class FactoryForm {
         this.setupCountryCityDropdown();
         this.setupGoogleMaps();
         this.detectAndSetLanguage();
+        this.populateCountryCodeSelectors();
         this.loadFormData();
     }
 
@@ -218,6 +220,83 @@ class FactoryForm {
         this.setupAutoSave();
     }
 
+    // Country code mapping for phone numbers
+    initializeCountryCodes() {
+        return {
+            'AE': { code: '+971', name: 'UAE' },
+            'SA': { code: '+966', name: 'Saudi Arabia' },
+            'EG': { code: '+20', name: 'Egypt' },
+            'IQ': { code: '+964', name: 'Iraq' },
+            'JO': { code: '+962', name: 'Jordan' },
+            'LB': { code: '+961', name: 'Lebanon' },
+            'SY': { code: '+963', name: 'Syria' },
+            'KW': { code: '+965', name: 'Kuwait' },
+            'QA': { code: '+974', name: 'Qatar' },
+            'BH': { code: '+973', name: 'Bahrain' },
+            'OM': { code: '+968', name: 'Oman' },
+            'YE': { code: '+967', name: 'Yemen' },
+            'LY': { code: '+218', name: 'Libya' },
+            'TN': { code: '+216', name: 'Tunisia' },
+            'DZ': { code: '+213', name: 'Algeria' },
+            'MA': { code: '+212', name: 'Morocco' },
+            'SD': { code: '+249', name: 'Sudan' },
+            'MR': { code: '+222', name: 'Mauritania' },
+            'SO': { code: '+252', name: 'Somalia' },
+            'DJ': { code: '+253', name: 'Djibouti' },
+            'KM': { code: '+269', name: 'Comoros' },
+            'PS': { code: '+970', name: 'Palestine' },
+            'TR': { code: '+90', name: 'Turkey' },
+            'RU': { code: '+7', name: 'Russia' },
+            'CN': { code: '+86', name: 'China' },
+            'IN': { code: '+91', name: 'India' },
+            'US': { code: '+1', name: 'United States' },
+            'GB': { code: '+44', name: 'United Kingdom' },
+            'DE': { code: '+49', name: 'Germany' },
+            'FR': { code: '+33', name: 'France' },
+            'ES': { code: '+34', name: 'Spain' },
+            'IT': { code: '+39', name: 'Italy' },
+            'NL': { code: '+31', name: 'Netherlands' },
+            'BE': { code: '+32', name: 'Belgium' },
+            'CH': { code: '+41', name: 'Switzerland' },
+            'AT': { code: '+43', name: 'Austria' },
+            'SE': { code: '+46', name: 'Sweden' },
+            'NO': { code: '+47', name: 'Norway' },
+            'DK': { code: '+45', name: 'Denmark' },
+            'FI': { code: '+358', name: 'Finland' },
+            'PL': { code: '+48', name: 'Poland' },
+            'CZ': { code: '+420', name: 'Czech Republic' },
+            'HU': { code: '+36', name: 'Hungary' },
+            'RO': { code: '+40', name: 'Romania' },
+            'BG': { code: '+359', name: 'Bulgaria' },
+            'GR': { code: '+30', name: 'Greece' },
+            'PT': { code: '+351', name: 'Portugal' },
+            'IE': { code: '+353', name: 'Ireland' },
+            'IS': { code: '+354', name: 'Iceland' },
+            'LU': { code: '+352', name: 'Luxembourg' },
+            'MT': { code: '+356', name: 'Malta' },
+            'CY': { code: '+357', name: 'Cyprus' },
+            'EE': { code: '+372', name: 'Estonia' },
+            'LV': { code: '+371', name: 'Latvia' },
+            'LT': { code: '+370', name: 'Lithuania' },
+            'SI': { code: '+386', name: 'Slovenia' },
+            'SK': { code: '+421', name: 'Slovakia' },
+            'HR': { code: '+385', name: 'Croatia' },
+            'BA': { code: '+387', name: 'Bosnia and Herzegovina' },
+            'RS': { code: '+381', name: 'Serbia' },
+            'ME': { code: '+382', name: 'Montenegro' },
+            'MK': { code: '+389', name: 'North Macedonia' },
+            'AL': { code: '+355', name: 'Albania' },
+            'MD': { code: '+373', name: 'Moldova' },
+            'UA': { code: '+380', name: 'Ukraine' },
+            'BY': { code: '+375', name: 'Belarus' },
+            'LI': { code: '+423', name: 'Liechtenstein' },
+            'MC': { code: '+377', name: 'Monaco' },
+            'SM': { code: '+378', name: 'San Marino' },
+            'AD': { code: '+376', name: 'Andorra' },
+            'VA': { code: '+379', name: 'Vatican City' }
+        };
+    }
+
     // Country-City data mapping
     initializeCountryCities() {
         return {
@@ -397,6 +476,9 @@ class FactoryForm {
         const ownerNamePlaceholder = this.getTranslation('sections.ownerInfo.ownerName.placeholder') || 'Enter owner name';
         const ownerPhonePlaceholder = this.getTranslation('sections.ownerInfo.ownerPhone.placeholder') || '+1 (555) 123-4567';
         
+        // Generate country code options
+        const countryCodeOptions = this.generateCountryCodeOptions();
+        
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
@@ -414,15 +496,20 @@ class FactoryForm {
                 </div>
                 <div class="form-group">
                     <label for="ownerMobile_${index}">${ownerPhoneLabel} <span class="required" aria-label="required">*</span></label>
-                    <input 
-                        type="tel" 
-                        id="ownerMobile_${index}" 
-                        name="ownerMobile_${index}" 
-                        required
-                        aria-describedby="ownerMobile_${index}-error"
-                        placeholder="${ownerPhonePlaceholder}"
-                        maxlength="20"
-                    >
+                    <div class="phone-input-container">
+                        <select class="country-code-selector" name="ownerMobileCountryCode_${index}" aria-label="Country code">
+                            ${countryCodeOptions}
+                        </select>
+                        <input 
+                            type="tel" 
+                            id="ownerMobile_${index}" 
+                            name="ownerMobile_${index}" 
+                            required
+                            aria-describedby="ownerMobile_${index}-error"
+                            placeholder="${ownerPhonePlaceholder}"
+                            maxlength="20"
+                        >
+                    </div>
                     <div id="ownerMobile_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
             </div>
@@ -439,6 +526,23 @@ class FactoryForm {
         // Setup validation for new fields
         const inputs = wrapper.querySelectorAll('input');
         inputs.forEach(input => this.setupFieldValidation(input));
+        
+        // Setup phone formatting for the new phone field
+        const phoneField = wrapper.querySelector('input[type="tel"]');
+        const countryCodeSelector = wrapper.querySelector('.country-code-selector');
+        const countrySelect = document.getElementById('country');
+        
+        if (phoneField) {
+            phoneField.addEventListener('input', (e) => {
+                this.formatPhoneNumber(e.target, countryCodeSelector, countrySelect);
+            });
+            
+            if (countryCodeSelector) {
+                countryCodeSelector.addEventListener('change', () => {
+                    this.formatPhoneNumber(phoneField, countryCodeSelector, countrySelect);
+                });
+            }
+        }
         
         return wrapper;
     }
@@ -467,6 +571,7 @@ class FactoryForm {
             
             const nameInput = block.querySelector('[id^="ownerName_"]');
             const mobileInput = block.querySelector('[id^="ownerMobile_"]');
+            const countryCodeSelector = block.querySelector('[name^="ownerMobileCountryCode_"]');
             const nameLabel = block.querySelector('label[for^="ownerName_"]');
             const mobileLabel = block.querySelector('label[for^="ownerMobile_"]');
             
@@ -479,6 +584,9 @@ class FactoryForm {
                 mobileInput.id = `ownerMobile_${index}`;
                 mobileInput.name = `ownerMobile_${index}`;
                 mobileInput.setAttribute('aria-describedby', `ownerMobile_${index}-error`);
+            }
+            if (countryCodeSelector) {
+                countryCodeSelector.name = `ownerMobileCountryCode_${index}`;
             }
             if (nameLabel) nameLabel.setAttribute('for', `ownerName_${index}`);
             if (mobileLabel) mobileLabel.setAttribute('for', `ownerMobile_${index}`);
@@ -775,9 +883,14 @@ class FactoryForm {
             return false;
         }
         
-        if (field.type === 'tel' && field.value && !this.isValidPhone(field.value)) {
-            this.showFieldError(field, 'Invalid phone number');
-            return false;
+        if (field.type === 'tel' && field.value) {
+            const countryCodeSelector = field.parentNode.querySelector('.country-code-selector');
+            const countryCode = countryCodeSelector ? countryCodeSelector.value : this.getDefaultCountryCode(document.getElementById('country'));
+            
+            if (!this.isValidPhone(field.value, countryCode)) {
+                this.showFieldError(field, 'Invalid phone number');
+                return false;
+            }
         }
         
         return true;
@@ -813,30 +926,152 @@ class FactoryForm {
         return emailRegex.test(email);
     }
 
-    isValidPhone(phone) {
-        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-        return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+    isValidPhone(phone, countryCode = '+1') {
+        // Remove all non-digit characters except +
+        let cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+        
+        // If phone starts with country code, remove it for validation
+        const codeDigits = countryCode.replace('+', '');
+        if (cleanPhone.startsWith(codeDigits)) {
+            cleanPhone = cleanPhone.substring(codeDigits.length);
+        }
+        
+        // Basic validation - should be 7-15 digits after country code
+        const phoneRegex = /^[1-9]\d{6,14}$/;
+        return phoneRegex.test(cleanPhone);
     }
 
     setupPhoneFormatting() {
         const phoneFields = this.form.querySelectorAll('input[type="tel"]');
         
         phoneFields.forEach(phoneField => {
+            // Get the associated country code selector
+            const countryCodeSelector = phoneField.parentNode.querySelector('.country-code-selector');
+            const countrySelect = document.getElementById('country');
+            
             phoneField.addEventListener('input', (e) => {
-                let value = e.target.value.replace(/\D/g, '');
-                
-                if (value.length > 0) {
-                    if (value.length <= 3) {
-                        value = `(${value}`;
-                    } else if (value.length <= 6) {
-                        value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
-                    } else {
-                        value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
-                    }
-                }
-                
-                e.target.value = value;
+                this.formatPhoneNumber(e.target, countryCodeSelector, countrySelect);
             });
+            
+            // Update phone formatting when country code changes
+            if (countryCodeSelector) {
+                countryCodeSelector.addEventListener('change', () => {
+                    this.formatPhoneNumber(phoneField, countryCodeSelector, countrySelect);
+                });
+            }
+            
+            // Update phone formatting when country changes
+            if (countrySelect) {
+                countrySelect.addEventListener('change', () => {
+                    this.updatePhoneCountryCode(countryCodeSelector, countrySelect);
+                    this.formatPhoneNumber(phoneField, countryCodeSelector, countrySelect);
+                });
+            }
+        });
+    }
+
+    formatPhoneNumber(phoneField, countryCodeSelector, countrySelect) {
+        let value = phoneField.value.replace(/\D/g, '');
+        const countryCode = countryCodeSelector ? countryCodeSelector.value : this.getDefaultCountryCode(countrySelect);
+        
+        // Remove country code from the beginning if it exists
+        if (countryCode && value.startsWith(countryCode.replace('+', ''))) {
+            value = value.substring(countryCode.replace('+', '').length);
+        }
+        
+        // Format the number based on country
+        const formattedNumber = this.formatNumberByCountry(value, countryCode);
+        phoneField.value = formattedNumber;
+    }
+
+    getDefaultCountryCode(countrySelect) {
+        if (!countrySelect || !countrySelect.value) return '+1';
+        return this.countryCodes[countrySelect.value]?.code || '+1';
+    }
+
+    updatePhoneCountryCode(countryCodeSelector, countrySelect) {
+        if (!countryCodeSelector || !countrySelect) return;
+        
+        const selectedCountry = countrySelect.value;
+        const countryCode = this.countryCodes[selectedCountry]?.code || '+1';
+        
+        // Update the country code selector
+        countryCodeSelector.value = countryCode;
+        
+        // Update the display text
+        const option = countryCodeSelector.querySelector(`option[value="${countryCode}"]`);
+        if (option) {
+            countryCodeSelector.selectedIndex = option.index;
+        }
+    }
+
+    formatNumberByCountry(number, countryCode) {
+        if (!number) return '';
+        
+        // Common formatting patterns by country
+        const patterns = {
+            '+1': (num) => {
+                if (num.length <= 3) return `(${num}`;
+                if (num.length <= 6) return `(${num.slice(0, 3)}) ${num.slice(3)}`;
+                return `(${num.slice(0, 3)}) ${num.slice(3, 6)}-${num.slice(6, 10)}`;
+            },
+            '+44': (num) => {
+                if (num.length <= 4) return num;
+                if (num.length <= 7) return `${num.slice(0, 4)} ${num.slice(4)}`;
+                return `${num.slice(0, 4)} ${num.slice(4, 7)} ${num.slice(7)}`;
+            },
+            '+971': (num) => {
+                if (num.length <= 2) return num;
+                if (num.length <= 5) return `${num.slice(0, 2)} ${num.slice(2)}`;
+                return `${num.slice(0, 2)} ${num.slice(2, 5)} ${num.slice(5)}`;
+            },
+            '+966': (num) => {
+                if (num.length <= 2) return num;
+                if (num.length <= 5) return `${num.slice(0, 2)} ${num.slice(2)}`;
+                return `${num.slice(0, 2)} ${num.slice(2, 5)} ${num.slice(5)}`;
+            },
+            '+20': (num) => {
+                if (num.length <= 2) return num;
+                if (num.length <= 5) return `${num.slice(0, 2)} ${num.slice(2)}`;
+                return `${num.slice(0, 2)} ${num.slice(2, 5)} ${num.slice(5)}`;
+            },
+            '+90': (num) => {
+                if (num.length <= 3) return num;
+                if (num.length <= 6) return `${num.slice(0, 3)} ${num.slice(3)}`;
+                return `${num.slice(0, 3)} ${num.slice(3, 6)} ${num.slice(6)}`;
+            }
+        };
+        
+        const formatter = patterns[countryCode] || patterns['+1'];
+        return formatter(number);
+    }
+
+    generateCountryCodeOptions() {
+        let options = '';
+        const countrySelect = document.getElementById('country');
+        const selectedCountry = countrySelect ? countrySelect.value : '';
+        
+        // Get the default country code based on selected country
+        const defaultCode = this.getDefaultCountryCode(countrySelect);
+        
+        // Sort country codes for better UX
+        const sortedCodes = Object.entries(this.countryCodes)
+            .sort((a, b) => a[1].name.localeCompare(b[1].name));
+        
+        sortedCodes.forEach(([countryCode, data]) => {
+            const selected = data.code === defaultCode ? 'selected' : '';
+            options += `<option value="${data.code}" ${selected}>${data.code} ${data.name}</option>`;
+        });
+        
+        return options;
+    }
+
+    populateCountryCodeSelectors() {
+        const countryCodeSelectors = this.form.querySelectorAll('.country-code-selector');
+        const countryCodeOptions = this.generateCountryCodeOptions();
+        
+        countryCodeSelectors.forEach(selector => {
+            selector.innerHTML = countryCodeOptions;
         });
     }
 

@@ -227,15 +227,20 @@
                             <label for="landlinePhone">
                                 <span data-translate="sections.factoryInfo.phone.label">Landline Phone</span>
                             </label>
-                            <input 
-                                type="tel" 
-                                id="landlinePhone" 
-                                name="landlinePhone" 
-                                data-translate-placeholder="sections.factoryInfo.phone.placeholder"
-                                placeholder="+1 (555) 123-4567"
-                                aria-describedby="landlinePhone-error"
-                                maxlength="20"
-                            >
+                            <div class="phone-input-container">
+                                <select class="country-code-selector" name="landlinePhoneCountryCode" aria-label="Country code">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                                <input 
+                                    type="tel" 
+                                    id="landlinePhone" 
+                                    name="landlinePhone" 
+                                    data-translate-placeholder="sections.factoryInfo.phone.placeholder"
+                                    placeholder="+1 (555) 123-4567"
+                                    aria-describedby="landlinePhone-error"
+                                    maxlength="20"
+                                >
+                            </div>
                             <div id="landlinePhone-error" class="error-message" role="alert" aria-live="polite"></div>
                         </div>
                         <div class="form-group">
@@ -294,16 +299,21 @@
                                     </span>
                                     <span class="required" aria-label="required">*</span>
                                 </label>
-                                <input 
-                                    type="tel" 
-                                    id="ownerMobile_1" 
-                                    name="ownerMobile_1" 
-                                    required
-                                    aria-describedby="ownerMobile_1-error"
-                                    data-translate-placeholder="sections.ownerInfo.ownerPhone.placeholder"
-                                    placeholder="+1 (555) 123-4567"
-                                    maxlength="20"
-                                >
+                                <div class="phone-input-container">
+                                    <select class="country-code-selector" name="ownerMobileCountryCode_1" aria-label="Country code">
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                    <input 
+                                        type="tel" 
+                                        id="ownerMobile_1" 
+                                        name="ownerMobile_1" 
+                                        required
+                                        aria-describedby="ownerMobile_1-error"
+                                        data-translate-placeholder="sections.ownerInfo.ownerPhone.placeholder"
+                                        placeholder="+1 (555) 123-4567"
+                                        maxlength="20"
+                                    >
+                                </div>
                                 <div id="ownerMobile_1-error" class="error-message" role="alert" aria-live="polite"></div>
                             </div>
                         </div>
@@ -356,16 +366,21 @@
                                 </span>
                                 <span class="required" aria-label="required">*</span>
                             </label>
-                            <input 
-                                type="tel" 
-                                id="sparePartsManagerMobile" 
-                                name="sparePartsManagerMobile" 
-                                required
-                                aria-describedby="sparePartsManagerMobile-error"
-                                data-translate-placeholder="sections.spareParts.managerPhone.placeholder"
-                                placeholder="+1 (555) 123-4567"
-                                maxlength="20"
-                            >
+                            <div class="phone-input-container">
+                                <select class="country-code-selector" name="sparePartsManagerMobileCountryCode" aria-label="Country code">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                                <input 
+                                    type="tel" 
+                                    id="sparePartsManagerMobile" 
+                                    name="sparePartsManagerMobile" 
+                                    required
+                                    aria-describedby="sparePartsManagerMobile-error"
+                                    data-translate-placeholder="sections.spareParts.managerPhone.placeholder"
+                                    placeholder="+1 (555) 123-4567"
+                                    maxlength="20"
+                                >
+                            </div>
                             <div id="sparePartsManagerMobile-error" class="error-message" role="alert" aria-live="polite"></div>
                         </div>
                         <div class="form-group">

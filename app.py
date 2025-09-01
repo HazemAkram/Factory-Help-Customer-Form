@@ -236,10 +236,6 @@ def create_company_notification_email(registration_data: Dict) -> str:
 					<span class="label">Submission Date:</span>
 					<span class="value">{registration_data.get('receivedAt', 'N/A')}</span>
 				</div>
-				<div class="field">
-					<span class="label">IP Address:</span>
-					<span class="value">{registration_data.get('ip', 'N/A')}</span>
-				</div>
 			</div>
 		</div>
 		
@@ -272,19 +268,20 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 	</head>
 	<body>
 		<div class="header">
-			<h1>Factory Registration Confirmation</h1>
-			<p>Submission ID: {registration_data.get('submissionId', 'N/A')}</p>
+			<h1>🎉 Registration Successful!</h1>
+			<h2>Factory Registration Confirmation</h2>
+			<p> <strong>Submission ID:</strong> {registration_data.get('submissionId', 'N/A')}</p>
 		</div>
 		
 		<div class="content">
 			<div class="thank-you">
-				<h2>Thank You for Your Registration!</h2>
-				<p>Dear {registration_data.get('factoryName', 'Valued Customer')},</p>
-				<p>We have successfully received your factory registration information. Our team will review your submission and contact you within 2-3 business days.</p>
+				<h2>🌟 Welcome to Our Manufacturing Network!</h2>
+				<p>Dear Valued Customer,</p>
+				<p>We have successfully received your factory registration information. Our team will review your submission and contact you As Soon As Possible.</p>
 			</div>
 			
 			<div class="section">
-				<h2>Registration Summary</h2>
+				<h2>📋 Registration Summary</h2>
 				<div class="field">
 					<span class="label">Factory Name:</span>
 					<span class="value">{registration_data.get('factoryName', 'N/A')}</span>
@@ -304,9 +301,9 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 			</div>
 			
 			<div class="section">
-				<h2>Next Steps</h2>
+				<h2>⏰ Next Steps</h2>
 				<ol>
-					<li>Our team will review your registration within 2-3 business days</li>
+					<li>Our team will review your registration As Soon As Possible</li>
 					<li>We will contact you via email or phone to discuss next steps</li>
 					<li>You may be asked to provide additional documentation if needed</li>
 					<li>Upon approval, you will receive access to our platform</li>
@@ -314,7 +311,7 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 			</div>
 			
 			<div class="section">
-				<h2>Contact Information</h2>
+				<h2>📞 Contact Information</h2>
 				<p>If you have any questions about your registration, please contact us:</p>
 				<p><strong>Email:</strong> {COMPANY_EMAIL}</p>
 				<p><strong>Company:</strong> {COMPANY_NAME}</p>
@@ -322,8 +319,9 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 		</div>
 		
 		<div class="footer">
-			<p>Thank you for choosing {COMPANY_NAME}!</p>
+			<p>🤝 Thank you for choosing {COMPANY_NAME}!</p>
 			<p>© {datetime.now().year} {COMPANY_NAME}. All rights reserved.</p>
+			<p><small>This is an automated email. Please do not reply to this email.</small></p>
 		</div>
 	</body>
 	</html>

@@ -553,6 +553,51 @@ body {
     color: #4b5563;
 }
 
+/* Phone Input Container */
+.phone-input-container {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.phone-input-container .country-code-selector {
+    flex: 0 0 auto;
+    min-width: 120px;
+    max-width: 140px;
+    padding: 14px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.phone-input-container .country-code-selector:focus {
+    outline: none;
+    border-color: #FF5150;
+    box-shadow: 0 0 0 3px rgba(255, 81, 0, 0.1);
+}
+
+.phone-input-container .country-code-selector:hover {
+    border-color: #cbd5e1;
+}
+
+.phone-input-container input[type="tel"] {
+    flex: 1;
+    min-width: 0;
+}
+
+/* RTL Support for Phone Input */
+.rtl .phone-input-container {
+    flex-direction: row-reverse;
+}
+
+.rtl .phone-input-container .country-code-selector {
+    text-align: right;
+}
+
 /* Form Actions */
 .form-actions {
     display: flex;
@@ -758,6 +803,16 @@ body {
     .map-section,
     .address-fields {
         min-width: 100%;
+    }
+    
+    .phone-input-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .phone-input-container .country-code-selector {
+        min-width: 100%;
+        max-width: none;
     }
 }
 
