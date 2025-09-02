@@ -1274,7 +1274,7 @@ class FactoryForm {
     async submitToServer(data) {
         // Configuration for server endpoint
         const serverConfig = {
-            endpoint: '/api/factory-registration',
+            endpoint: 'api/factory-registration',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
