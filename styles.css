@@ -69,7 +69,7 @@
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     font-size: 16px;
-    min-width: 160px;
+    min-width: 75px;
     box-shadow: 0 2px 8px rgba(255, 81, 0, 0.15);
     transition: all 0.3s ease;
 }
@@ -100,7 +100,7 @@
 .custom-select {
     position: relative;
     display: inline-block;
-    min-width: 180px;
+    min-width: 140px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -108,16 +108,16 @@
     background: rgba(255, 81, 0, 0.1);
     color: #FF5100;
     border: 2px solid rgba(255, 81, 0, 0.9);
-    padding: 14px 42px 14px 16px;
+    padding: 10px 32px 10px 12px;
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     box-shadow: 0 2px 8px rgba(255, 81, 0, 0.15);
-    font-size: 16px;
+    font-size: 14px;
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     -webkit-user-select: none;
@@ -146,7 +146,7 @@
     transform: translateY(-50%);
     transition: transform 0.3s ease;
     color: #FF5100;
-    font-size: 14px;
+    font-size: 12px;
     pointer-events: none;
 }
 
@@ -165,7 +165,7 @@
     border-radius: 0 0 10px 10px;
     max-height: 300px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 10000;
     display: none;
     box-shadow: 0 4px 12px rgba(255, 81, 0, 0.2);
 }
@@ -187,13 +187,13 @@
 }
 
 .option {
-    padding: 12px 16px;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #374151;
 }
@@ -210,8 +210,8 @@
 }
 
 .flag-icon {
-    width: 20px;
-    height: 15px;
+    width: 16px;
+    height: 12px;
     object-fit: cover;
     border-radius: 2px;
     flex-shrink: 0;
@@ -235,8 +235,8 @@
 }
 
 .selected-flag-icon {
-    width: 20px;
-    height: 15px;
+    width: 16px;
+    height: 12px;
     flex-shrink: 0;
     color: #FF5100;
 }
@@ -276,7 +276,7 @@
         top: auto;
         right: auto;
         margin: 10px 0;
-        min-width: 200px;
+        min-width: 140px;
     }
     
     .select-trigger {
@@ -337,6 +337,21 @@
 /* Hidden select element */
 .hidden-select {
     display: none !important;
+}
+
+/* Portaled dropdown menu (appended to body) */
+.select-options.portaled {
+    position: fixed;
+    left: 0; /* will be positioned inline via JS */
+    top: 0;  /* will be positioned inline via JS */
+    width: auto; /* width set inline */
+    max-height: 300px;
+    z-index: 2147483647; /* max practical z-index to ensure on top */
+}
+
+/* Ensure language switcher sits above page chrome */
+.lang-switcher {
+    z-index: 10000;
 }
 
 /* RTL specific adjustments */
@@ -473,8 +488,8 @@ body {
 }
 
 .flag-img {
-    width: 200px;
-    height: 100px;
+    width: 150px;
+    height: 75px;
     border-radius: 4px;
     
 }
@@ -1194,17 +1209,30 @@ body {
     }
 
     .lang-switcher {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin: 10px 0;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        margin: 0;
+        z-index: 10000;
     }
     
-    .lang-switcher select {
-        width: 100%;
-        max-width: 220px;
-        font-size: 15px;
-        padding: 14px 40px 14px 18px;
+    /* Compact custom language selector on small phones */
+    .custom-select {
+        min-width: 110px;
+    }
+    .select-trigger {
+        font-size: 12px;
+        padding: 6px 24px 6px 10px;
+        border-radius: 8px;
+    }
+    .selected-flag-icon,
+    .flag-icon {
+        width: 14px;
+        height: 10px;
+    }
+    .select-arrow {
+        right: 10px;
+        font-size: 10px;
     }
 }
 
@@ -1272,6 +1300,7 @@ body {
     .logo-img {
         width: 200px;
         height: 200px;
+        margin-top: 32px;
     }
     
     .flag-img {
@@ -1282,8 +1311,9 @@ body {
 
 @media (max-width: 480px) {
     .logo-img {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
+        margin-top: 36px;
     }
     
     .flag-img {
@@ -1297,9 +1327,10 @@ body {
     }
     
     .flag {
-        position: relative;
-        top: auto;
-        left: auto;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
     }
 }
 

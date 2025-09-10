@@ -434,7 +434,7 @@ def send_emails(registration_data: Dict) -> Dict:
 	return email_results
 
 
-@app.route("/api/factory-registration", methods=["POST"])
+@app.route("/v2/factory-registration", methods=["POST"])
 def factory_registration():
 	if not request.is_json:
 		return jsonify({"success": False, "message": "Expected JSON body"}), 400

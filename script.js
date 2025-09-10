@@ -257,10 +257,15 @@ class FactoryForm {
             'in': 'हिंदी'
         };
         
-        // Toggle dropdown
+        // Toggle dropdown with portal behavior
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
-            customSelect.classList.toggle('open');
+            const isOpen = customSelect.classList.toggle('open');
+            if (isOpen) {
+                this.openPortaledDropdown(customSelect);
+            } else {
+                this.closePortaledDropdown(customSelect);
+            }
         });
         
         // Handle option selection
@@ -293,7 +298,10 @@ class FactoryForm {
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!customSelect.contains(e.target)) {
-                customSelect.classList.remove('open');
+                if (customSelect.classList.contains('open')) {
+                    customSelect.classList.remove('open');
+                    this.closePortaledDropdown(customSelect);
+                }
             }
         });
         
@@ -301,9 +309,17 @@ class FactoryForm {
         trigger.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                customSelect.classList.toggle('open');
+                const isOpen = customSelect.classList.toggle('open');
+                if (isOpen) {
+                    this.openPortaledDropdown(customSelect);
+                } else {
+                    this.closePortaledDropdown(customSelect);
+                }
             } else if (e.key === 'Escape') {
-                customSelect.classList.remove('open');
+                if (customSelect.classList.contains('open')) {
+                    customSelect.classList.remove('open');
+                    this.closePortaledDropdown(customSelect);
+                }
             }
         });
         
@@ -313,6 +329,86 @@ class FactoryForm {
         // Store reference for later use
         this.customLanguageSelector = customSelect;
         this.languageSelector = hiddenSelect;
+    }
+
+    /**
+     * Portal the language dropdown options to body and position it
+     */
+    openPortaledDropdown(customSelect) {
+        const optionsEl = customSelect.querySelector('.select-options');
+        const trigger = customSelect.querySelector('.select-trigger');
+        if (!optionsEl || !trigger) return;
+
+        // Save original parent for restoration
+        optionsEl.__originalParent = optionsEl.parentNode;
+        optionsEl.__originalNextSibling = optionsEl.nextSibling;
+
+        // Compute trigger rect
+        const rect = trigger.getBoundingClientRect();
+        const width = rect.width;
+        const top = rect.bottom;
+        const left = rect.left;
+
+        // Convert to fixed positioned popover
+        optionsEl.classList.add('portaled');
+        optionsEl.style.position = 'fixed';
+        optionsEl.style.top = `${Math.round(top)}px`;
+        optionsEl.style.left = `${Math.round(left)}px`;
+        optionsEl.style.width = `${Math.round(width)}px`;
+        optionsEl.style.display = 'block';
+        optionsEl.style.zIndex = '2147483647';
+
+        // Append to body to avoid clipping and stacking issues
+        document.body.appendChild(optionsEl);
+
+        // Bind listeners to keep position on scroll/resize
+        const reposition = () => {
+            const r = trigger.getBoundingClientRect();
+            optionsEl.style.top = `${Math.round(r.bottom)}px`;
+            optionsEl.style.left = `${Math.round(r.left)}px`;
+            optionsEl.style.width = `${Math.round(r.width)}px`;
+        };
+        optionsEl.__repositionHandler = reposition;
+        window.addEventListener('scroll', reposition, true);
+        window.addEventListener('resize', reposition);
+        // Initial position correction
+        reposition();
+    }
+
+    /**
+     * Restore the dropdown options back to original DOM and cleanup
+     */
+    closePortaledDropdown(customSelect) {
+        const bodyOptions = document.querySelector('body > .select-options.portaled');
+        const optionsEl = bodyOptions || customSelect.querySelector('.select-options');
+        if (!optionsEl) return;
+
+        // Cleanup listeners
+        if (optionsEl.__repositionHandler) {
+            window.removeEventListener('scroll', optionsEl.__repositionHandler, true);
+            window.removeEventListener('resize', optionsEl.__repositionHandler);
+            delete optionsEl.__repositionHandler;
+        }
+
+        // Hide
+        optionsEl.style.display = 'none';
+        optionsEl.classList.remove('portaled');
+        optionsEl.style.position = '';
+        optionsEl.style.top = '';
+        optionsEl.style.left = '';
+        optionsEl.style.width = '';
+        optionsEl.style.zIndex = '';
+
+        // Restore to original parent if needed
+        if (optionsEl.__originalParent) {
+            if (optionsEl.__originalNextSibling) {
+                optionsEl.__originalParent.insertBefore(optionsEl, optionsEl.__originalNextSibling);
+            } else {
+                optionsEl.__originalParent.appendChild(optionsEl);
+            }
+            delete optionsEl.__originalParent;
+            delete optionsEl.__originalNextSibling;
+        }
     }
     
     /**
@@ -1488,7 +1584,7 @@ class FactoryForm {
     async submitToServer(data) {
         // Configuration for server endpoint
         const serverConfig = {
-            endpoint: 'api/factory-registration',
+            endpoint: 'v2/factory-registration',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
