@@ -1,20 +1,19 @@
 {
     "meta": {
-        "title": "कारखाना सूचना फॉर्म",
-        "description": "वेबसाइट एकीकरण और पंजीकरण उद्देश्यों के लिए अपनी कारखाना की जानकारी दर्ज करें"
+        "title": "फैक्ट्री जानकारी फॉर्म",
+        "description": "वेबसाइट एकीकरण और पंजीकरण उद्देश्यों के लिए अपनी फैक्ट्री की जानकारी पंजीकृत करें"
     },
     "header": {
-        "logoText": "वेबसाइट खोलने का फॉर्म",
-        "title": "कारखाना पंजीकरण फॉर्म",
-        "subtitle": "कृपया पंजीकरण और एकीकरण उद्देश्यों के लिए नीचे अपनी कारखाना का विवरण प्रदान करें।"
+        "title": "वेबसाइट खोलने का फॉर्म",
+        "subtitle": "कृपया पंजीकरण और एकीकरण उद्देश्यों के लिए नीचे अपनी फैक्ट्री का विवरण प्रदान करें।"
     },
     "sections": {
         "factoryInfo": {
-            "title": "कारखाना की जानकारी",
+            "title": "फैक्ट्री की जानकारी",
             "factoryName": {
-                "label": "कारखाना का नाम",
-                "placeholder": "कारखाना का नाम दर्ज करें",
-                "error": "कारखाना का नाम आवश्यक है"
+                "label": "फैक्ट्री का नाम",
+                "placeholder": "फैक्ट्री का नाम दर्ज करें",
+                "error": "फैक्ट्री का नाम आवश्यक है"
             },
             "country": {
                 "label": "देश",
@@ -25,6 +24,7 @@
                 "label": "शहर",
                 "placeholder": "पहले देश चुनें",
                 "other": "अन्य (कृपया निर्दिष्ट करें)",
+                "customPlaceholder": "शहर का नाम दर्ज करें",
                 "error": "कृपया एक शहर चुनें"
             },
             "address": {
@@ -38,23 +38,27 @@
             },
             "phone": {
                 "label": "लैंडलाइन फोन",
-                "placeholder": "+91 (11) 1234-5678"
+                "placeholder": "+91 11 1234-5678"
             },
             "email": {
                 "label": "ईमेल (वेबसाइट एकीकरण के लिए)",
-                "placeholder": "कारखाना@उदाहरण.com",
-                "error": "एक वैध ईमेल पता आवश्यक है"
+                "placeholder": "factory@example.com",
+                "error": "वैध ईमेल आवश्यक है"
             }
         },
         "ownerInfo": {
-            "title": "कारखाना मालिक की जानकारी",
+            "title": "फैक्ट्री मालिक की जानकारी",
             "ownerName": {
                 "label": "मालिक का नाम",
                 "placeholder": "मालिक का नाम दर्ज करें"
             },
+            "ownerEmail": {
+                "label": "मालिक का ईमेल",
+                "placeholder": "malik@example.com"
+            },
             "ownerPhone": {
-                "label": "मोबाइल फोन",
-                "placeholder": "+91 (11) 1234-5678"
+                "label": "मोबाइल नंबर",
+                "placeholder": "+91 98765-43210"
             },
             "addOwner": "मालिक जोड़ें",
             "removeOwner": "मालिक हटाएं"
@@ -66,43 +70,72 @@
                 "placeholder": "मैनेजर का नाम दर्ज करें"
             },
             "managerPhone": {
-                "label": "मोबाइल फोन",
-                "placeholder": "+91 (11) 1234-5678"
+                "label": "मोबाइल नंबर",
+                "placeholder": "+91 98765-43210"
             },
             "managerEmail": {
                 "label": "ईमेल",
-                "placeholder": "मैनेजर@उदाहरण.com"
+                "placeholder": "manager@example.com"
             }
         },
         "productionInfo": {
             "title": "औद्योगिक गतिविधि",
             "productType": {
                 "label": "उद्योग क्षेत्र",
-                "placeholder": "उद्योग क्षेत्र चुनें"
+                "placeholder": "उद्योग क्षेत्र चुनें",
+                "customPlaceholder": "उद्योग प्रकार दर्ज करें"
+            },
+            "productionCapacity": {
+                "label": "उपलब्ध उत्पादन लाइनें और ब्रांड"
             },
             "productionLine": {
-                "label": "उत्पादन लाइन"
+                "label": "उत्पादन लाइन",
+                "placeholder": "जैसे, असेंबली लाइन ए, निर्माण यूनिट 1"
             },
             "brandName": {
-                "label": "ब्रांड नाम"
+                "label": "ब्रांड का नाम",
+                "placeholder": "जैसे, ब्रांड X, कंपनी Y"
+            },
+            "madeIn": {
+                "label": "निर्मित स्थान",
+                "placeholder": "देश चुनें"
             },
             "addProductionLine": "उत्पादन लाइन जोड़ें",
             "removeProductionLine": "उत्पादन लाइन हटाएं",
             "manufacturingDate": {
-                "label": "उत्पादन लाइनों की निर्माण तिथि"
+                "label": "फैक्ट्री स्थापना तिथि"
+            }
+        },
+        "employeeInfo": {
+            "title": "फॉर्म भरा गया",
+            "employeeName": {
+                "label": "कर्मचारी का नाम",
+                "placeholder": "कर्मचारी का नाम दर्ज करें"
+            },
+            "employeePosition": {
+                "label": "पद/शीर्षक",
+                "placeholder": "उदा. HR प्रबंधक, संचालन निदेशक"
+            },
+            "employeeEmail": {
+                "label": "कर्मचारी ईमेल",
+                "placeholder": "karmachari@company.com"
+            },
+            "employeePhone": {
+                "label": "कर्मचारी फोन",
+                "placeholder": "+91 (11) 1234-5678"
             }
         },
         "terms": {
             "title": "नियम और शर्तें",
-            "content": "ग्राहक को कंपनी की वेबसाइट गोपनीयता नीति की शर्तों और उपयोग की शर्तों को स्वीकार करने के लिए माना जाता है और डेटा की गोपनीयता बनाए रखने और वेबसाइट डेटा में नेविगेट करने के लिए उसे दिए गए समय के दौरान, किसी भी परिस्थिति में इसे तृतीय पक्षों को लीक नहीं करने का वचन देता है। यह समय वेबसाइट में प्रवेश की तिथि से एक महीने के रूप में निर्दिष्ट किया गया है। कंपनी इलेक्ट्रॉनिक वाणिज्य नियमों, यूरोपीय डेटा संरक्षण विनियमन और UNCITRAL नियमों के अनुपालन में ग्राहक डेटा की गोपनीयता बनाए रखने का वचन देती है।"
+            "content": "ग्राहक को कंपनी की वेबसाइट की गोपनीयता नीति और उपयोग की शर्तों को स्वीकार करने वाला माना जाता है और वह डेटा की गोपनीयता बनाए रखने और वेबसाइट के डेटा को ब्राउज़ करने के लिए दी गई अवधि के दौरान किसी भी परिस्थिति में इसमें से कोई भी जानकारी तीसरे पक्ष को लीक न करने का वचन देता है, जो उसकी वेबसाइट में प्रवेश की तारीख से एक महीने के रूप में निर्दिष्ट है। कंपनी इलेक्ट्रॉनिक कॉमर्स के नियमों, यूरोपीय डेटा सुरक्षा विनियम, और UNCITRAL नियमों के अनुसार ग्राहक डेटा की गोपनीयता बनाए रखने के लिए प्रतिबद्ध है।"
         }
     },
     "form": {
-        "submit": "कारखाना जानकारी भेजें",
-        "submitting": "भेज रहा है...",
+        "submit": "फैक्ट्री की जानकारी सबमिट करें",
+        "submitting": "सबमिट कर रहे हैं...",
         "reset": "फॉर्म रीसेट करें",
         "resetConfirm": "क्या आप वाकई फॉर्म को रीसेट करना चाहते हैं?",
-        "resetSuccess": "फॉर्म सफलतापूर्वक रीसेट किया गया"
+        "resetSuccess": "फॉर्म सफलतापूर्वक रीसेट हो गया"
     },
     "validation": {
         "required": "यह फील्ड आवश्यक है",
@@ -112,10 +145,10 @@
     "messages": {
         "success": {
             "title": "धन्यवाद!",
-            "description": "आपकी कारखाना की जानकारी सफलतापूर्वक भेज दी गई है। हम इसकी समीक्षा करेंगे और जल्द ही आपसे संपर्क करेंगे!",
-            "submitAnother": "दूसरा भेजें"
+            "description": "आपकी फैक्ट्री की जानकारी सफलतापूर्वक सबमिट हो गई है। हम इसकी समीक्षा करेंगे और जल्द ही आपसे संपर्क करेंगे!",
+            "submitAnother": "एक और सबमिट करें"
         },
-        "error": "एक त्रुटि हुई। कृपया पुनः प्रयास करें।",
+        "error": "एक त्रुटि हुई है। कृपया पुनः प्रयास करें।",
         "submissionId": "सबमिशन आईडी"
     },
     "countries": {
@@ -162,21 +195,21 @@
         "IE": "आयरलैंड",
         "IT": "इटली",
         "LV": "लातविया",
-        "LI": "लिचटेंस्टीन",
+        "LI": "लिकटेंस्टीन",
         "LT": "लिथुआनिया",
         "LU": "लक्जमबर्ग",
         "MT": "माल्टा",
         "MD": "मोल्दोवा",
         "MC": "मोनाको",
-        "ME": "मोंटेनेग्रो",
+        "ME": "मॉन्टेनेग्रो",
         "NL": "नीदरलैंड",
-        "MK": "उत्तरी मैसेडोनिया",
+        "MK": "उत्तर मैसेडोनिया",
         "NO": "नॉर्वे",
         "PL": "पोलैंड",
         "PT": "पुर्तगाल",
         "RO": "रोमानिया",
         "RU": "रूस",
-        "SM": "सैन मैरिनो",
+        "SM": "सैन मारिनो",
         "RS": "सर्बिया",
         "SK": "स्लोवाकिया",
         "SI": "स्लोवेनिया",
@@ -199,365 +232,601 @@
             "Ras Al Khaimah": "रास अल खैमाह",
             "Fujairah": "फुजैराह",
             "Umm Al Quwain": "उम्म अल कुवैन",
-            "Al Ain": "अल ऐन",
+            "Al Ain": "अल आइन",
             "Khor Fakkan": "खोर फक्कन",
             "Dibba Al-Fujairah": "दिब्बा अल-फुजैराह",
-            "Kalba": "कल्बा"
+            "Kalba": "कलबा",
+            "Madinat Zayde": "मदीनत जायदे",
+            "Al Dhannah": "अल धन्नाह",
+            "Ghayathi": "गयाथी",
+            "Jebel Ali": "जेबेल अली",
+            "Liwa": "लिवा",
+            "Hatta": "हट्टा",
+            "Ar-Rams": "अर-रामस",
+            "Dibba Al-Hisn": "दिब्बा अल-हिस्न",
+            "Al-Jazirah Al-Hamra": "अल-जज़ीराह अल-हम्रा"
         },
         "SA": {
-            "Riyadh": "रियाद",
+            "Riyadh": "रियाध",
             "Jeddah": "जेद्दाह",
             "Mecca": "मक्का",
             "Medina": "मदीना",
             "Dammam": "दम्माम",
-            "Khobar": "अल-खोबर",
+            "Khobar": "खोबर",
             "Tabuk": "तबूक",
             "Buraydah": "बुरैदाह",
-            "Hail": "हैल",
+            "Hail": "हाइल",
             "Najran": "नजरान",
             "Al-Kharj": "अल-खर्ज",
             "Taif": "ताइफ"
         },
         "EG": {
-            "Cairo": "काहिरा",
             "Alexandria": "अलेक्जेंड्रिया",
+            "Aswan": "असवान",
+            "Asyut": "असयूत",
+            "Beheira": "बहीरा",
+            "Beni Suef": "बेनी सुएफ",
+            "Cairo": "काहिरा",
+            "Dakahlia": "दकहलिया",
+            "Damietta": "दमिएत्ता",
+            "Faiyum": "फैयूम",
+            "Gharbia": "गार्बिया",
             "Giza": "गीज़ा",
-            "Shubra El-Kheima": "शुबरा अल-खैमा",
-            "Port Said": "पोर्ट सईद",
-            "Suez": "स्वेज",
-            "Luxor": "लक्सर",
-            "Aswan": "अस्वान",
-            "Mansoura": "मंसूरा",
-            "Tanta": "तंता",
             "Ismailia": "इस्माइलिया",
-            "Faiyum": "फैयूम"
+            "Kafr El-Sheikh": "कफ्र अल-शेख",
+            "Luxor": "लक्सर",
+            "Matruh": "मतरूह",
+            "Minya": "मिन्या",
+            "Monufia": "मोनूफिया",
+            "North Sinai": "उत्तरी सिनाई",
+            "Port Said": "पोर्ट सईद",
+            "Qalyubia": "कल्युबिया",
+            "Qena": "केना",
+            "Red Sea": "लाल सागर",
+            "Sharkia": "शार्किया",
+            "Sohag": "सोहाग",
+            "South Sinai": "दक्षिणी सिनाई",
+            "Suez": "स्वेज"
         },
         "IQ": {
+            "Al-Anbar": "अल-अनबार",
+            "Babil": "बाबिल",
             "Baghdad": "बगदाद",
             "Basra": "बसरा",
-            "Mosul": "मोसुल",
-            "Erbil": "अरबिल",
-            "Kirkuk": "किरकुक",
-            "Najaf": "नजफ",
-            "Samarra": "समर्रा",
-            "Karbala": "कर्बला",
-            "Sulaymaniyah": "सुलेमानिया",
             "Dhi Qar": "धी कार",
-            "Al Hillah": "अल हिल्ला"
+            "Diyala": "दियाला",
+            "Erbil": "एर्बिल",
+            "Karbala": "कर्बला",
+            "Kirkuk": "किर्कुक",
+            "Maysan": "मैसान",
+            "Najaf": "नजफ",
+            "Nineveh": "निनवे",
+            "Salah al Din": "सलाह अल दीन",
+            "Sulaymaniyah": "सुलेमानिया",
+            "Wasit": "वासित",
+            "Halabja": "हलबजा"
         },
         "JO": {
             "Amman": "अम्मान",
-            "Zarqa": "ज़रका",
-            "Irbid": "इरबिद",
+            "Balqa": "बल्का",
+            "Zarqa": "जर्का",
+            "Irbid": "इर्बिद",
             "Aqaba": "अकाबा",
             "Madaba": "मदाबा",
-            "Mafraq": "माफ्रक",
-            "Al Karak": "अल करक",
-            "Jerash": "जराश",
-            "Tafilah": "ताफिला",
-            "Ajloun": "अजलून"
+            "Mafraq": "मफ्राक",
+            "Al Karak": "अल कराक",
+            "Jerash": "जेराश",
+            "Tafilah": "तफिलाह",
+            "Ajloun": "अजलून",
+            "Karak": "कराक",
+            "Ma'an": "मान"
         },
         "LB": {
-            "Beirut": "बेरूत",
-            "Tripoli": "त्रिपोली",
-            "Sidon": "सैदा",
-            "Tyre": "टायर",
-            "Byblos": "बायब्लोस",
-            "Zahle": "ज़हले",
+            "Akkar": "अक्कार",
             "Baalbek": "बालबेक",
-            "Jounieh": "जौनी",
-            "Saida": "सैदा",
-            "Nabatieh": "नबातिये"
+            "Beirut": "बेरूत",
+            "Beqaa": "बेकाा",
+            "Keserwan": "केसेरवान",
+            "Mount Lebanon": "माउंट लेबनान",
+            "Nabatieh": "नबातिए",
+            "North Lebanon": "उत्तरी लेबनान",
+            "South Lebanon": "दक्षिणी लेबनान"
         },
         "SY": {
-            "Damascus": "दमिश्क",
-            "Aleppo": "अलेप्पो",
-            "Homs": "होम्स",
-            "Hama": "हमा",
-            "Latakia": "लाताकिया",
-            "Deir ez-Zor": "देर एज़-ज़ोर",
-            "Raqqa": "रक्का",
-            "Tartus": "तारतूस",
-            "Qamishli": "कामिशली",
-            "Al Hasakah": "अल हसाका"
+           "Aleppo ": "अलेप्पो",
+           "Raqqa ": "रक्का",
+           "Suwayda ": "सुवैदा",
+           "Damascus ": "दमिश्क",
+           "Daraa ": "दराा",
+           "Deir ez-Zor ": "देर अज़-ज़ोर",
+           "Hama ": "हमा",
+           "Al-Hasakah ": "अल-हसकाह",
+           "Homs ": "होम्स",
+           "Idlib ": "इदलिब",
+           "Latakia ": "लताकिया",
+           "Quneitra ": "कुनेत्रा",
+           "Rif Dimashq ": "रिफ दिमश्क",
+           "Tartus ": "तरतूस"
         },
         "KW": {
-            "Kuwait City": "कुवैत सिटी",
-            "Al Ahmadi": "अल अहमदी",
-            "Hawalli": "हवल्ली",
-            "Salmiya": "सलमिया",
-            "Jahra": "अल जहरा",
+            "Ahmadi": "अहमदी",
+            "ASimah": "असिमाह",
             "Farwaniya": "फरवानिया",
-            "Mangaf": "मंगाफ",
-            "Sabah Al Salem": "सबाह अल सलम"
+            "Hawalli": "हवल्ली",
+            "Jahra": "जहरा",
+            "Mubarak Al-Kabeer": "मुबारक अल-कबीर"
         },
         "QA": {
-            "Doha": "दोहा",
-            "Al Rayyan": "अल राययान",
-            "Al Wakrah": "अल वकरा",
-            "Al Khor": "अल खोर",
             "Al Shamal": "अल शमाल",
-            "Mesaieed": "मेसाईद",
+            "Al Khor": "अल खोर",
+            "Al Shahaniya": "अल शहानिया",
             "Umm Salal": "उम्म सलाल",
-            "Al Daayen": "अल दायेन"
+            "Al Daayen": "अल दायेन",
+            "Doha": "दोहा",
+            "AL Rayyan": "अल रय्यान",
+            "Al Wakrah": "अल वकराह"
         },
         "BH": {
+            "Al Hidd": "अल हिद्द",
             "Manama": "मनामा",
-            "Riffa": "रिफ्फा",
+            "westren Region": "पश्चिमी क्षेत्र",
+            "Central Region": "केंद्रीय क्षेत्र",
+            "Northern Region": "उत्तरी क्षेत्र",
             "Muharraq": "मुहर्रक",
-            "Hamad Town": "हमाद टाउन",
-            "Isa Town": "ईसा टाउन",
-            "Sitra": "सित्रा",
-            "Budaiya": "बुदैया",
-            "Zallaq": "ज़ल्लाक"
+            "Rifa and Southern Region": "रिफा और दक्षिणी क्षेत्र",
+            "Jidd Hafs": "जिद्द हफ्स", 
+            "Hamad Town": "हमद टाउन",
+            "Isa Two": "ईसा टू",
+            "Hawar Island": "हवार द्वीप",
+            "Sitra": "सित्रा"
         },
         "OM": {
+            "Ad Dakhiliyah": "अद दाखिलिया",
+            "Ad Dhahirah": "अद धाहिरा",
+            "Al Batinah North": "अल बातिना उत्तर",
+            "Al Batinah South": "अल बातिना दक्षिण",
+            "Al Buraimi": "अल बुरैमी",
+            "Al Wusta": "अल वुस्ता",
+            "Ash Sharqiyah North": "अश शर्किया उत्तर",
+            "Ash Sharqiyah South": "अश शर्किया दक्षिण",
+            "Dhofar": "धोफार",
             "Muscat": "मस्कट",
-            "Salalah": "सलालाह",
-            "Sohar": "सोहर",
-            "Nizwa": "निज़वा",
-            "Sur": "सूर",
-            "Bahla": "बहला",
-            "Ibra": "इब्रा",
-            "Rustaq": "रुस्ताक",
-            "Shinas": "शिनास",
-            "Dhofar": "धोफार"
+            "Musandam": "मुसंदम"
         },
         "YE": {
-            "Sana'a": "सना",
-            "Aden": "एडन",
-            "Taiz": "ताइज़",
-            "Al Hudaydah": "अल हुदैदा",
-            "Ibb": "इब्ब",
-            "Mokha": "मोखा",
+            "Abyan": "अब्यान",
+            "Aden": "अदन",
+            "Al Bayda": "अल बैदा",
+            "Al Jawf": "अल जौफ",
+            "Al Mahran": "अल महरान",
+            "Al Mahwit": "अल महवित",
+            "Amanat Al Asimah": "अमानत अल असिमाह",
+            "'Amran": "अमरान",
+            "Dhale": "धाले",
             "Dhamar": "धमार",
+            "Hadhramaut": "हद्रमौत",
+            "Hajjah": "हज्जाह",
+            "Ibb": "इब्ब",
             "Lahij": "लाहिज",
-            "Hajjah": "हज्जा",
-            "Saada": "सादा"
+            "Ma'rib": "मारिब",
+            "Raymah": "रेमाह",
+            "Sa'dah": "सादाह",
+            "Sana'a": "सना",
+            "Shabwah": "शबवाह",
+            "Socotra Archipelago": "सोकोत्रा द्वीपसमूह",
+            "Taizz": "ताइज़"
         },
         "LY": {
-            "Tripoli": "त्रिपोली",
-            "Benghazi": "बेंगाजी",
+            "Bayda": "बैदा",
+            "Al Khums": "अल खुम्स",
+            "Awbari": "अवबारी",
+            "Az Zawiyah": "अज़ जावियाह",
+            "Benghazi": "बेंगाज़ी",
+            "Darnah": "दर्नाह",
+            "Al Jabal al Gharbi": "अल जबल अल गर्बी",
             "Misrata": "मिसराता",
-            "Bayda": "अल बैदा",
-            "Zawiya": "अल ज़ाविया",
             "Sabha": "सब्हा",
-            "Ajdabiya": "अजदाबिया",
-            "Tobruk": "टोब्रुक",
-            "Derna": "दर्ना",
-            "Sirte": "सिर्त"
+            "Tarabulus": "त्रिपोली"
         },
         "TN": {
-            "Tunis": "ट्यूनिस",
-            "Sfax": "स्फाक्स",
-            "Sousse": "सूस",
-            "Kairouan": "कैरौवान",
-            "Bizerte": "बिज़र्ट",
+            "Ariana": "एरियाना",
+            "Beja": "बेजा",
+            "Ben Arous": "बेन अरूस",
+            "Bizerte": "बिज़र्ते",
             "Gabès": "गाबेस",
-            "Ariana": "अरियाना",
             "Gafsa": "गाफ्सा",
-            "Monastir": "मोनास्तिर",
-            "Sidi Bouzid": "सिदी बूज़िद"
+            "Jendouba": "जेंदूबा",
+            "Kairouan": "कैरवान",
+            "Kassérine": "कास्सेरीन",
+            "Kebili": "केबिली",
+            "Kef": "केफ",
+            "Mahdia": "महदिया",
+            "Manouba": "मनूबा",
+            "Medenine": "मेदेनीन",
+            "Monastir": "मोनास्टिर",
+            "Nabeul": "नाबेउल",
+            "Sfax": "स्फ़ैक्स",
+            "Sidi Bouzid": "सिदी बूज़िद",
+            "Siliana": "सिलियाना",
+            "Sousse": "सूस",
+            "Tataouine": "तातावीन",
+            "Tozeur": "तोज़ेउर",
+            "Tunis": "ट्यूनिस",
+            "Zaghouan": "ज़गवान"
         },
         "DZ": {
-            "Algiers": "अल्जीयर्स",
-            "Oran": "ओरान",
-            "Constantine": "कॉन्स्टेंटाइन",
-            "Annaba": "अन्नाबा",
-            "Blida": "ब्लिदा",
+            "Adrar": "अदरार",
+            "Chlef": "श्लेफ",
+            "Laghouat": "लगवात",
+            "Oum El Bouaghi": "उम अल बवागी",
             "Batna": "बतना",
-            "Sétif": "सेटिफ",
-            "Sidi Bel Abbès": "सिदी बेल अब्बेस",
+            "Béjaïa": "बेजाया",
+            "Biskra": "बिस्क्रा",
+            "Bechar": "बेशार",
+            "Blida": "ब्लिदा",
+            "Bouira": "बुईरा",
+            "Tamanrasset": "तमनरासेत",
+            "Tebessa": "तेबेस्सा",
             "Tlemcen": "तलेमसेन",
-            "Tizi Ouzou": "तिज़ी ऊज़ू"
+            "Tiaret": "तिआरेत",
+            "Tizi Ouzou": "तिज़ी उज़ू",
+            "Algiers": "अल्जीयर्स",
+            "Djelfa": "जेल्फा",
+            "Jijel": "जिजेल",
+            "Sétif": "सेतिफ",
+            "Saida": "सैदा",
+            "Skikda": "स्किकदा",
+            "Annaba": "अन्नाबा",
+            "Guelma": "गुएल्मा",
+            "Constantine": "कॉन्स्टेंटाइन",
+            "Medea": "मेदिया",
+            "Mostaganem": "मोस्तगानेम",
+            "M'Sila": "म्सिला",
+            "Mascara": "मास्कारा",
+            "Ouargla": "वार्गला",
+            "Oran": "ओरान",
+            "El Bayadh": "अल बयाध",
+            "Illizi": "इलिज़ी",
+            "Bordj Bou Arreridj": "बोर्ज बू अरेरिज",
+            "Boumerdes": "बूमेर्देस",
+            "El Tarf": "अल तर्फ",
+            "Tindouf": "तिंदूफ",
+            "Tissemsilt": "तिस्सेमसिल्त",
+            "El Oued": "अल ऊएद",
+            "Khenchela": "खेंशेला",
+            "Souk Ahras": "सूक अहरास",
+            "Tipaza": "तिपाज़ा",
+            "Mila": "मिला",
+            "Ain Defla": "आइन देफला",
+            "Naama": "नामा",
+            "Ain Temouchent": "आइन तेमूशेंत",
+            "Ghardaia": "गार्दाया",
+            "Relizane": "रेलिज़ान",
+            "Timimoun": "तिमिमून",
+            "Bordj Badji Mokhtar": "बोर्ज बदजी मोख्तार",
+            "Ouled Djellal": "ऊलेद जेल्लाल",
+            "Beni Abbes": "बेनी अब्बेस",
+            "Ain Salah": "आइन सलाह",
+            "Ain Guezzam": "आइन गुएज़म",
+            "Touggourt": "तुग्गूर्त",
+            "Djanet": "जानेत",
+            "El M'Ghair": "अल म्गैर",
+            "EL Menia": "अल मेनिया"
         },
         "MA": {
-            "Rabat": "रबात",
-            "Casablanca": "कासाब्लांका",
-            "Marrakech": "मराकेश",
-            "Fes": "फेस",
-            "Tangier": "टैंजियर",
-            "Agadir": "अगादिर",
-            "Meknes": "मेकनेस",
-            "Oujda": "ऊज्दा",
-            "Kenitra": "केनित्रा",
-            "Tetouan": "तेतुआन"
+            "Tangier-Tetouan-Al Hoceima": "तांजियर-तेतुआन-अल होसेमा",
+            "L'Oriental": "ल'ओरिएंटल",
+            "Fez-Meknes": "फेज़-मेकनेस",
+            "Rabat-Sale-Kenitra": "रबात-सेल-केनित्रा",
+            "Beni Mellal-Khenifra": "बेनी मेल्लाल-खेनिफ्रा",
+            "Casablanca-Settat": "कासाब्लांका-सेत्तात",
+            "Marrakech-Safi": "मराकेश-साफी",
+            "Draa-Tafilalet": "द्रा-तफिलालेत",
+            "Souss-Massa": "सूस-मासा",
+            "Guelmim-Oued Noun": "गुएल्मिम-ऊएद नून",
+            "Laâyoune-Sakia El Hamra": "लायून-सकिया अल हम्रा",
+            "Dakhla-Oued Ed-Dahab": "दाखला-ऊएद एड-दहाब"
         },
         "SD": {
             "Khartoum": "खार्तूम",
-            "Omdurman": "ओमदुरमान",
-            "Port Sudan": "पोर्ट सूडान",
+            "North Kordofan": "उत्तरी कोर्डोफान",
+            "Northen": "उत्तरी",
             "Kassala": "कस्साला",
-            "El-Obeid": "अल-ओबेयद",
-            "Al-Fashir": "अल-फशीर",
-            "Nyala": "न्याला",
+            "Blue Nile": "नीली नील",
+            "North Darfur": "उत्तरी दारफुर",
+            "South Darfur": "दक्षिणी दारफुर",
+            "South Kordofan": "दक्षिणी कोर्डोफान",
+            "Gezira": "गेज़िरा",
+            "White Nile": "सफेद नील",
+            "River Nile": "नदी नील",
+            "Red Sea": "लाल सागर",
+            "Al Qadarif": "अल कदारिफ",
             "Sennar": "सेन्नार",
-            "Wad Madani": "वाद मदनी",
-            "Kosti": "कोस्ती"
+            "West Darfur": "पश्चिमी दारफुर",
+            "Central Darfur": "मध्य दारफुर",
+            "East Darfur": "पूर्वी दारफुर",
+            "West Kordofan": "पश्चिमी कोर्डोफान"
         },
         "MR": {
-            "Nouakchott": "नुआकशॉट",
-            "Nouadhibou": "नुआदिबू",
-            "Atar": "अतार",
-            "Zouérat": "ज़ोएरात",
-            "Kiffa": "किफ्फा",
-            "Rosso": "रोसो",
-            "Kaédi": "काएदी",
-            "Néma": "नेमा",
-            "Tékane": "तेकाने",
-            "Akjoujt": "अकजौज्त"
+            "Adrar": "अदरार",
+            "Assaba": "अस्साबा",
+            "Brakna": "ब्राकना",
+            "Dakhlet Nouadhibou": "दाखलेत नुआधिबू",
+            "Gorgol": "गोर्गोल",
+            "Guidimaka": "गुइदिमाका",
+            "Hodh ech Chargui": "होध एश शार्गुई",
+            "Hodh el Gharbi": "होध अल गर्बी",
+            "Inhiri": "इन्हिरी",
+            "Nouakchott-Nord": "नुआकशॉत-उत्तर",
+            "Nouakchott-Ouest": "नुआकशॉत-पश्चिम",
+            "Tagant": "तागंत",
+            "Tiris Zemmour": "तिरिस ज़ेम्मूर",
+            "Trarza": "त्रारज़ा"
         },
         "SO": {
-            "Mogadishu": "मोगादिशू",
-            "Hargeisa": "हरगीसा",
-            "Bosaso": "बोसासो",
-            "Kismayo": "किस्मायो",
-            "Baidoa": "बैदोआ",
-            "Berbera": "बरबेरा",
-            "Galkayo": "गल्कायो",
-            "Marka": "मार्का",
-            "Burao": "बुराओ",
-            "Erigavo": "एरिगावो"
+            "Awdal": "अवदल",
+            "Bakool": "बकूल",
+            "Banadir": "बनादिर",
+            "Bari": "बारी",
+            "Bay": "बे",
+            "Galguduud": "गल्गुदुद",
+            "Gedo": "गेदो",
+            "Hiiraan": "हीरान",
+            "Lower Juba": "निचला जुबा",
+            "Lower Shabelle": "निचला शबेले",
+            "Middl Juba": "मध्य जुबा",
+            "Middl Shabelle": "मध्य शबेले",
+            "Middle Juba": "मध्य जुबा",
+            "Middle Shabelle": "मध्य शबेले",
+            "Mudug": "मुदुग",
+            "Nugal": "नुगाल",
+            "Sanaag": "सनाग",
+            "Sool": "सूल",
+            "Togdheer": "तोगधीर",
+            "Woqooyi Galbeed": "वोकूयी गल्बीद"
         },
         "DJ": {
-            "Djibouti City": "जिबूती सिटी",
-            "Ali Sabieh": "अली सबीह",
-            "Tadjoura": "ताजौरा",
-            "Obock": "ओबॉक",
-            "Dikhil": "दिखिल",
-            "Arta": "अरता",
-            "Randa": "रंडा"
+            "Djibouti Region": "जिबूती क्षेत्र",
+            "Ali Sabieh Region": "अली सबीह क्षेत्र",
+            "Arta region": "अर्ता क्षेत्र",
+            "Dikhil region": "दिखिल क्षेत्र",
+            "Tadjoura region": "तदजूरा क्षेत्र",
+            "Obock region": "ओबॉक क्षेत्र"
         },
         "KM": {
             "Moroni": "मोरोनी",
-            "Moutsamoudou": "मुत्सामुदू",
+            "Moutsamoudou": "मुत्समुदू",
             "Fomboni": "फोम्बोनी",
-            "Ouani": "ओआनी",
-            "Dzaoudzi": "ज़ाओउद्जी",
-            "Domoni": "दोमोनी",
-            "Itsandra": "इत्संद्रा"
+            "Ouani": "ऊआनी",
+            "Dzaoudzi": "जाऊदज़ी",
+            "Domoni": "डोमोनी",
+            "Itsandra": "इत्सांद्रा"
         },
         "PS": {
-            "Ramallah": "रामल्ला",
-            "Gaza City": "गाजा सिटी",
-            "Hebron": "हेब्रोन",
-            "Nablus": "नाब्लस",
             "Bethlehem": "बेथलेहम",
-            "Jenin": "जेनिन",
-            "Tulkarm": "तुलकर्म",
-            "Qalqilya": "कलकिल्या",
+            "Hebron": "हेब्रोन",
+            "jenin": "जेनिन",
             "Jericho": "जेरिको",
-            "Salfit": "सल्फित"
+            "Nablus": "नाब्लुस",
+            "Qalqilya": "कल्किल्या",
+            "Quds": "कुद्स",
+            "Ramallah and Al-Bireh": "रामल्लाह और अल-बिरेह",
+            "Salfit": "सल्फित",
+            "Tubas": "तुबास",
+            "Tulkarm": "तुल्करम",
+            "Deir al-Balah": "देर अल-बलाह",
+            "Gaza (Stop The Genocide)": "गाज़ा (नरसंहार रोकें)",
+            "Khan Yunis": "खान यूनिस"
         },
         "RU": {
-            "Moscow": "मास्को",
-            "Saint Petersburg": "सेंट पीटर्सबर्ग",
-            "Novosibirsk": "नोवोसिबिर्स्क",
-            "Yekaterinburg": "येकातेरिनबर्ग",
-            "Nizhny Novgorod": "निज़नी नोवगोरोड",
-            "Kazan": "कज़ान",
-            "Chelyabinsk": "चेल्याबिंस्क",
-            "Samara": "समारा",
-            "Omsk": "ओम्स्क",
-            "Rostov-on-Don": "रोस्तोव-ऑन-डॉन",
-            "Ufa": "उफा",
-            "Krasnoyarsk": "क्रास्नोयार्स्क",
-            "Perm": "पर्म",
-            "Voronezh": "वोरोनिश",
-            "Volgograd": "वोल्गोग्राद"
+            "Adygea": "अदिगिया",
+            "Bashkortostan": "बश्कोर्तोस्तान",
+            "Buryatia": "बुर्यातिया",
+            "Altai Republic": "अल्ताई गणराज्य",
+            "Dagestan": "दागेस्तान",
+            "Ingushetia": "इंगुशेतिया",
+            "Kabaridio-Balkaria": "कबार्दिनो-बल्कारिया",
+            "Kalmykia": "कल्मिकिया",
+            "Karachay-Cherkessia": "कराचाय-चेर्केसिया",
+            "Karelia": "कारेलिया",
+            "Komi Republic": "कोमी गणराज्य"
         },
         "TR": {
-            "Istanbul": "इस्तांबुल",
-            "Ankara": "अंकारा",
-            "Izmir": "इज़मिर",
-            "Bursa": "बुरसा",
             "Adana": "अदाना",
-            "Gaziantep": "गाज़ियांतेप",
-            "Konya": "कोन्या",
+            "Adıyaman": "अदियामान",
+            "Afyonkarahisar": "अफ्योनकराहिसार",
+            "Ağri": "अग्री",
+            "Amasya": "अमास्या",
+            "Ankara": "अंकारा",
             "Antalya": "अंताल्या",
-            "Kayseri": "कायसेरी",
-            "Mersin": "मर्सिन",
-            "Eskisehir": "एस्किशेहिर",
-            "Diyarbakır": "दियारबकिर",
-            "Samsun": "सैमसुन",
+            "Artvin": "आर्त्विन",
+            "Aydın": "आयदिन",
+            "Balıkesir": "बालिकेसिर",
+            "Bilecik": "बिलेसिक",
+            "Bingöl": "बिंगोल",
+            "Bitlis": "बितलिस",
+            "Bolu": "बोलू",
+            "Burdur": "बुर्दुर",
+            "Bursa": "बुर्सा",
+            "Çanakkale": "चानाक्काले",
+            "Çankırı": "चांकिरी",
+            "Çorum": "चोरुम",
             "Denizli": "देनिज़ली",
-            "Sanliurfa": "शानलीउरफा"
+            "Diyarbakır": "दियारबकिर",
+            "Edirne": "एदिर्ने",
+            "Elazığ": "एलाज़िग",
+            "Erzincan": "एर्ज़िंकान",
+            "Erzurum": "एर्ज़ुरुम",
+            "Eskişehir": "एस्किशेहिर",
+            "Gaziantep": "गाज़िअंतेप",
+            "Giresun": "गिरेसुन",
+            "Gümüşhane": "गुमुशहाने",
+            "Hakkari": "हक्कारी",
+            "Hatay": "हताय",
+            "Isparta": "इस्पार्ता",
+            "Mersin": "मेर्सिन",
+            "İstanbul": "इस्तांबुल",
+            "İzmir": "इज़मिर",
+            "Kars": "कार्स",
+            "Kastamonu": "कास्तामोनू",
+            "Kayseri": "कैसेरी",
+            "Kırklareli": "किर्कलारेली",
+            "Kocaeli": "कोकाएली",
+            "Konya": "कोन्या",
+            "kütahya": "कुताह्या",
+            "Malatya": "मलात्या",
+            "Manisa": "मनिसा",
+            "Kahramanmaraş": "कहरामानमराश",
+            "Mardin": "मार्दिन",
+            "Muğla": "मुगला",
+            "Muş": "मुश",
+            "Nevşehir": "नेवशेहिर",
+            "Niğde": "निगदे",
+            "Ordu": "ऑर्दू",
+            "Rize": "रिज़े",
+            "Sakarya": "साकार्या",
+            "Samsun": "सामसुन",
+            "Siirt": "सिर्त",
+            "Sinop": "सिनोप",
+            "Sivas": "सिवास",
+            "Tekirdağ": "तेकिर्दाग",
+            "Tokat": "तोकात",
+            "Trabzon": "त्राब्ज़ोन",
+            "Tunceli": "तुंसेली",
+            "Şanlıurfa": "शानली उर्फा",
+            "Uşak": "उशाक",
+            "Van": "वान",
+            "Yozgat": "योज़गत",
+            "Zonguldak": "ज़ोंगुल्दक",
+            "Aksaray": "अक्सराय",
+            "Bayburt": "बेबुर्त",
+            "Karaman": "करामान",
+            "Kırıkkale": "किरिक्काले",
+            "Batman": "बैटमैन",
+            "Şırnak": "शिर्नाक",
+            "Bartın": "बार्तिन",
+            "Ardahan": "अर्दहान",
+            "Iğdır": "इगदिर",
+            "Yalova": "यालोवा",
+            "Karabük": "काराबुक",
+            "Kilis": "किलिस",
+            "Osmaniye": "ओस्मानिये",
+            "Düzce": "दुज़्से"
         },
         "CN": {
-            "Beijing": "बीजिंग",
-            "Shanghai": "शंघाई",
-            "Guangzhou": "गुआंगज़ौ",
-            "Shenzhen": "शेन्ज़ेन",
-            "Chengdu": "चेंगदू",
-            "Tianjin": "तियानजिन",
-            "Chongqing": "चोंगकिंग",
-            "Wuhan": "वुहान",
-            "Xi'an": "शीआन",
-            "Hangzhou": "हांग्जो",
-            "Nanjing": "नानजिंग",
-            "Shenyang": "शेनयांग",
-            "Harbin": "हार्बिन",
-            "Suzhou": "सूज़ौ",
-            "Qingdao": "किंगदाओ"
+            "Hebei": "हेबेई",
+            "shanxi": "शांक्सी",
+            "Liaoning": "लिआओनिंग",
+            "Jilin": "जिलिन",
+            "Heilongjiang": "हेइलोंगजिआंग",
+            "Jiangsu": "जिआंगसू",
+            "Zhejiang": "झेजिआंग",
+            "Anhui": "आनहुई",
+            "Fujian": "फुजिआन",
+            "Jiangxi": "जिआंगक्सी",
+            "Shandong": "शांडोंग",
+            "Henan": "हेनान",
+            "Hubei": "हुबेई",
+            "Hunan": "हुनान",
+            "Guangdong": "गुआंगडोंग",
+            "Hainan": "हैनान",
+            "Sichuan": "सिचुआन",
+            "Guizhou": "गुइझोऊ",
+            "Yunnan": "युन्नान",
+            "shaanxi": "शाआंक्सी",
+            "Gansu": "गांसू",
+            "Qinghai": "किंघाई"
         },
         "IN": {
-            "New Delhi": "नई दिल्ली",
-            "Mumbai": "मुंबई",
-            "Bangalore": "बेंगलुरु",
-            "Hyderabad": "हैदराबाद",
-            "Chennai": "चेन्नई",
-            "Kolkata": "कोलकाता",
-            "Pune": "पुणे",
-            "Ahmedabad": "अहमदाबाद",
-            "Jaipur": "जयपुर",
-            "Lucknow": "लखनऊ",
-            "Kanpur": "कानपुर",
-            "Nagpur": "नागपुर",
-            "Indore": "इंदौर",
-            "Bhopal": "भोपाल",
-            "Patna": "पटना"
+            "Gujarat": "गुजरात",
+            "Karnataka": "कर्नाटक",
+            "Andhra Pradesh": "आंध्र प्रदेश",
+            "Odisha": "ओडिशा",
+            "Chhattisgarh": "छत्तीसगढ़",
+            "Tamil Nadu": "तमिल नाडु",
+            "Telangana": "तेलंगाना",
+            "Bihar": "बिहार",
+            "West Bengal": "पश्चिम बंगाल",
+            "Arunachal Pradesh": "अरुणाचल प्रदेश",
+            "Jharkhand": "झारखंड",
+            "Assam": "असम",
+            "Ladakh": "लद्दाख",
+            "Himachal Pradesh": "हिमाचल प्रदेश",
+            "Uttarakhand": "उत्तराखंड",
+            "Punjab": "पंजाब",
+            "Haryana": "हरियाणा",
+            "Jammu and Kashmir": "जम्मू और कश्मीर",
+            "Kerala": "केरल",
+            "Meghalaya": "मेघालय",
+            "Manipur": "मणिपुर",
+            "Mizoram": "मिजोरम",
+            "Nagaland": "नागालैंड",
+            "Tripura": "त्रिपुरा",
+            "Andaman and Nicobar Islands": "अंडमान और निकोबार द्वीप समूह",
+            "Sikkim": "सिक्किम",
+            "Goa": "गोवा",
+            "Delhi": "दिल्ली",
+            "Dadra and Nagar Haveli": "दादरा और नगर हवेली",
+            "Puducherry": "पुडुचेरी",
+            "Chandigarh": "चंडीगढ़",
+            "Lakshadweep": "लक्षद्वीप"
         },
         "AL": {
-            "Tirana": "तिराना",
+            "Berat": "बेरात",
+            "Diber": "दिबर",
             "Durrës": "दुर्रेस",
-            "Vlorë": "व्लोरे",
+            "Elbasan": "एल्बासान",
+            "Fier": "फिएर",
+            "Gjirokastër": "ज्जिरोकास्तर",
+            "Korçë": "कोर्चे",
+            "Kukës": "कुकेस",
+            "Lezhë": "लेझे",
             "Shkodër": "श्कोदर",
-            "Fier": "फिएर"
+            "Tirana": "तिराना",
+            "Vlorë": "व्लोरे"
         },
         "AD": {
-            "Andorra la Vella": "एंडोरा ला वेला",
-            "Escaldes-Engordany": "एस्काल्देस-एंगोर्डानी",
+            "Andorra la Vella": "एंडोरा ला वेल्ला",
+            "Canillo": "कैनिलो",
             "Encamp": "एनकैम्प",
-            "Sant Julià de Lòria": "संत जुलिया डी लोरिया",
-            "La Massana": "ला मासाना"
+            "Escaldes-Engordany": "एस्कैल्डेस-एनगॉर्डानी",
+            "La Massana": "ला मासाना",
+            "Ordino": "ऑर्डिनो",
+            "Sant Julia de Loria": "सैंट जूलिया डे लोरिया"
         },
         "AT": {
-            "Vienna": "वियना",
-            "Graz": "ग्राज़",
-            "Linz": "लिंज़",
+            "Burgenland": "बुर्गेनलैंड",
+            "Carinthia": "कारिंथिया",
+            "Lower Austria": "निचला ऑस्ट्रिया",
             "Salzburg": "साल्ज़बर्ग",
-            "Innsbruck": "इन्सब्रुक"
+            "Styria": "स्टायरिया",
+            "Tyrol": "टायरोल",
+            "Upper Austria": "ऊपरी ऑस्ट्रिया",
+            "Vienna": "वियना",
+            "Vorarlberg": "वोरार्लबर्ग"
         },
         "BY": {
-            "Minsk": "मिन्स्क",
+            "City of Minsk": "मिन्स्क शहर",
+            "Brest": "ब्रेस्त",
             "Gomel": "गोमेल",
+            "Grodno": "ग्रोडनो",
             "Mogilev": "मोगिलेव",
-            "Vitebsk": "वितेब्स्क",
-            "Hrodna": "ह्रोदना"
+            "Minsk": "मिन्स्क",
+            "Vitebsk": "वितेब्स्क"
         },
         "BE": {
             "Brussels": "ब्रसेल्स",
             "Antwerp": "एंटवर्प",
             "Ghent": "गेंट",
-            "Charleroi": "शार्लेरोई",
-            "Liège": "लीज"
+            "Charleroi": "शार्लेरॉय",
+            "Liège": "लिएज"
         },
         "BA": {
             "Sarajevo": "सारायेवो",
-            "Banja Luka": "बन्या लुका",
+            "Banja Luka": "बान्या लुका",
             "Tuzla": "तुज़ला",
             "Zenica": "ज़ेनिका",
-            "Mostar": "मोस्टार"
+            "Mostar": "मोस्तार"
         },
         "BG": {
             "Sofia": "सोफिया",
@@ -569,51 +838,51 @@
         "HR": {
             "Zagreb": "ज़ाग्रेब",
             "Split": "स्प्लिट",
-            "Rijeka": "रिएका",
-            "Osijek": "ओसीजेक",
-            "Zadar": "ज़ादार"
+            "Rijeka": "रिजेका",
+            "Osijek": "ओसिजेक",
+            "Zadar": "ज़ादर"
         },
         "CY": {
             "Nicosia": "निकोसिया",
             "Limassol": "लिमासोल",
-            "Larnaca": "लारनाका",
+            "Larnaca": "लार्नाका",
             "Famagusta": "फामागुस्ता",
             "Paphos": "पाफोस"
         },
         "CZ": {
             "Prague": "प्राग",
-            "Brno": "ब्रनो",
+            "Brno": "ब्र्नो",
             "Ostrava": "ओस्त्रावा",
-            "Plzeň": "प्लज़ेन",
-            "Liberec": "लिबरेक"
+            "Plzeň": "प्ल्ज़ेन",
+            "Liberec": "लिबेरेक"
         },
         "DK": {
             "Copenhagen": "कोपेनहेगन",
-            "Aarhus": "आरहुस",
+            "Aarhus": "आर्हुस",
             "Odense": "ओडेंसे",
             "Aalborg": "आलबोर्ग",
             "Esbjerg": "एस्बजर्ग"
         },
         "EE": {
             "Tallinn": "तालिन",
-            "Tartu": "तार्तु",
+            "Tartu": "तार्तू",
             "Narva": "नार्वा",
-            "Pärnu": "पार्नु",
+            "Pärnu": "पार्नू",
             "Kohtla-Järve": "कोह्तला-यार्वे"
         },
         "FI": {
-            "Helsinki": "हेलसिंकी",
-            "Espoo": "एस्पू",
-            "Tampere": "ताम्पेरे",
-            "Vantaa": "वंताआ",
-            "Oulu": "ओउलु"
+            "Helsinki": "हेल्सिंकी",
+            "Espoo": "एस्पो",
+            "Tampere": "तांपेरे",
+            "Vantaa": "वांता",
+            "Oulu": "ऊलू"
         },
         "FR": {
             "Paris": "पेरिस",
-            "Marseille": "मार्सेई",
-            "Lyon": "ल्यों",
+            "Marseille": "मार्सेल",
+            "Lyon": "ल्योन",
             "Toulouse": "टूलूज़",
-            "Nice": "नाइस"
+            "Nice": "नीस"
         },
         "DE": {
             "Berlin": "बर्लिन",
@@ -624,31 +893,31 @@
         },
         "GR": {
             "Athens": "एथेंस",
-            "Thessaloniki": "थेस्सालोनिकी",
-            "Patras": "पैट्रास",
-            "Heraklion": "हेराक्लियन",
+            "Thessaloniki": "थेसालोनिकी",
+            "Patras": "पात्रास",
+            "Heraklion": "हेराक्लिओन",
             "Larissa": "लारिसा"
         },
         "HU": {
-            "Budapest": "बुडापेस्ट",
+            "Budapest": "बुडापेस्त",
             "Debrecen": "देब्रेसेन",
-            "Szeged": "सेगेद",
+            "Szeged": "सेगेड",
             "Miskolc": "मिस्कोल्क",
-            "Pécs": "पेच"
+            "Pécs": "पेक्स"
         },
         "IS": {
             "Reykjavik": "रेक्जाविक",
             "Kópavogur": "कोपावोगुर",
-            "Hafnarfjörður": "हफ्नारफ्योर्दुर",
+            "Hafnarfjörður": "हाफ्नारफ्जोर्डुर",
             "Akureyri": "अकुरेरी",
-            "Reykjanesbær": "रेक्यानेसबेर"
+            "Reykjanesbær": "रेक्जानेसबार"
         },
         "IE": {
             "Dublin": "डबलिन",
-            "Cork": "कोर्क",
-            "Limerick": "लिमरिक",
+            "Cork": "कॉर्क",
+            "Limerick": "लिमेरिक",
             "Galway": "गैलवे",
-            "Waterford": "वॉटरफोर्ड"
+            "Waterford": "वाटरफोर्ड"
         },
         "IT": {
             "Rome": "रोम",
@@ -659,66 +928,66 @@
         },
         "LV": {
             "Riga": "रीगा",
-            "Daugavpils": "दौगवपिल्स",
-            "Liepāja": "लीपाजा",
-            "Jelgava": "जेलगावा",
+            "Daugavpils": "दाउगवपिल्स",
+            "Liepāja": "लिएपाया",
+            "Jelgava": "जेल्गावा",
             "Jūrmala": "जूर्माला"
         },
         "LI": {
             "Vaduz": "वादुज़",
             "Schaan": "शान",
-            "Triesen": "ट्रीज़ेन",
-            "Balzers": "बाल्जर्स",
+            "Triesen": "त्रिएसेन",
+            "Balzers": "बाल्ज़र्स",
             "Eschen": "एशेन"
         },
         "LT": {
             "Vilnius": "विल्नियस",
-            "Kaunas": "कौनास",
+            "Kaunas": "काउनास",
             "Klaipėda": "क्लाइपेडा",
-            "Šiauliai": "शियाउलियाई",
-            "Panevėžys": "पनेवेज़िस"
+            "Šiauliai": "शिआउलियाई",
+            "Panevėžys": "पानेवेझिस"
         },
         "LU": {
-            "Luxembourg City": "लक्जमबर्ग सिटी",
-            "Esch-sur-Alzette": "एश-सुर-अल्जेट",
-            "Differdange": "डिफरडांग",
-            "Dudelange": "डुडेलांग",
-            "Ettelbruck": "एटेलब्रुक"
+            "Luxembourg City": "लक्ज़मबर्ग शहर",
+            "Esch-sur-Alzette": "एश-सुर-अल्ज़ेत",
+            "Differdange": "डिफ़रडांज",
+            "Dudelange": "डुडेलांज",
+            "Ettelbruck": "एत्तेलब्रुक"
         },
         "MT": {
-            "Valletta": "वैलेटा",
-            "Birkirkara": "बिरकिरकारा",
+            "Valletta": "वैलेट्टा",
+            "Birkirkara": "बिर्किर्करा",
             "Mosta": "मोस्ता",
-            "Qormi": "कोर्मी",
-            "Sliema": "स्लीमा"
+            "Qormi": "कॉर्मी",
+            "Sliema": "स्लिएमा"
         },
         "MD": {
-            "Chișinău": "किशिनेव",
+            "Chișinău": "किशिनाउ",
             "Tiraspol": "तिरास्पोल",
-            "Bălți": "बेल्त्सी",
+            "Bălți": "बाल्टी",
             "Bender": "बेंडर",
-            "Rîbnița": "रीब्नित्सा"
+            "Rîbnița": "रिब्निता"
         },
         "MC": {
             "Monaco": "मोनाको"
         },
         "ME": {
-            "Podgorica": "पोडगोरिका",
-            "Nikšić": "निक्शिच",
-            "Herceg Novi": "हेरसेग नोवी",
-            "Pljevlja": "प्लजेवल्या",
+            "Podgorica": "पॉडगोरिका",
+            "Nikšić": "निकशिक",
+            "Herceg Novi": "हेर्सेग नोवी",
+            "Pljevlja": "प्ल्जेव्ल्जा",
             "Bijelo Polje": "बिजेलो पोल्जे"
         },
         "NL": {
             "Amsterdam": "एम्स्टर्डम",
-            "Rotterdam": "रॉटरडैम",
+            "Rotterdam": "रॉटरडम",
             "The Hague": "द हेग",
-            "Utrecht": "उट्रेच",
-            "Eindhoven": "आइंडहोवन"
+            "Utrecht": "उट्रेख्त",
+            "Eindhoven": "आइंधोवन"
         },
         "MK": {
             "Skopje": "स्कोप्जे",
-            "Bitola": "बिटोला",
+            "Bitola": "बितोला",
             "Kumanovo": "कुमानोवो",
             "Prilep": "प्रिलेप",
             "Tetovo": "तेतोवो"
@@ -726,15 +995,15 @@
         "NO": {
             "Oslo": "ओस्लो",
             "Bergen": "बर्गन",
-            "Trondheim": "ट्रॉनहैम",
-            "Stavanger": "स्टावंगर",
-            "Drammen": "ड्रामेन"
+            "Trondheim": "त्रोंडहेम",
+            "Stavanger": "स्तावंगर",
+            "Drammen": "द्रामेन"
         },
         "PL": {
-            "Warsaw": "वारसॉ",
+            "Warsaw": "वारसा",
             "Kraków": "क्राकोव",
-            "Łódź": "लॉड्ज",
-            "Wrocław": "व्रोकला",
+            "Łódź": "वॉड्ज़",
+            "Wrocław": "व्रोकलाव",
             "Poznań": "पोज़्नान"
         },
         "PT": {
@@ -742,23 +1011,23 @@
             "Porto": "पोर्टो",
             "Braga": "ब्रागा",
             "Coimbra": "कोइम्ब्रा",
-            "Funchal": "फंचल"
+            "Funchal": "फुंशाल"
         },
         "RO": {
-            "Bucharest": "बुखारेस्ट",
+            "Bucharest": "बुखारेस्त",
             "Cluj-Napoca": "क्लुज-नापोका",
             "Timișoara": "तिमिशोआरा",
-            "Iași": "यासी",
-            "Constanța": "कॉन्स्टेंटा"
+            "Iași": "इयाशी",
+            "Constanța": "कॉन्स्तांता"
         },
         "SM": {
-            "San Marino": "सैन मैरिनो"
+            "San Marino": "सैन मारिनो"
         },
         "RS": {
             "Belgrade": "बेलग्रेड",
             "Novi Sad": "नोवी साद",
             "Niš": "निश",
-            "Kragujevac": "क्रागुजेवैक",
+            "Kragujevac": "क्रागुजेवाक",
             "Subotica": "सुबोतिका"
         },
         "SK": {
@@ -769,39 +1038,39 @@
             "Nitra": "नित्रा"
         },
         "SI": {
-            "Ljubljana": "ल्युब्ल्याना",
+            "Ljubljana": "ल्जुब्लजाना",
             "Maribor": "मारिबोर",
             "Celje": "सेल्जे",
-            "Kranj": "क्रान्ज",
+            "Kranj": "क्रांज",
             "Velenje": "वेलेन्जे"
         },
         "ES": {
             "Madrid": "मैड्रिड",
             "Barcelona": "बार्सिलोना",
             "Valencia": "वैलेंसिया",
-            "Seville": "सेविल",
-            "Zaragoza": "ज़रागोज़ा"
+            "Seville": "सेविले",
+            "Zaragoza": "सरगोसा"
         },
         "SE": {
             "Stockholm": "स्टॉकहोम",
-            "Gothenburg": "गोथेनबर्ग",
+            "Gothenburg": "गोटेनबर्ग",
             "Malmö": "माल्मो",
             "Uppsala": "उप्साला",
-            "Västerås": "वेस्टरास"
+            "Västerås": "वेस्तेरास"
         },
         "CH": {
-            "Zurich": "ज़्यूरिख",
-            "Geneva": "जिनेवा",
-            "Basel": "बेसल",
+            "Zurich": "ज्यूरिख",
+            "Geneva": "जेनेवा",
+            "Basel": "बासेल",
             "Bern": "बर्न",
-            "Lausanne": "लौज़ान"
+            "Lausanne": "लॉज़ान"
         },
         "UA": {
             "Kyiv": "कीव",
             "Kharkiv": "खार्किव",
             "Odesa": "ओडेसा",
-            "Dnipro": "द्नीप्रो",
-            "Lviv": "लविव"
+            "Dnipro": "दनीप्रो",
+            "Lviv": "ल्विव"
         },
         "GB": {
             "London": "लंदन",
@@ -812,20 +1081,27 @@
         }
     },
     "productTypes": {
-        "textiles": "कपड़ा",
-        "electronics": "इलेक्ट्रॉनिक्स",
-        "automotive": "ऑटोमोटिव",
-        "food_beverage": "खाद्य और पेय",
+        "food_beverage": "भोजन और पेय",
+        "pharmaceuticals": "औषधि",
+        "textiles": "टेक्स्टाइल",
         "chemicals": "रसायन",
-        "pharmaceuticals": "फार्मास्यूटिकल्स",
-        "machinery": "मशीनरी और उपकरण",
-        "metals": "धातु और खनन",
-        "construction": "निर्माण सामग्री",
-        "aerospace": "एयरोस्पेस और रक्षा",
-        "energy": "ऊर्जा और उपयोगिताएं",
-        "medical": "चिकित्सा उपकरण",
-        "plastics": "प्लास्टिक और रबर",
-        "paper": "कागज और पैकेजिंग",
+        "building_materials": "इंजीनियरिंग मद",
+        "plastics": "प्लास्टिक",
+        "metals": "धातु",
+        "machinery_equipments": "मशीनरी और उपकरण",
+        "medical_devices": "चिकित्सा उपकरण",
+        "wood_furniture": "लकड़ी का फर्नीचर",
+        "paper_cardboard": "कागज और कार्डबोर्ड",
+        "printing_packaging": "प्रिंटिंग और पैकिंग",
+        "refirigeration": "रिफ्रिजरेटर",
+        "electronics": "इलेक्ट्रॉनिक्स",
+        "automotive": "स्वयं चलने वाले वाहन",
+        "glass": "ग्लास",
+        "water_treatment": "पानी की संसाधन",
+        "medical_industrial_gases": "चिकित्सा और उद्योग गैस",
+        "petroleum and oil": "पेट्रोलियम और तेल",
+        "air_defense": "हवाई युद्ध",
+        "energy": "ऊर्जा",
         "other": "अन्य"
     }
 }

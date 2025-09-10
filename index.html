@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script>
+        // Apply Twemoji to language selector
+        twemoji.parse(document.querySelector('.lang-switcher'));
+    </script>
+
     <!-- Google Maps API - key injected by backend -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&libraries=places" defer></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=__GOOGLE_MAPS_API_KEY__&libraries=places" defer></script> -->
+    <script src="maps.js?v=2.2" defer></script>
 </head>
 <body>
     <div class="container">
@@ -20,26 +27,66 @@
                         <img src="imgs/flag.png" alt="Flag" class="flag-img" />
                     </div>
                     <div class="logo" aria-label="Factory Registration Logo">
-                        <img src="imgs/logo.png" alt="Logo" class="logo-img" />
+                        <img src="imgs/b_logo.png" alt="Logo" class="logo-img" />
                     </div>
-                    <!-- Language Switcher -->
+                    <!-- Language Switcher with Flag Icons -->
                     <div class="lang-switcher">
-                        <select id="languageSelector" aria-label="Select language">
-                            <option class="lang-switcher-select" value="auto">🌐 Auto</option>
-                            <option class="lang-switcher-select" value="en">🇺🇸 - English</option>
-                            <option class="lang-switcher-select" value="tr">🇹🇷 - Türkçe</option>
-                            <option class="lang-switcher-select" value="ar">🇸🇦 - العربية</option>
-                            <option class="lang-switcher-select" value="de">🇩🇪 - Deutsch</option>
-                            <option class="lang-switcher-select" value="fr">🇫🇷 - Français</option>
-                            <option class="lang-switcher-select" value="es">🇪🇸 - Español</option>
-                            <option class="lang-switcher-select" value="zh">🇨🇳 - 中文</option>
-                            <option class="lang-switcher-select" value="ru">🇷🇺 - Русский</option>
-                            <option class="lang-switcher-select" value="in">🇮🇳 - हिंदी</option>
+                        <div class="custom-select" id="customLanguageSelector">
+                            <div class="select-trigger">
+                                <span class="selected-option">
+                                    <i class="fas fa-globe selected-flag-icon"></i> Auto
+                                </span>
+                                <i class="fas fa-chevron-down select-arrow"></i>
+                            </div>
+                            <div class="select-options">
+                                <div class="option" data-value="auto">
+                                    <i class="fas fa-globe flag-icon"></i> Auto
+                                </div>
+                                <div class="option" data-value="en">
+                                    <img src="icns/us.svg" alt="US Flag" class="flag-icon"> English
+                                </div>
+                                <div class="option" data-value="tr">
+                                    <img src="icns/tr.svg" alt="Turkey Flag" class="flag-icon"> Türkçe
+                                </div>
+                                <div class="option" data-value="ar">
+                                    <img src="icns/ar.svg" alt="Saudi Arabia Flag" class="flag-icon"> العربية
+                                </div>
+                                <div class="option" data-value="de">
+                                    <img src="icns/de.svg" alt="Germany Flag" class="flag-icon"> Deutsch
+                                </div>
+                                <div class="option" data-value="fr">
+                                    <img src="icns/fr.svg" alt="France Flag" class="flag-icon"> Français
+                                </div>
+                                <div class="option" data-value="es">
+                                    <img src="icns/es.svg" alt="Spain Flag" class="flag-icon"> Español
+                                </div>
+                                <div class="option" data-value="zh">
+                                    <img src="icns/cn.svg" alt="China Flag" class="flag-icon"> 中文
+                                </div>
+                                <div class="option" data-value="ru">
+                                    <img src="icns/ru.svg" alt="Russia Flag" class="flag-icon"> Русский
+                                </div>
+                                <div class="option" data-value="in">
+                                    <img src="icns/in.svg" alt="India Flag" class="flag-icon"> हिंदी
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hidden select for form submission -->
+                        <select id="languageSelector" aria-label="Select language" class="hidden-select">
+                            <option value="auto">Auto</option>
+                            <option value="en">English</option>
+                            <option value="tr">Türkçe</option>
+                            <option value="ar">العربية</option>
+                            <option value="de">Deutsch</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="zh">中文</option>
+                            <option value="ru">Русский</option>
+                            <option value="in">हिंदी</option>
                         </select>
                     </div>
                 </div>
-                <span class="logo-text" data-translate="header.logoText">Website Opening Form</span>
-                <h1 data-translate="header.title">Factory Registration Form</h1>
+                <h1 data-translate="header.title">Website Opening Form</h1>
                 <p data-translate="header.subtitle">Please provide your factory details below for registration and integration purposes.</p>
             </div>
 
@@ -274,6 +321,7 @@
                     
                     <div id="ownersContainer">
                         <div class="owner-block" data-owner-index="1">
+                            <div class="form-row">
                             <div class="form-group">
                                 <label for="ownerName_1">
                                     <span data-translate="sections.ownerInfo.ownerName.label">Owner Name</span>
@@ -290,6 +338,24 @@
                                     maxlength="100"
                                 >
                                 <div id="ownerName_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ownerEmail_1">
+                                        <span data-translate="sections.ownerInfo.ownerEmail.label">Owner Email</span>
+                                        <span class="required" aria-label="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="email" 
+                                        id="ownerEmail_1" 
+                                        name="ownerEmail_1" 
+                                        required
+                                        aria-describedby="ownerEmail_1-error"
+                                        data-translate-placeholder="sections.ownerInfo.ownerEmail.placeholder"
+                                        placeholder="owner@example.com"
+                                        maxlength="100"
+                                    >
+                                    <div id="ownerEmail_1-error" class="error-message" role="alert" aria-live="polite"></div>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -428,21 +494,28 @@
                             aria-describedby="industryField-error"
                         >
                             <option value="" data-translate="sections.productionInfo.productType.placeholder">Select Industry Field</option>
-                            <option value="automotive">Automotive</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="textiles">Textiles</option>
-                            <option value="chemicals">Chemicals</option>
-                            <option value="pharmaceuticals">Pharmaceuticals</option>
-                            <option value="food_beverage">Food & Beverage</option>
-                            <option value="machinery">Machinery & Equipment</option>
-                            <option value="metals">Metals & Mining</option>
-                            <option value="construction">Construction Materials</option>
-                            <option value="aerospace">Aerospace & Defense</option>
-                            <option value="energy">Energy & Utilities</option>
-                            <option value="medical">Medical Devices</option>
-                            <option value="plastics">Plastics & Rubber</option>
-                            <option value="paper">Paper & Packaging</option>
-                            <option value="other">Other</option>
+                            <option value="food_beverage" data-translate="productTypes.food_beverage">Food & Beverage</option>
+                            <option value="pharmaceuticals" data-translate="productTypes.pharmaceuticals">Pharmaceuticals</option>
+                            <option value="textiles" data-translate="productTypes.textiles">Textiles</option>
+                            <option value="chemicals" data-translate="productTypes.chemicals">Chemicals</option>
+                            <option value="building_materials" data-translate="productTypes.building_materials">Building Materials</option>
+                            <option value="plastics" data-translate="productTypes.plastics">Plastics</option>
+                            <option value="metals" data-translate="productTypes.metals">Metals</option>
+                            <option value="machinery_equipments" data-translate="productTypes.machinery_equipments">Machinery & Equipment</option>
+                            <option value="medical_devices" data-translate="productTypes.medical_devices">Medical Devices</option>
+                            <option value="wood_furniture" data-translate="productTypes.wood_furniture">Wood Furniture</option>
+                            <option value="paper_cardboard" data-translate="productTypes.paper_cardboard">Paper & Cardboard</option>
+                            <option value="printing_packaging" data-translate="productTypes.printing_packaging">Printing & Packaging</option>
+                            <option value="refirigeration" data-translate="productTypes.refirigeration">Refrigeration</option>
+                            <option value="electronics" data-translate="productTypes.electronics">Electronics</option>
+                            <option value="automotive" data-translate="productTypes.automotive">Automotive</option>
+                            <option value="glass" data-translate="productTypes.glass">Glass</option>
+                            <option value="water_treatment" data-translate="productTypes.water_treatment">Water Treatment</option>
+                            <option value="medical_industrial_gases" data-translate="productTypes.medical_industrial_gases">Medical & Industrial Gases</option>
+                            <option value="petroleum and oil" data-translate="productTypes.petroleum and oil">Petroleum & Oil</option>
+                            <option value="air_defense" data-translate="productTypes.air_defense">Air Defense</option>
+                            <option value="energy" data-translate="productTypes.energy">Energy</option>
+                            <option value="other" data-translate="productTypes.other">Other</option>
                         </select>
                         <div id="industryField-error" class="error-message" role="alert" aria-live="polite"></div>
                     </div>
@@ -468,6 +541,7 @@
                                             type="text" 
                                             id="productionLine_1" 
                                             name="productionLine_1" 
+                                            data-translate-placeholder="sections.productionInfo.productionLine.placeholder"
                                             placeholder="e.g., Assembly Line A, Manufacturing Unit 1" 
                                             required
                                             aria-describedby="productionLine_1-error"
@@ -486,6 +560,7 @@
                                             type="text" 
                                             id="brandName_1" 
                                             name="brandName_1" 
+                                            data-translate-placeholder="sections.productionInfo.brandName.placeholder"
                                             placeholder="e.g., Brand X, Company Y" 
                                             required
                                             aria-describedby="brandName_1-error"
@@ -493,6 +568,93 @@
                                         >
                                         <div id="brandName_1-error" class="error-message" role="alert" aria-live="polite"></div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="madeIn_1">
+                                        <span data-translate="sections.productionInfo.madeIn.label">
+                                            Made In
+                                        </span>
+                                        <span class="required" aria-label="required">*</span>
+                                    </label>
+                                    <select 
+                                        id="madeIn_1" 
+                                        name="madeIn_1" 
+                                        required
+                                        aria-describedby="madeIn_1-error"
+                                    >
+                                        <option value="" data-translate="sections.productionInfo.madeIn.placeholder">Select Country</option>
+                                        <option value="AE" data-translate="countries.AE">United Arab Emirates</option>
+                                        <option value="SA" data-translate="countries.SA">Saudi Arabia</option>
+                                        <option value="EG" data-translate="countries.EG">Egypt</option>
+                                        <option value="IQ" data-translate="countries.IQ">Iraq</option>
+                                        <option value="JO" data-translate="countries.JO">Jordan</option>
+                                        <option value="LB" data-translate="countries.LB">Lebanon</option>
+                                        <option value="SY" data-translate="countries.SY">Syria</option>
+                                        <option value="KW" data-translate="countries.KW">Kuwait</option>
+                                        <option value="QA" data-translate="countries.QA">Qatar</option>
+                                        <option value="BH" data-translate="countries.BH">Bahrain</option>
+                                        <option value="OM" data-translate="countries.OM">Oman</option>
+                                        <option value="YE" data-translate="countries.YE">Yemen</option>
+                                        <option value="LY" data-translate="countries.LY">Libya</option>
+                                        <option value="TN" data-translate="countries.TN">Tunisia</option>
+                                        <option value="DZ" data-translate="countries.DZ">Algeria</option>
+                                        <option value="MA" data-translate="countries.MA">Morocco</option>
+                                        <option value="SD" data-translate="countries.SD">Sudan</option>
+                                        <option value="MR" data-translate="countries.MR">Mauritania</option>
+                                        <option value="SO" data-translate="countries.SO">Somalia</option>
+                                        <option value="DJ" data-translate="countries.DJ">Djibouti</option>
+                                        <option value="KM" data-translate="countries.KM">Comoros</option>
+                                        <option value="PS" data-translate="countries.PS">Palestine</option>
+                                        <option value="AL" data-translate="countries.AL">Albania</option>
+                                        <option value="AD" data-translate="countries.AD">Andorra</option>
+                                        <option value="AT" data-translate="countries.AT">Austria</option>
+                                        <option value="BY" data-translate="countries.BY">Belarus</option>
+                                        <option value="BE" data-translate="countries.BE">Belgium</option>
+                                        <option value="BA" data-translate="countries.BA">Bosnia and Herzegovina</option>
+                                        <option value="BG" data-translate="countries.BG">Bulgaria</option>
+                                        <option value="HR" data-translate="countries.HR">Croatia</option>
+                                        <option value="CY" data-translate="countries.CY">Cyprus</option>
+                                        <option value="CZ" data-translate="countries.CZ">Czech Republic</option>
+                                        <option value="DK" data-translate="countries.DK">Denmark</option>
+                                        <option value="EE" data-translate="countries.EE">Estonia</option>
+                                        <option value="FI" data-translate="countries.FI">Finland</option>
+                                        <option value="FR" data-translate="countries.FR">France</option>
+                                        <option value="DE" data-translate="countries.DE">Germany</option>
+                                        <option value="GR" data-translate="countries.GR">Greece</option>
+                                        <option value="HU" data-translate="countries.HU">Hungary</option>
+                                        <option value="IS" data-translate="countries.IS">Iceland</option>
+                                        <option value="IE" data-translate="countries.IE">Ireland</option>
+                                        <option value="IT" data-translate="countries.IT">Italy</option>
+                                        <option value="LV" data-translate="countries.LV">Latvia</option>
+                                        <option value="LI" data-translate="countries.LI">Liechtenstein</option>
+                                        <option value="LT" data-translate="countries.LT">Lithuania</option>
+                                        <option value="LU" data-translate="countries.LU">Luxembourg</option>
+                                        <option value="MT" data-translate="countries.MT">Malta</option>
+                                        <option value="MD" data-translate="countries.MD">Moldova</option>
+                                        <option value="MC" data-translate="countries.MC">Monaco</option>
+                                        <option value="ME" data-translate="countries.ME">Montenegro</option>
+                                        <option value="NL" data-translate="countries.NL">Netherlands</option>
+                                        <option value="MK" data-translate="countries.MK">North Macedonia</option>
+                                        <option value="NO" data-translate="countries.NO">Norway</option>
+                                        <option value="PL" data-translate="countries.PL">Poland</option>
+                                        <option value="PT" data-translate="countries.PT">Portugal</option>
+                                        <option value="RO" data-translate="countries.RO">Romania</option>
+                                        <option value="RU" data-translate="countries.RU">Russia</option>
+                                        <option value="SM" data-translate="countries.SM">San Marino</option>
+                                        <option value="RS" data-translate="countries.RS">Serbia</option>
+                                        <option value="SK" data-translate="countries.SK">Slovakia</option>
+                                        <option value="SI" data-translate="countries.SI">Slovenia</option>
+                                        <option value="ES" data-translate="countries.ES">Spain</option>
+                                        <option value="SE" data-translate="countries.SE">Sweden</option>
+                                        <option value="CH" data-translate="countries.CH">Switzerland</option>
+                                        <option value="TR" data-translate="countries.TR">Turkey</option>
+                                        <option value="UA" data-translate="countries.UA">Ukraine</option>
+                                        <option value="GB" data-translate="countries.GB">United Kingdom</option>
+                                        <option value="US" data-translate="countries.US">United States</option>
+                                        <option value="CN" data-translate="countries.CN">China</option>
+                                        <option value="IN" data-translate="countries.IN">India</option>
+                                    </select>
+                                    <div id="madeIn_1-error" class="error-message" role="alert" aria-live="polite"></div>
                                 </div>
                             </div>
                         </div>
@@ -510,7 +672,7 @@
                     <div class="form-group">
                         <label for="manufacturingDate">
                             <span data-translate="sections.productionInfo.manufacturingDate.label">
-                                Production Lines Manufacturing Date
+                                Factory establishment date
                             </span>
                         </label>
                         <input 
@@ -520,6 +682,93 @@
                             aria-describedby="manufacturingDate-error"
                         >
                         <div id="manufacturingDate-error" class="error-message" role="alert" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <!-- Fifth Section: Employee Information -->
+                <div class="form-section">
+                    <h3>
+                        <i class="fas fa-user-edit" aria-hidden="true"></i>
+                        <span data-translate="sections.employeeInfo.title">
+                            Form Completed By
+                        </span>
+                    </h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeName">
+                                <span data-translate="sections.employeeInfo.employeeName.label">Employee Name</span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="employeeName" 
+                                name="employeeName" 
+                                required
+                                aria-describedby="employeeName-error"
+                                data-translate-placeholder="sections.employeeInfo.employeeName.placeholder"
+                                placeholder="Enter employee name"
+                                maxlength="100"
+                            >
+                            <div id="employeeName-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeePosition">
+                                <span data-translate="sections.employeeInfo.employeePosition.label">Position/Title</span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                id="employeePosition" 
+                                name="employeePosition" 
+                                required
+                                aria-describedby="employeePosition-error"
+                                data-translate-placeholder="sections.employeeInfo.employeePosition.placeholder"
+                                placeholder="e.g., HR Manager, Operations Director"
+                                maxlength="100"
+                            >
+                            <div id="employeePosition-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeEmail">
+                                <span data-translate="sections.employeeInfo.employeeEmail.label">Employee Email</span>
+                                <span class="required" aria-label="required">*</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                id="employeeEmail" 
+                                name="employeeEmail" 
+                                required
+                                aria-describedby="employeeEmail-error"
+                                data-translate-placeholder="sections.employeeInfo.employeeEmail.placeholder"
+                                placeholder="employee@company.com"
+                                maxlength="100"
+                            >
+                            <div id="employeeEmail-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="employeePhone">
+                                <span data-translate="sections.employeeInfo.employeePhone.label">Employee Phone</span>
+                            </label>
+                            <div class="phone-input-container">
+                                <select class="country-code-selector" name="employeePhoneCountryCode" aria-label="Country code">
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                                <input 
+                                    type="tel" 
+                                    id="employeePhone" 
+                                    name="employeePhone" 
+                                    aria-describedby="employeePhone-error"
+                                    data-translate-placeholder="sections.employeeInfo.employeePhone.placeholder"
+                                    placeholder="+1 (555) 123-4567"
+                                    maxlength="20"
+                                >
+                            </div>
+                            <div id="employeePhone-error" class="error-message" role="alert" aria-live="polite"></div>
+                        </div>
                     </div>
                 </div>
 

@@ -5,7 +5,6 @@ class FactoryForm {
         this.map = null;
         this.marker = null;
         this.geocoder = null;
-        this.countryCities = this.initializeCountryCities();
         this.countryCodes = this.initializeCountryCodes();
         this.ownerIndex = 1;
         this.productionLineIndex = 1;
@@ -95,9 +94,7 @@ class FactoryForm {
         this.setLanguage(detectedLang);
         
         // Update language selector
-        if (this.languageSelector) {
-            this.languageSelector.value = detectedLang;
-        }
+        this.updateCustomSelectorDisplay(detectedLang);
     }
 
     setLanguage(lang) {
@@ -207,17 +204,172 @@ class FactoryForm {
     setupEventListeners() {
         this.form.addEventListener('submit', (e) => this.handleFormSubmit(e));
         
-        // Language selector event
-        if (this.languageSelector) {
-            this.languageSelector.addEventListener('change', (e) => {
-                this.setLanguage(e.target.value);
-            });
-        }
+        // Setup custom language selector
+        this.setupCustomLanguageSelector();
         
         this.setupDynamicSections();
         this.setupRealTimeValidation();
         this.setupPhoneFormatting();
         this.setupAutoSave();
+    }
+
+    /**
+     * Setup custom language selector with flag icons
+     */
+    setupCustomLanguageSelector() {
+        const customSelect = document.getElementById('customLanguageSelector');
+        const hiddenSelect = document.getElementById('languageSelector');
+        
+        if (!customSelect || !hiddenSelect) {
+            console.warn('Custom language selector elements not found');
+            return;
+        }
+        
+        const trigger = customSelect.querySelector('.select-trigger');
+        const options = customSelect.querySelectorAll('.option');
+        const selectedOption = customSelect.querySelector('.selected-option');
+        
+        // Flag icon mapping
+        const flagMapping = {
+            'auto': '<i class="fas fa-globe selected-flag-icon"></i>',
+            'en': '<img src="icns/us.svg" alt="US Flag" class="flag-icon">',
+            'tr': '<img src="icns/tr.svg" alt="Turkey Flag" class="flag-icon">',
+            'ar': '<img src="icns/ar.svg" alt="Saudi Arabia Flag" class="flag-icon">',
+            'de': '<img src="icns/de.svg" alt="Germany Flag" class="flag-icon">',
+            'fr': '<img src="icns/fr.svg" alt="France Flag" class="flag-icon">',
+            'es': '<img src="icns/es.svg" alt="Spain Flag" class="flag-icon">',
+            'zh': '<img src="icns/cn.svg" alt="China Flag" class="flag-icon">',
+            'ru': '<img src="icns/ru.svg" alt="Russia Flag" class="flag-icon">',
+            'in': '<img src="icns/in.svg" alt="India Flag" class="flag-icon">'
+        };
+        
+        // Language text mapping
+        const languageMapping = {
+            'auto': 'Auto',
+            'en': 'English',
+            'tr': 'Türkçe',
+            'ar': 'العربية',
+            'de': 'Deutsch',
+            'fr': 'Français',
+            'es': 'Español',
+            'zh': '中文',
+            'ru': 'Русский',
+            'in': 'हिंदी'
+        };
+        
+        // Toggle dropdown
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('open');
+        });
+        
+        // Handle option selection
+        options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                const value = option.getAttribute('data-value');
+                
+                // Update visual selection
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                // Update trigger display
+                const flagIcon = flagMapping[value] || flagMapping['auto'];
+                const languageText = languageMapping[value] || 'Auto';
+                selectedOption.innerHTML = `${flagIcon} ${languageText}`;
+                
+                // Update hidden select
+                hiddenSelect.value = value;
+                
+                // Trigger language change
+                this.setLanguage(value);
+                
+                // Close dropdown
+                customSelect.classList.remove('open');
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!customSelect.contains(e.target)) {
+                customSelect.classList.remove('open');
+            }
+        });
+        
+        // Keyboard navigation support
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                customSelect.classList.toggle('open');
+            } else if (e.key === 'Escape') {
+                customSelect.classList.remove('open');
+            }
+        });
+        
+        // Set initial selection
+        this.updateCustomSelectorDisplay('auto');
+        
+        // Store reference for later use
+        this.customLanguageSelector = customSelect;
+        this.languageSelector = hiddenSelect;
+    }
+    
+    /**
+     * Update custom selector display
+     */
+    updateCustomSelectorDisplay(value) {
+        const customSelect = document.getElementById('customLanguageSelector');
+        if (!customSelect) return;
+        
+        const selectedOption = customSelect.querySelector('.selected-option');
+        const options = customSelect.querySelectorAll('.option');
+        
+        // Flag icon mapping
+        const flagMapping = {
+            'auto': '<i class="fas fa-globe selected-flag-icon"></i>',
+            'en': '<img src="icns/us.svg" alt="US Flag" class="flag-icon">',
+            'tr': '<img src="icns/tr.svg" alt="Turkey Flag" class="flag-icon">',
+            'ar': '<img src="icns/ar.svg" alt="Saudi Arabia Flag" class="flag-icon">',
+            'de': '<img src="icns/de.svg" alt="Germany Flag" class="flag-icon">',
+            'fr': '<img src="icns/fr.svg" alt="France Flag" class="flag-icon">',
+            'es': '<img src="icns/es.svg" alt="Spain Flag" class="flag-icon">',
+            'zh': '<img src="icns/cn.svg" alt="China Flag" class="flag-icon">',
+            'ru': '<img src="icns/ru.svg" alt="Russia Flag" class="flag-icon">',
+            'in': '<img src="icns/in.svg" alt="India Flag" class="flag-icon">'
+        };
+        
+        // Language text mapping
+        const languageMapping = {
+            'auto': 'Auto',
+            'en': 'English',
+            'tr': 'Türkçe',
+            'ar': 'العربية',
+            'de': 'Deutsch',
+            'fr': 'Français',
+            'es': 'Español',
+            'zh': '中文',
+            'ru': 'Русский',
+            'in': 'हिंदी'
+        };
+        
+        // Update trigger display
+        const flagIcon = flagMapping[value] || flagMapping['auto'];
+        const languageText = languageMapping[value] || 'Auto';
+        selectedOption.innerHTML = `${flagIcon} ${languageText}`;
+        
+        // Update option selection
+        options.forEach(option => {
+            option.classList.remove('selected');
+            if (option.getAttribute('data-value') === value) {
+                option.classList.add('selected');
+            }
+        });
+        
+        // Update hidden select
+        if (this.languageSelector) {
+            this.languageSelector.value = value;
+        }
     }
 
     // Country code mapping for phone numbers
@@ -297,83 +449,28 @@ class FactoryForm {
         };
     }
 
-    // Country-City data mapping
+    // Country-City data mapping - now uses data from translation files
     initializeCountryCities() {
-        return {
-            'AE': ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain', 'Al Ain', 'Khor Fakkan', 'Dibba Al-Fujairah', 'Kalba'],
-            'SA': ['Riyadh', 'Jeddah', 'Mecca', 'Medina', 'Dammam', 'Khobar', 'Tabuk', 'Buraydah', 'Hail', 'Najran', 'Al-Kharj', 'Taif'],
-            'EG': ['Cairo', 'Alexandria', 'Giza', 'Shubra El-Kheima', 'Port Said', 'Suez', 'Luxor', 'Aswan', 'Mansoura', 'Tanta', 'Ismailia', 'Faiyum'],
-            'IQ': ['Baghdad', 'Basra', 'Mosul', 'Erbil', 'Kirkuk', 'Najaf', 'Samarra', 'Karbala', 'Sulaymaniyah', 'Dhi Qar', 'Al Hillah'],
-            'JO': ['Amman', 'Zarqa', 'Irbid', 'Aqaba', 'Madaba', 'Mafraq', 'Al Karak', 'Jerash', 'Tafilah', 'Ajloun'],
-            'LB': ['Beirut', 'Tripoli', 'Sidon', 'Tyre', 'Byblos', 'Zahle', 'Baalbek', 'Jounieh', 'Saida', 'Nabatieh'],
-            'SY': ['Damascus', 'Aleppo', 'Homs', 'Hama', 'Latakia', 'Deir ez-Zor', 'Raqqa', 'Tartus', 'Qamishli', 'Al Hasakah'],
-            'KW': ['Kuwait City', 'Al Ahmadi', 'Hawalli', 'Salmiya', 'Jahra', 'Farwaniya', 'Mangaf', 'Sabah Al Salem'],
-            'QA': ['Doha', 'Al Rayyan', 'Al Wakrah', 'Al Khor', 'Al Shamal', 'Mesaieed', 'Umm Salal', 'Al Daayen'],
-            'BH': ['Manama', 'Riffa', 'Muharraq', 'Hamad Town', 'Isa Town', 'Sitra', 'Budaiya', 'Zallaq'],
-            'OM': ['Muscat', 'Salalah', 'Sohar', 'Nizwa', 'Sur', 'Bahla', 'Ibra', 'Rustaq', 'Shinas', 'Dhofar'],
-            'YE': ['Sana\'a', 'Aden', 'Taiz', 'Al Hudaydah', 'Ibb', 'Mokha', 'Dhamar', 'Lahij', 'Hajjah', 'Saada'],
-            'LY': ['Tripoli', 'Benghazi', 'Misrata', 'Bayda', 'Zawiya', 'Sabha', 'Ajdabiya', 'Tobruk', 'Derna', 'Sirte'],
-            'TN': ['Tunis', 'Sfax', 'Sousse', 'Kairouan', 'Bizerte', 'Gabès', 'Ariana', 'Gafsa', 'Monastir', 'Sidi Bouzid'],
-            'DZ': ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Blida', 'Batna', 'Sétif', 'Sidi Bel Abbès', 'Tlemcen', 'Tizi Ouzou'],
-            'MA': ['Rabat', 'Casablanca', 'Marrakech', 'Fes', 'Tangier', 'Agadir', 'Meknes', 'Oujda', 'Kenitra', 'Tetouan'],
-            'SD': ['Khartoum', 'Omdurman', 'Port Sudan', 'Kassala', 'El-Obeid', 'Al-Fashir', 'Nyala', 'Sennar', 'Wad Madani', 'Kosti'],
-            'MR': ['Nouakchott', 'Nouadhibou', 'Atar', 'Zouérat', 'Kiffa', 'Rosso', 'Kaédi', 'Néma', 'Tékane', 'Akjoujt'],
-            'SO': ['Mogadishu', 'Hargeisa', 'Bosaso', 'Kismayo', 'Baidoa', 'Berbera', 'Galkayo', 'Marka', 'Burao', 'Erigavo'],
-            'DJ': ['Djibouti City', 'Ali Sabieh', 'Tadjoura', 'Obock', 'Dikhil', 'Arta', 'Randa'],
-            'KM': ['Moroni', 'Moutsamoudou', 'Fomboni', 'Ouani', 'Dzaoudzi', 'Domoni', 'Itsandra'],
-            'PS': ['Ramallah', 'Gaza City', 'Hebron', 'Nablus', 'Bethlehem', 'Jenin', 'Tulkarm', 'Qalqilya', 'Jericho', 'Salfit'],
+        // Return a function that dynamically gets cities from translation files
+        // This will be populated after translations are loaded
+        return {};
+    }
 
-            'RU': ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Nizhny Novgorod', 'Kazan', 'Chelyabinsk', 'Samara', 'Omsk', 'Rostov-on-Don', 'Ufa', 'Krasnoyarsk', 'Perm', 'Voronezh', 'Volgograd'],
-            'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Adana', 'Gaziantep', 'Konya', 'Antalya', 'Kayseri', 'Mersin', 'Eskisehir', 'Diyarbakır', 'Samsun', 'Denizli', 'Sanliurfa'],
-            'CN': ['Beijing', 'Shanghai', 'Guangzhou', 'Shenzhen', 'Chengdu', 'Tianjin', 'Chongqing', 'Wuhan', 'Xi’an', 'Hangzhou', 'Nanjing', 'Shenyang', 'Harbin', 'Suzhou', 'Qingdao'],
-            'IN': ['New Delhi', 'Mumbai', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Kanpur', 'Nagpur', 'Indore', 'Bhopal', 'Patna'],
+    // Get cities for a specific country from the translation files
+    // This method dynamically retrieves cities from the loaded translation data
+    getCitiesForCountry(countryCode) {
+        if (!this.translations || !this.translations[this.currentLanguage]) {
+            return [];
+        }
 
-            'AL': ['Tirana', 'Durrës', 'Vlorë', 'Shkodër', 'Fier'],
-            'AD': ['Andorra la Vella', 'Escaldes-Engordany', 'Encamp', 'Sant Julià de Lòria', 'La Massana'],
-            'AT': ['Vienna', 'Graz', 'Linz', 'Salzburg', 'Innsbruck'],
-            'BY': ['Minsk', 'Gomel', 'Mogilev', 'Vitebsk', 'Hrodna'],
-            'BE': ['Brussels', 'Antwerp', 'Ghent', 'Charleroi', 'Liège'],
-            'BA': ['Sarajevo', 'Banja Luka', 'Tuzla', 'Zenica', 'Mostar'],
-            'BG': ['Sofia', 'Plovdiv', 'Varna', 'Burgas', 'Ruse'],
-            'HR': ['Zagreb', 'Split', 'Rijeka', 'Osijek', 'Zadar'],
-            'CY': ['Nicosia', 'Limassol', 'Larnaca', 'Famagusta', 'Paphos'],
-            'CZ': ['Prague', 'Brno', 'Ostrava', 'Plzeň', 'Liberec'],
-            'DK': ['Copenhagen', 'Aarhus', 'Odense', 'Aalborg', 'Esbjerg'],
-            'EE': ['Tallinn', 'Tartu', 'Narva', 'Pärnu', 'Kohtla-Järve'],
-            'FI': ['Helsinki', 'Espoo', 'Tampere', 'Vantaa', 'Oulu'],
-            'FR': ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice'],
-            'DE': ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt'],
-            'GR': ['Athens', 'Thessaloniki', 'Patras', 'Heraklion', 'Larissa'],
-            'HU': ['Budapest', 'Debrecen', 'Szeged', 'Miskolc', 'Pécs'],
-            'IS': ['Reykjavik', 'Kópavogur', 'Hafnarfjörður', 'Akureyri', 'Reykjanesbær'],
-            'IE': ['Dublin', 'Cork', 'Limerick', 'Galway', 'Waterford'],
-            'IT': ['Rome', 'Milan', 'Naples', 'Turin', 'Palermo'],
-            'LV': ['Riga', 'Daugavpils', 'Liepāja', 'Jelgava', 'Jūrmala'],
-            'LI': ['Vaduz', 'Schaan', 'Triesen', 'Balzers', 'Eschen'],
-            'LT': ['Vilnius', 'Kaunas', 'Klaipėda', 'Šiauliai', 'Panevėžys'],
-            'LU': ['Luxembourg City', 'Esch-sur-Alzette', 'Differdange', 'Dudelange', 'Ettelbruck'],
-            'MT': ['Valletta', 'Birkirkara', 'Mosta', 'Qormi', 'Sliema'],
-            'MD': ['Chișinău', 'Tiraspol', 'Bălți', 'Bender', 'Rîbnița'],
-            'MC': ['Monaco'],
-            'ME': ['Podgorica', 'Nikšić', 'Herceg Novi', 'Pljevlja', 'Bijelo Polje'],
-            'NL': ['Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven'],
-            'MK': ['Skopje', 'Bitola', 'Kumanovo', 'Prilep', 'Tetovo'],
-            'NO': ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen'],
-            'PL': ['Warsaw', 'Kraków', 'Łódź', 'Wrocław', 'Poznań'],
-            'PT': ['Lisbon', 'Porto', 'Braga', 'Coimbra', 'Funchal'],
-            'RO': ['Bucharest', 'Cluj-Napoca', 'Timișoara', 'Iași', 'Constanța'],
-            'RU': ['Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Nizhny Novgorod'],
-            'SM': ['San Marino'],
-            'RS': ['Belgrade', 'Novi Sad', 'Niš', 'Kragujevac', 'Subotica'],
-            'SK': ['Bratislava', 'Košice', 'Prešov', 'Žilina', 'Nitra'],
-            'SI': ['Ljubljana', 'Maribor', 'Celje', 'Kranj', 'Velenje'],
-            'ES': ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Zaragoza'],
-            'SE': ['Stockholm', 'Gothenburg', 'Malmö', 'Uppsala', 'Västerås'],
-            'CH': ['Zurich', 'Geneva', 'Basel', 'Bern', 'Lausanne'],
-            'TR': ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Adana'],
-            'UA': ['Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Lviv'],
-            'GB': ['London', 'Birmingham', 'Manchester', 'Glasgow', 'Liverpool'],
-        };
+        const cities = this.translations[this.currentLanguage].cities;
+        if (!cities || !cities[countryCode]) {
+            return [];
+        }
+
+        // Return array of city keys (which are the city names in English)
+        // These keys are used as values, while the translated names are displayed
+        return Object.keys(cities[countryCode]);
     }
 
     setupCountryCityDropdown() {
@@ -384,6 +481,17 @@ class FactoryForm {
         
         countrySelect.addEventListener('change', (e) => this.handleCountryChange(e));
         citySelect.addEventListener('change', (e) => this.handleCityChange(e));
+        
+        // Setup industry field dropdown
+        this.setupIndustryFieldDropdown();
+    }
+
+    setupIndustryFieldDropdown() {
+        const industrySelect = document.getElementById('industryField');
+        
+        if (!industrySelect) return;
+        
+        industrySelect.addEventListener('change', (e) => this.handleIndustryChange(e));
     }
 
     handleCountryChange(event) {
@@ -395,8 +503,8 @@ class FactoryForm {
         citySelect.disabled = true;
         
         if (selectedCountry && selectedCountry !== 'other') {
-            const cities = this.countryCities[selectedCountry];
-            if (cities) {
+            const cities = this.getCitiesForCountry(selectedCountry);
+            if (cities && cities.length > 0) {
                 cities.forEach(city => {
                     const option = document.createElement('option');
                     option.value = city;
@@ -405,6 +513,13 @@ class FactoryForm {
                     option.textContent = translatedCity;
                     citySelect.appendChild(option);
                 });
+                
+                // Always add "Other" option at the end for any country
+                const otherOption = document.createElement('option');
+                otherOption.value = 'other';
+                otherOption.textContent = this.getTranslation('sections.factoryInfo.city.other') || 'Other (Please specify)';
+                citySelect.appendChild(otherOption);
+                
                 citySelect.disabled = false;
             }
         } else if (selectedCountry === 'other') {
@@ -423,6 +538,12 @@ class FactoryForm {
         }
     }
 
+    handleIndustryChange(event) {
+        if (event.target.value === 'other') {
+            this.replaceIndustrySelectWithInput();
+        }
+    }
+
     replaceCitySelectWithInput() {
         const citySelect = document.getElementById('city');
         const cityGroup = citySelect.parentNode;
@@ -432,11 +553,31 @@ class FactoryForm {
         textInput.id = 'city';
         textInput.name = 'city';
         textInput.required = true;
-        textInput.placeholder = 'Enter city name';
+        textInput.placeholder = this.getTranslation('sections.factoryInfo.city.customPlaceholder') || 'Enter city name';
         textInput.maxLength = 100;
         textInput.setAttribute('aria-describedby', 'city-error');
         
         cityGroup.replaceChild(textInput, citySelect);
+        textInput.focus();
+        
+        // Re-setup event listeners for the new input
+        this.setupFieldValidation(textInput);
+    }
+
+    replaceIndustrySelectWithInput() {
+        const industrySelect = document.getElementById('industryField');
+        const industryGroup = industrySelect.parentNode;
+        
+        const textInput = document.createElement('input');
+        textInput.type = 'text';
+        textInput.id = 'industryField';
+        textInput.name = 'industryField';
+        textInput.required = true;
+        textInput.placeholder = this.getTranslation('sections.productionInfo.productType.customPlaceholder') || 'Enter industry type';
+        textInput.maxLength = 100;
+        textInput.setAttribute('aria-describedby', 'industryField-error');
+        
+        industryGroup.replaceChild(textInput, industrySelect);
         textInput.focus();
         
         // Re-setup event listeners for the new input
@@ -471,13 +612,18 @@ class FactoryForm {
         wrapper.setAttribute('data-owner-index', String(index));
         
         const ownerNameLabel = this.getTranslation('sections.ownerInfo.ownerName.label') || 'Owner Name';
+        const ownerEmailLabel = this.getTranslation('sections.ownerInfo.ownerEmail.label') || 'Owner Email';
         const ownerPhoneLabel = this.getTranslation('sections.ownerInfo.ownerPhone.label') || 'Mobile Number';
         const removeOwnerText = this.getTranslation('sections.ownerInfo.removeOwner') || 'Remove Owner';
         const ownerNamePlaceholder = this.getTranslation('sections.ownerInfo.ownerName.placeholder') || 'Enter owner name';
+        const ownerEmailPlaceholder = this.getTranslation('sections.ownerInfo.ownerEmail.placeholder') || 'owner@example.com';
         const ownerPhonePlaceholder = this.getTranslation('sections.ownerInfo.ownerPhone.placeholder') || '+1 (555) 123-4567';
         
         // Generate country code options
         const countryCodeOptions = this.generateCountryCodeOptions();
+        
+        // Generate country options for Made In field
+        const countryOptions = this.generateCountryOptions();
         
         wrapper.innerHTML = `
             <div class="form-row">
@@ -493,6 +639,20 @@ class FactoryForm {
                         maxlength="100"
                     >
                     <div id="ownerName_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
+                </div>
+                <div class="form-group">
+                    <label for="ownerEmail_${index}">${ownerEmailLabel} <span class="required" aria-label="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="ownerEmail_${index}" 
+                        name="ownerEmail_${index}" 
+                        required
+                        aria-describedby="ownerEmail_${index}-error"
+                        placeholder="${ownerEmailPlaceholder}"
+                        maxlength="100"
+                    >
+                    <div id="ownerEmail_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
+                </div>
                 </div>
                 <div class="form-group">
                     <label for="ownerMobile_${index}">${ownerPhoneLabel} <span class="required" aria-label="required">*</span></label>
@@ -511,7 +671,6 @@ class FactoryForm {
                         >
                     </div>
                     <div id="ownerMobile_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
-                </div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-owner aria-label="Remove this owner">
@@ -570,15 +729,22 @@ class FactoryForm {
             block.setAttribute('data-owner-index', String(index));
             
             const nameInput = block.querySelector('[id^="ownerName_"]');
+            const emailInput = block.querySelector('[id^="ownerEmail_"]');
             const mobileInput = block.querySelector('[id^="ownerMobile_"]');
             const countryCodeSelector = block.querySelector('[name^="ownerMobileCountryCode_"]');
             const nameLabel = block.querySelector('label[for^="ownerName_"]');
+            const emailLabel = block.querySelector('label[for^="ownerEmail_"]');
             const mobileLabel = block.querySelector('label[for^="ownerMobile_"]');
             
             if (nameInput) {
                 nameInput.id = `ownerName_${index}`;
                 nameInput.name = `ownerName_${index}`;
                 nameInput.setAttribute('aria-describedby', `ownerName_${index}-error`);
+            }
+            if (emailInput) {
+                emailInput.id = `ownerEmail_${index}`;
+                emailInput.name = `ownerEmail_${index}`;
+                emailInput.setAttribute('aria-describedby', `ownerEmail_${index}-error`);
             }
             if (mobileInput) {
                 mobileInput.id = `ownerMobile_${index}`;
@@ -589,6 +755,7 @@ class FactoryForm {
                 countryCodeSelector.name = `ownerMobileCountryCode_${index}`;
             }
             if (nameLabel) nameLabel.setAttribute('for', `ownerName_${index}`);
+            if (emailLabel) emailLabel.setAttribute('for', `ownerEmail_${index}`);
             if (mobileLabel) mobileLabel.setAttribute('for', `ownerMobile_${index}`);
         });
     }
@@ -617,36 +784,56 @@ class FactoryForm {
         
         const productionLineLabel = this.getTranslation('sections.productionInfo.productionLine.label') || 'Production Line';
         const brandNameLabel = this.getTranslation('sections.productionInfo.brandName.label') || 'Brand Name';
+        const madeInLabel = this.getTranslation('sections.productionInfo.madeIn.label') || 'Made In';
         const removeProductionLineText = this.getTranslation('sections.productionInfo.removeProductionLine') || 'Remove Production Line';
+        const productionLinePlaceholder = this.getTranslation('sections.productionInfo.productionLine.placeholder') || 'e.g., Assembly Line A, Manufacturing Unit 1';
+        const brandNamePlaceholder = this.getTranslation('sections.productionInfo.brandName.placeholder') || 'e.g., Brand X, Company Y';
+        const madeInPlaceholder = this.getTranslation('sections.productionInfo.madeIn.placeholder') || 'Select Country';
+        
+        // Generate country options for Made In field
+        const countryOptions = this.generateCountryOptions();
         
         wrapper.innerHTML = `
             <div class="form-row">
                 <div class="form-group">
                     <label for="productionLine_${index}">${productionLineLabel} <span class="required" aria-label="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="productionLine_${index}" 
-                        name="productionLine_${index}" 
-                        placeholder="e.g., Assembly Line A, Manufacturing Unit 1" 
-                        required
-                        aria-describedby="productionLine_${index}-error"
-                        maxlength="100"
-                    >
+                        <input 
+                            type="text" 
+                            id="productionLine_${index}" 
+                            name="productionLine_${index}" 
+                            placeholder="${productionLinePlaceholder}" 
+                            required
+                            aria-describedby="productionLine_${index}-error"
+                            maxlength="100"
+                        >
                     <div id="productionLine_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
                     <label for="brandName_${index}">${brandNameLabel} <span class="required" aria-label="required">*</span></label>
-                    <input 
-                        type="text" 
-                        id="brandName_${index}" 
-                        name="brandName_${index}" 
-                        placeholder="e.g., Brand X, Company Y" 
-                        required
-                        aria-describedby="brandName_${index}-error"
-                        maxlength="100"
-                    >
+                        <input 
+                            type="text" 
+                            id="brandName_${index}" 
+                            name="brandName_${index}" 
+                            placeholder="${brandNamePlaceholder}" 
+                            required
+                            aria-describedby="brandName_${index}-error"
+                            maxlength="100"
+                        >
                     <div id="brandName_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="madeIn_${index}">${madeInLabel} <span class="required" aria-label="required">*</span></label>
+                <select 
+                    id="madeIn_${index}" 
+                    name="madeIn_${index}" 
+                    required
+                    aria-describedby="madeIn_${index}-error"
+                >
+                    <option value="">${madeInPlaceholder}</option>
+                    ${countryOptions}
+                </select>
+                <div id="madeIn_${index}-error" class="error-message" role="alert" aria-live="polite"></div>
             </div>
             <div class="form-actions">
                 <button type="button" class="btn btn-secondary" data-remove-production-line aria-label="Remove this production line">
@@ -689,8 +876,10 @@ class FactoryForm {
             
             const lineInput = block.querySelector('[id^="productionLine_"]');
             const brandInput = block.querySelector('[id^="brandName_"]');
+            const madeInSelect = block.querySelector('[id^="madeIn_"]');
             const lineLabel = block.querySelector('label[for^="productionLine_"]');
             const brandLabel = block.querySelector('label[for^="brandName_"]');
+            const madeInLabel = block.querySelector('label[for^="madeIn_"]');
             
             if (lineInput) {
                 lineInput.id = `productionLine_${index}`;
@@ -702,8 +891,14 @@ class FactoryForm {
                 brandInput.name = `brandName_${index}`;
                 brandInput.setAttribute('aria-describedby', `brandName_${index}-error`);
             }
+            if (madeInSelect) {
+                madeInSelect.id = `madeIn_${index}`;
+                madeInSelect.name = `madeIn_${index}`;
+                madeInSelect.setAttribute('aria-describedby', `madeIn_${index}-error`);
+            }
             if (lineLabel) lineLabel.setAttribute('for', `productionLine_${index}`);
             if (brandLabel) brandLabel.setAttribute('for', `brandName_${index}`);
+            if (madeInLabel) madeInLabel.setAttribute('for', `madeIn_${index}`);
         });
     }
 
@@ -1066,6 +1261,25 @@ class FactoryForm {
         return options;
     }
 
+    generateCountryOptions() {
+        let options = '';
+        
+        // Sort countries alphabetically by their translated names
+        const sortedCountries = Object.keys(this.countryCodes)
+            .sort((a, b) => {
+                const nameA = this.getTranslation(`countries.${a}`) || this.countryCodes[a].name;
+                const nameB = this.getTranslation(`countries.${b}`) || this.countryCodes[b].name;
+                return nameA.localeCompare(nameB);
+            });
+        
+        sortedCountries.forEach(countryCode => {
+            const translatedName = this.getTranslation(`countries.${countryCode}`) || this.countryCodes[countryCode].name;
+            options += `<option value="${countryCode}">${translatedName}</option>`;
+        });
+        
+        return options;
+    }
+
     populateCountryCodeSelectors() {
         const countryCodeSelectors = this.form.querySelectorAll('.country-code-selector');
         const countryCodeOptions = this.generateCountryCodeOptions();
@@ -1389,6 +1603,9 @@ class FactoryForm {
             // Reset city field
             this.resetCityField();
             
+            // Reset industry field
+            this.resetIndustryField();
+            
             this.showNotification('Form reset successfully', 'success');
         }
     }
@@ -1434,6 +1651,46 @@ class FactoryForm {
             } else {
             cityField.innerHTML = `<option value="">${this.getTranslation('sections.factoryInfo.city.placeholder') || 'Select Country First'}</option>`;
             cityField.disabled = true;
+        }
+    }
+
+    resetIndustryField() {
+        const industryField = document.getElementById('industryField');
+        if (!industryField) return;
+        
+        if (industryField.tagName === 'INPUT') {
+            const industryGroup = industryField.parentNode;
+            const industrySelect = document.createElement('select');
+            industrySelect.id = 'industryField';
+            industrySelect.name = 'industryField';
+            industrySelect.required = true;
+            industrySelect.setAttribute('aria-describedby', 'industryField-error');
+            
+            // Recreate the industry options
+            industrySelect.innerHTML = `
+                <option value="">${this.getTranslation('sections.productionInfo.productType.placeholder') || 'Select Industry Field'}</option>
+                <option value="automotive">${this.getTranslation('productTypes.automotive') || 'Automotive'}</option>
+                <option value="electronics">${this.getTranslation('productTypes.electronics') || 'Electronics'}</option>
+                <option value="textiles">${this.getTranslation('productTypes.textiles') || 'Textiles'}</option>
+                <option value="chemicals">${this.getTranslation('productTypes.chemicals') || 'Chemicals'}</option>
+                <option value="pharmaceuticals">${this.getTranslation('productTypes.pharmaceuticals') || 'Pharmaceuticals'}</option>
+                <option value="food_beverage">${this.getTranslation('productTypes.food_beverage') || 'Food & Beverage'}</option>
+                <option value="machinery">${this.getTranslation('productTypes.machinery') || 'Machinery & Equipment'}</option>
+                <option value="metals">${this.getTranslation('productTypes.metals') || 'Metals & Mining'}</option>
+                <option value="construction">${this.getTranslation('productTypes.construction') || 'Construction Materials'}</option>
+                <option value="aerospace">${this.getTranslation('productTypes.aerospace') || 'Aerospace & Defense'}</option>
+                <option value="energy">${this.getTranslation('productTypes.energy') || 'Energy & Utilities'}</option>
+                <option value="medical">${this.getTranslation('productTypes.medical') || 'Medical Devices'}</option>
+                <option value="plastics">${this.getTranslation('productTypes.plastics') || 'Plastics & Rubber'}</option>
+                <option value="paper">${this.getTranslation('productTypes.paper') || 'Paper & Packaging'}</option>
+                <option value="other">${this.getTranslation('productTypes.other') || 'Other'}</option>
+            `;
+            
+            industryGroup.replaceChild(industrySelect, industryField);
+            this.setupFieldValidation(industrySelect);
+            
+            // Re-setup the event listener
+            industrySelect.addEventListener('change', (e) => this.handleIndustryChange(e));
         }
     }
 

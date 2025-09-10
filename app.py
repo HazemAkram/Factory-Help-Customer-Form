@@ -20,7 +20,7 @@ JSONL_PATH = SUBMISSIONS_DIR / "factory_registrations.jsonl"
 SUBMISSIONS_DIR.mkdir(exist_ok=True)
 
 app = Flask(__name__, static_folder=str(STATIC_ROOT), static_url_path="")
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/v2/*": {"origins": "*"}})
 
 # Email configuration
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
@@ -178,11 +178,20 @@ def create_company_notification_email(registration_data: Dict) -> str:
 	owner_index = 1
 	while f'ownerName_{owner_index}' in registration_data:
 		owner_name = registration_data.get(f'ownerName_{owner_index}', 'N/A')
+		owner_email = registration_data.get(f'ownerEmail_{owner_index}', 'N/A')
 		owner_mobile = registration_data.get(f'ownerMobile_{owner_index}', 'N/A')
 		html_content += f"""
 				<div class="field">
 					<span class="label">Owner {owner_index}:</span>
-					<span class="value">{owner_name} - {owner_mobile}</span>
+					<span class="value">{owner_name}</span>
+				</div>
+				<div class="field">
+					<span class="label">Email:</span>
+					<span class="value">{owner_email}</span>
+				</div>
+				<div class="field">
+					<span class="label">Mobile:</span>
+					<span class="value">{owner_mobile}</span>
 				</div>
 		"""
 		owner_index += 1
@@ -219,15 +228,36 @@ def create_company_notification_email(registration_data: Dict) -> str:
 	while f'productionLine_{production_index}' in registration_data:
 		production_line = registration_data.get(f'productionLine_{production_index}', 'N/A')
 		brand_name = registration_data.get(f'brandName_{production_index}', 'N/A')
+		made_in = registration_data.get(f'madeIn_{production_index}', 'N/A')
 		html_content += f"""
 				<div class="field">
 					<span class="label">Production Line {production_index}:</span>
-					<span class="value">{production_line} - {brand_name}</span>
+					<span class="value">{production_line} - {brand_name} (Made in: {made_in})</span>
 				</div>
 		"""
 		production_index += 1
 	
 	html_content += f"""
+			</div>
+			
+			<div class="section">
+				<h2>Employee Information</h2>
+				<div class="field">
+					<span class="label">Employee Name:</span>
+					<span class="value">{registration_data.get('employeeName', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Position/Title:</span>
+					<span class="value">{registration_data.get('employeePosition', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Employee Email:</span>
+					<span class="value">{registration_data.get('employeeEmail', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Employee Phone:</span>
+					<span class="value">{registration_data.get('employeePhone', 'N/A')}</span>
+				</div>
 			</div>
 			
 			<div class="section">
@@ -295,6 +325,12 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 					<span class="value">{registration_data.get('industryField', 'N/A')}</span>
 				</div>
 				<div class="field">
+					<span class="label">Production Lines:</span>
+					<span class="value">
+						{', '.join([f"{registration_data.get(f'productionLine_{i}', '')} ({registration_data.get(f'brandName_{i}', '')}, Made in: {registration_data.get(f'madeIn_{i}', '')})" for i in range(1, 10) if registration_data.get(f'productionLine_{i}')])}
+					</span>
+				</div>
+				<div class="field">
 					<span class="label">Contact Email:</span>
 					<span class="value">{registration_data.get('factoryEmail', 'N/A')}</span>
 				</div>
@@ -308,6 +344,26 @@ def create_customer_confirmation_email(registration_data: Dict) -> str:
 					<li>You may be asked to provide additional documentation if needed</li>
 					<li>Upon approval, you will receive access to our platform</li>
 				</ol>
+			</div>
+			
+			<div class="section">
+				<h2>👤 Form Completed By</h2>
+				<div class="field">
+					<span class="label">Employee Name:</span>
+					<span class="value">{registration_data.get('employeeName', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Position/Title:</span>
+					<span class="value">{registration_data.get('employeePosition', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Employee Email:</span>
+					<span class="value">{registration_data.get('employeeEmail', 'N/A')}</span>
+				</div>
+				<div class="field">
+					<span class="label">Employee Phone:</span>
+					<span class="value">{registration_data.get('employeePhone', 'N/A')}</span>
+				</div>
 			</div>
 			
 			<div class="section">
