@@ -111,6 +111,8 @@ class FactoryForm {
         // Update body direction for RTL languages
         if (lang === 'ar') {
             document.body.classList.add('rtl');
+            // Fix RTL mobile visibility issues
+            this.fixRTLMobileVisibility();
         } else {
             document.body.classList.remove('rtl');
         }
@@ -168,6 +170,50 @@ class FactoryForm {
         return value;
     }
 
+    fixRTLMobileVisibility() {
+        // Fix detailed address field
+        const detailedAddress = document.getElementById('detailedAddress');
+        if (detailedAddress) {
+            detailedAddress.style.direction = 'rtl';
+            detailedAddress.style.textAlign = 'right';
+            detailedAddress.style.display = 'block';
+            detailedAddress.style.width = '100%';
+        }
+        
+        // Fix phone input fields
+        const phoneInputs = document.querySelectorAll('input[type="tel"]');
+        phoneInputs.forEach(input => {
+            input.style.direction = 'rtl';
+            input.style.textAlign = 'right';
+        });
+        
+        // Fix phone input containers
+        const phoneContainers = document.querySelectorAll('.phone-input-container');
+        phoneContainers.forEach(container => {
+            if (window.innerWidth <= 768) {
+                container.style.flexDirection = 'column';
+                container.style.gap = '8px';
+            }
+        });
+        
+        // Fix address container
+        const addressContainer = document.querySelector('.address-container');
+        if (addressContainer && window.innerWidth <= 768) {
+            addressContainer.style.flexDirection = 'column';
+        }
+        
+        // Fix address fields
+        const addressFields = document.querySelector('.address-fields');
+        if (addressFields) {
+            addressFields.style.display = 'block';
+            addressFields.style.width = '100%';
+            addressFields.style.minWidth = '100%';
+        }
+        
+        // Force reflow to ensure changes take effect
+        document.body.offsetHeight;
+    }
+
     updateCountryOptions() {
         const countrySelect = document.getElementById('country');
         if (!countrySelect) return;
@@ -211,6 +257,7 @@ class FactoryForm {
         this.setupRealTimeValidation();
         this.setupPhoneFormatting();
         this.setupAutoSave();
+        this.setupResizeHandler();
     }
 
     /**
@@ -1391,6 +1438,18 @@ class FactoryForm {
         fields.forEach(field => {
             field.addEventListener('input', () => this.saveFormData());
             field.addEventListener('change', () => this.saveFormData());
+        });
+    }
+
+    setupResizeHandler() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (this.currentLanguage === 'ar') {
+                    this.fixRTLMobileVisibility();
+                }
+            }, 250);
         });
     }
 

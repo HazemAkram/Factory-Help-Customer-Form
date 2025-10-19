@@ -35,10 +35,6 @@
     right: auto;
 }
 
-.rtl .address-container {
-    flex-direction: row-reverse;
-}
-
 .rtl .coordinates-display {
     flex-direction: row-reverse;
 }
@@ -880,6 +876,20 @@ body {
     text-align: right;
 }
 
+/* Fix RTL mobile phone input container */
+@media (max-width: 768px) {
+    .rtl .phone-input-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .rtl .phone-input-container .country-code-selector {
+        min-width: 100%;
+        max-width: none;
+        text-align: right;
+    }
+}
+
 /* Form Actions */
 .form-actions {
     display: flex;
@@ -970,6 +980,23 @@ body {
 .map-section {
     flex: 1;
     min-width: 300px;
+}
+
+/* Fix RTL address container */
+.rtl .address-container {
+    flex-direction: row-reverse;
+}
+
+/* Fix RTL mobile address container */
+@media (max-width: 768px) {
+    .rtl .address-container {
+        flex-direction: column;
+    }
+    
+    .rtl .map-section,
+    .rtl .address-fields {
+        min-width: 100%;
+    }
 }
 
 .google-map {
@@ -1351,6 +1378,42 @@ body {
     .form-section h3 {
         font-size: 18px;
         margin-bottom: 20px;
+    }
+    
+    /* Ensure RTL form elements are visible on mobile */
+    .rtl .form-group input,
+    .rtl .form-group select,
+    .rtl .form-group textarea {
+        direction: rtl;
+        text-align: right;
+    }
+    
+    /* Fix RTL phone input visibility */
+    .rtl .phone-input-container input[type="tel"] {
+        direction: rtl;
+        text-align: right;
+    }
+    
+    /* Fix RTL textarea visibility */
+    .rtl .form-group textarea {
+        direction: rtl;
+        text-align: right;
+    }
+    
+    /* Specific fix for detailed address field */
+    .rtl #detailedAddress {
+        direction: rtl;
+        text-align: right;
+        min-height: 100px;
+        width: 100%;
+        display: block;
+    }
+    
+    /* Ensure address fields container is visible */
+    .rtl .address-fields {
+        display: block;
+        width: 100%;
+        min-width: 100%;
     }
 }
 
